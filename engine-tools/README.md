@@ -145,8 +145,9 @@ player per game), and Easy overpays.
 
 Measured by playing whole auctions in the page and simming the two rosters (150 auctions each): Hard
 beats a card reader (a human stand-in that ranks players by their card's lead stat and spends a fair
-share on the good ones) 61.8%, Normal 51.0%, Easy 40.0%; Hard beats Normal 58.6%, Normal beats Easy
-59.6%.
+share on the good ones) 63.7%, Normal 49.6%, Easy 42.3%; Hard beats Normal 62.7%, Normal beats Easy
+56.0%. The dump share barely moves this (Hard vs the card reader: 62.7% paying nothing, 62.3% a
+quarter, 63.7% half, 62.0% all of the swing; each about ±2%); half answers a dump without overpaying.
 
 ## Where it stands (2026-09-24, engine 4ffc55b)
 
