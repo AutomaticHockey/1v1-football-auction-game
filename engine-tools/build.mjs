@@ -9,9 +9,11 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { applyPatches } from './patches.mjs'
+import { computeGrades } from './grades.mjs'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
-const esbuild = createRequire('D:/NFL game test/package.json')('esbuild')
+// ESBUILD_FROM: another package.json to take esbuild from (the Cornerstone repo's by default).
+const esbuild = createRequire(process.env.ESBUILD_FROM || 'D:/NFL game test/package.json')('esbuild')
 const core = path.join(here, 'cornerstone')
 
 // 1. The full TUNING object, evaluated from the snapshot.
@@ -89,8 +91,10 @@ const engine = header + js + 'if (typeof module !== "undefined") module.exports 
 writeFileSync(path.join(here, 'engine.js'), engine)
 console.log(`engine.js ${Math.round(engine.length / 1024)} KB; TUNING sections: ${names.join(', ')}`)
 
-// 3. simkit.js: SIMKIT with the ratings packed as arrays in ratings.json's key order.
+// 3. simkit.js: SIMKIT with the ratings packed as arrays in ratings.json's key order, and every
+// player's and defense's grade (grades.mjs, from the player file and the ratings).
 const R = JSON.parse(readFileSync(path.join(here, 'ratings.json'), 'utf8'))
+const grades = computeGrades(JSON.parse(readFileSync(path.join(here, '..', 'nfl_auction_players.json'), 'utf8')), R)
 if (R.unmatched.length) console.warn(`players with no Madden match (they play as a league-average starter): ${R.unmatched.join('; ')}`)
 const one = (x) => Math.round(x * 10) / 10
 const data = {
@@ -101,6 +105,7 @@ const data = {
   filler: Object.fromEntries(Object.entries(R.filler).map(([slot, f]) => [slot, [one(f.overall), ...f.ratings.map(one)]])),
   players: Object.fromEntries(Object.entries(R.players).map(([id, p]) => [id, [p.pos, p.madden, p.overall, ...p.ratings]])),
   defenses: Object.fromEntries(Object.entries(R.defenses).map(([team, unit]) => [team, unit.map((d) => [d.pos, d.name, d.madden, d.overall, ...d.ratings])])),
+  grades: { players: grades.players, defenses: grades.defenses },
 }
 const simkitSrc = readFileSync(path.join(here, 'simkit.src.js'), 'utf8')
 if (!simkitSrc.includes('/*@@RATINGS@@*/null')) throw new Error('simkit.src.js has no ratings placeholder')

@@ -517,7 +517,7 @@ var ENGINE = (() => {
     const score = runScore(intent, cell);
     const frontDefense = front.reduce((sum, player) => sum + frontRunDefense(player), 0) / front.length;
     const powerLine = isPowerCell(cell) ? rules.powerLineWeight * (average(blockers, "strength") - average(front, "strength") - rules.powerLineCentre) : 0;
-    const matchup = (average(blockers, "runBlock") - mean - rules.runDefenseWeight * (frontDefense - mean) + (carryScore(rusher, score) - TUNING.usage.rusherScoreReference[carrier.group][CARRY_SCORE[score]]) - rules.tacklingWeight * (average(secondLevel, "tackling") - rules.tacklingReference) + powerLine + staminaEdge(context, blockers, front) + rules.passThreatWeight * passThreat) / rules.ratingEffectDivisor - redZonePenalty + TUNING.usage.carrierYardsOffset[carrier.group];
+    const matchup = (average(blockers, "runBlock") - mean - rules.runDefenseWeight * (frontDefense - mean) + (carryScore(rusher, score) - TUNING.usage.rusherScoreReference[carrier.group][CARRY_SCORE[score]]) - rules.tacklingWeight * (average(secondLevel, "tackling") - rules.tacklingReference) + powerLine + staminaEdge(context, blockers, front) + rules.passThreatWeight * passThreat) / rules.ratingEffectDivisor - redZonePenalty + TUNING.usage.carrierYardsOffset[carrier.group] + (HOOKS.game ? HOOKS.game.runShift(rusher, defense) : 0);
     const tail = TUNING.rushing.breakawayTail;
     let u = rng.next();
     if (rng.chance(Math.max(0, rusher.ratings.speed - TUNING.roster.starterMean) / TUNING.rushing.carryingEffectDivisor)) u = 1 - tail * rng.next();
@@ -740,7 +740,7 @@ var ENGINE = (() => {
     const crowd = isHomeOffense ? 0 : context.crowdFactor;
     const interceptionChance = TUNING.passing.intPerAttempt * Math.exp(-TUNING.passing.intEdgePerPoint * edgeOverLeague) * interceptionFactor + crowd * TUNING.homeField.awayIntBonus + (intent.forceBall ? TUNING.passing.forcedIntBonus : 0);
     const zoneCompletion = TUNING.passing.routeZoneCompletion[cellOf(TUNING.passing.routeZones, TUNING.football.fieldLength - context.yardLine)];
-    if (rng.chance(interceptionChance)) {
+    if (rng.chance(HOOKS.game ? interceptionChance * HOOKS.game.passInt(qb, defense) : interceptionChance)) {
       const interceptor = creditedDefender(defense, TUNING.credit.interceptionRoleShares, "interception", rng.next(), { covering: defender });
       return {
         ...resultBase(rng),
@@ -752,7 +752,7 @@ var ENGINE = (() => {
         desc: `${qb.lastName} intercepted by ${interceptor.lastName} targeting ${receiver.lastName}`
       };
     }
-    const completionChance = clamp(TUNING.passing.routeCompletion[kind] * zoneCompletion[ROUTE_INDEX[kind]] * TUNING.passing.completionSituation[situation2] * completionFactor + ratingAdjustment + (isHomeOffense ? context.crowdFactor * TUNING.passing.homeRatingBoost / TUNING.passing.ratingEffectDivisor : 0) - weatherPenalty - forcedPenalty, 0, 1);
+    const completionChance = clamp(TUNING.passing.routeCompletion[kind] * zoneCompletion[ROUTE_INDEX[kind]] * TUNING.passing.completionSituation[situation2] * completionFactor + ratingAdjustment + (isHomeOffense ? context.crowdFactor * TUNING.passing.homeRatingBoost / TUNING.passing.ratingEffectDivisor : 0) - weatherPenalty - forcedPenalty + (HOOKS.game ? HOOKS.game.passCatch(qb, receiver, defense) : 0), 0, 1);
     if (!rng.chance(completionChance)) {
       return {
         ...resultBase(rng),
@@ -766,7 +766,8 @@ var ENGINE = (() => {
       };
     }
     const tilt = Math.exp(TUNING.passing.yardsTiltPerPoint * (edgeOverLeague - TUNING.passing.yardsTiltOffset));
-    const yards = Math.min(Math.round(quantileAt(TUNING.passing.completionYards[kind], 1 - (1 - rng.next()) ** tilt)), TUNING.football.fieldLength - context.yardLine);
+    const drawn = quantileAt(TUNING.passing.completionYards[kind], 1 - (1 - rng.next()) ** tilt);
+    const yards = Math.min(Math.round(HOOKS.game ? HOOKS.game.passYards(drawn, qb, receiver, defense) : drawn), TUNING.football.fieldLength - context.yardLine);
     const credited = tacklers(defense, kind, rng);
     const isTouchdown = context.yardLine + yards >= TUNING.football.fieldLength;
     const base = {
@@ -1633,7 +1634,11 @@ var ENGINE = (() => {
   var RUNS = ["inside", "outside", "draw", "power"];
   var CONFIG = {
     routeMix: { screen: 0.199, short: 0.454, medium: 0.215, deep: 0.131 },
-    runMix: { inside: 0.354, outside: 0.441, draw: 0.121, power: 0.084 }
+    runMix: { inside: 0.354, outside: 0.441, draw: 0.121, power: 0.084 },
+    // Two real backs: the share of their carries split by overall, and its weight a point of overall
+    // (0.05: 6 points apart is 57/43, 20 apart 73/27).
+    backOverallShare: 0.5,
+    backOverallPerPoint: 0.05
   };
   var lean = {};
   var routeWeight = {};
@@ -1665,12 +1670,38 @@ var ENGINE = (() => {
         const average2 = RUNS.reduce((sum, run) => sum + CONFIG.runMix[run] * fitness(c.player, run), 0);
         return volume * fitness(c.player, score) / average2;
       });
+      const own = backs.map((c, i) => i).filter((i) => backs[i].player.usage && backs[i].player.usage.own && weights[i] > 0);
+      if (own.length > 1) {
+        const together = own.reduce((sum, i) => sum + weights[i], 0);
+        const top = Math.max(...own.map((i) => backs[i].player.overall));
+        const byOverall = own.map((i) => Math.exp(CONFIG.backOverallPerPoint * (backs[i].player.overall - top)));
+        const overallSum = byOverall.reduce((a, b) => a + b, 0);
+        const split = CONFIG.backOverallShare;
+        own.forEach((i, k) => {
+          weights[i] = together * ((1 - split) * weights[i] / together + split * byOverall[k] / overallSum);
+        });
+      }
       const total = weights.reduce((a, b) => a + b, 0);
       backs.forEach((c, i) => {
         c.weight = total > 0 ? backShare * weights[i] / total : 0;
       });
+    },
+    runShift(rusher, defense) {
+      return edgeOf(rusher).run + unitOf(defense).run;
+    },
+    passCatch(qb, receiver, defense) {
+      return edgeOf(qb).catch + edgeOf(receiver).catch + unitOf(defense).catch;
+    },
+    passInt(qb, defense) {
+      return edgeOf(qb).int * unitOf(defense).int;
+    },
+    passYards(drawn, qb, receiver, defense) {
+      return drawn > 0 ? drawn * edgeOf(qb).yards * edgeOf(receiver).yards * unitOf(defense).yards : drawn;
     }
   };
+  var NO_EDGE = { run: 0, catch: 0, yards: 1, int: 1 };
+  var edgeOf = (player) => player.edge || NO_EDGE;
+  var unitOf = (defense) => defense.getGroup("DB").unit || NO_EDGE;
   function withUsage(on, fn) {
     const saved = HOOKS.game;
     HOOKS.game = on ? USAGE : null;

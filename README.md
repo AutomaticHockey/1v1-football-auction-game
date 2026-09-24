@@ -15,8 +15,10 @@ A 1v1 NFL auction game in a single HTML file. Two GMs bid on real 2025 players f
 
 Games run the Cornerstone play-by-play engine, compiled from its own TypeScript source, with every
 player rated from Madden NFL 26 (the end of the 2025 season) on the engine's scale. Each player gets
-the ball as often as he did in 2025, and a DEF pick is that team's real defense. `engine-tools/`
-rebuilds and checks all of it; see [engine-tools/README.md](engine-tools/README.md).
+the ball as often as he did in 2025 and plays mostly to his 2025 production: his grade is 70% his
+real line, 30% his Madden rating. A DEF pick is that team's real defense. QB and DEF swing games the
+most; a star RB, WR or FLEX is worth about a 60% win on his own. `engine-tools/` rebuilds and checks
+all of it; see [engine-tools/README.md](engine-tools/README.md).
 
 ## Files
 

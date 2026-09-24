@@ -3,13 +3,15 @@
 // stops, so an engine update can never silently skip one. equiv.ts proves the result is still
 // Cornerstone's engine, game by game, against its own simulateGame.
 //
-// Two kinds of edit:
+// Three kinds of edit:
 // - driving: let game.ts run the engine a quarter at a time (exports and a pause flag);
 // - usage: at the two places the engine picks who gets the ball (the target allocation and the
 //   backs' share of designed runs), HOOKS.game may weigh players by their real 2025 volume. Every
 //   rating-driven part of the pick stays: route and run fitness from the ratings, the per-game
-//   form, and the quarterback's and receivers' own share of runs. With HOOKS.game null the original
-//   code runs unchanged.
+//   form, and the quarterback's and receivers' own share of runs;
+// - grades: a run's yards, a throw's completion and interception chances and a catch's yards also
+//   take the graded players' edges (their 2025 production, grades.mjs), through HOOKS.game.
+// With HOOKS.game null the original code runs unchanged.
 
 const HOOKS_IMPORT = "import { HOOKS } from 'game:hooks'\n"
 
@@ -81,6 +83,29 @@ function gameTargetPool(offense: DepthChart, kind: RouteKind): TargetPool {
 
 function chooseReceiver(offense: DepthChart, kind: RouteKind, rng: RNG): ReceivingOption {
   const { options, cumulative } = HOOKS.game ? gameTargetPool(offense, kind) : targetPool(offense, kind)`,
+    },
+    // Grades: a real player's 2025 production (blended with his Madden rating, grades.mjs) moves
+    // each play he is in, on top of everything the engine already reads. Filler has no grade.
+    {
+      why: "grades: the carrier's and the defense's yards per carry",
+      find: '    + TUNING.usage.carrierYardsOffset[carrier.group]\n',
+      replace: '    + TUNING.usage.carrierYardsOffset[carrier.group]\n    + (HOOKS.game ? HOOKS.game.runShift(rusher, defense) : 0)\n',
+    },
+    {
+      why: "grades: the passer's, the receiver's and the defense's completion rate",
+      find: '    - forcedPenalty, 0, 1)',
+      replace: '    - forcedPenalty\n    + (HOOKS.game ? HOOKS.game.passCatch(qb, receiver, defense) : 0), 0, 1)',
+    },
+    {
+      why: "grades: the passer's and the defense's interceptions",
+      find: '  if (rng.chance(interceptionChance)) {',
+      replace: '  if (rng.chance(HOOKS.game ? interceptionChance * HOOKS.game.passInt(qb, defense) : interceptionChance)) {',
+    },
+    {
+      why: "grades: the passer's, the receiver's and the defense's yards per catch",
+      find: '  const yards = Math.min(Math.round(quantileAt(TUNING.passing.completionYards[kind], 1 - (1 - rng.next()) ** tilt)), TUNING.football.fieldLength - context.yardLine)',
+      replace: `  const drawn = quantileAt(TUNING.passing.completionYards[kind], 1 - (1 - rng.next()) ** tilt)
+  const yards = Math.min(Math.round(HOOKS.game ? HOOKS.game.passYards(drawn, qb, receiver, defense) : drawn), TUNING.football.fieldLength - context.yardLine)`,
     },
   ],
 }
