@@ -88,12 +88,15 @@ const COLS = {
   WR: [col('WR', 'targets/g', p => p.stats.tgt_g, r => r('WR.targets')), col('WR', 'rec/g', p => p.stats.rec_g, r => r('WR.receptions')),
     col('WR', 'rec yds/g', p => p.stats.rec_yds_g, r => r('WR.receivingYards')), col('WR', 'yds/catch', p => p.stats.ypr, r => r('WR.receivingYards') / Math.max(0.1, r('WR.receptions'))),
     col('WR', 'rec TD/g', p => p.stats.rec_td_g, r => r('WR.receivingTouchdowns'))],
+  TE: [col('TE', 'targets/g', p => p.stats.tgt_g, r => r('TE.targets')), col('TE', 'rec/g', p => p.stats.rec_g, r => r('TE.receptions')),
+    col('TE', 'rec yds/g', p => p.stats.rec_yds_g, r => r('TE.receivingYards')), col('TE', 'yds/catch', p => p.stats.ypr, r => r('TE.receivingYards') / Math.max(0.1, r('TE.receptions'))),
+    col('TE', 'rec TD/g', p => p.stats.rec_td_g, r => r('TE.receivingTouchdowns'))],
   DEF: [col('DEF', 'pts allowed/g', p => p.stats.pts_allowed_g, r => r('b.points')), col('DEF', 'yds allowed/g', p => p.stats.yds_allowed_g, r => r('b.totalYards')),
     col('DEF', 'sacks/g', p => p.stats.sacks_g, r => r('b.sacksAllowed')), col('DEF', 'takeaways/g', p => p.stats.takeaways_g, r => r('b.turnovers')),
     col('DEF', 'def TD/season', p => p.stats.def_td, r => r('a.defensiveTouchdowns') * 17)],
 };
-const SHOW = { QB: ['pass_yds_g', 'QB.passingYards'], RB: ['rush_yds_g', 'RB.rushingYards'], WR: ['rec_yds_g', 'WR.receivingYards'] };
-for (const pos of ['QB', 'RB', 'WR', 'DEF']) {
+const SHOW = { QB: ['pass_yds_g', 'QB.passingYards'], RB: ['rush_yds_g', 'RB.rushingYards'], WR: ['rec_yds_g', 'WR.receivingYards'], TE: ['rec_yds_g', 'TE.receivingYards'] };
+for (const pos of ['QB', 'RB', 'WR', 'TE', 'DEF']) {
   for (const p of byPos[pos] || []) {
     const r = play({ [pos === 'DEF' ? 'DEF' : pos]: p }, {}, N);
     COLS[pos].forEach(f => f(p, r));

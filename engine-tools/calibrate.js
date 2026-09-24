@@ -60,6 +60,8 @@ if (!ONLY_WINS) {
     rbYpr: base('RB.receivingYards') / base('RB.receptions'),
     wrCatch: base('WR.receptions') / base('WR.targets'),
     wrYpr: base('WR.receivingYards') / base('WR.receptions'),
+    teCatch: base('TE.receptions') / base('TE.targets'),
+    teYpr: base('TE.receivingYards') / base('TE.receptions'),
     cmp: base('QB.completions') / base('QB.passAttempts'),
     qbYds: base('QB.passingYards') / games,
     int: base('QB.interceptions') / games,
@@ -79,10 +81,12 @@ if (!ONLY_WINS) {
     put('RB yds/carry', g.ypc, r('RB.rushingYards') / Math.max(1, r('RB.rushAttempts')));
     put('RB yds/catch', g.ypr, r('RB.receivingYards') / Math.max(1, r('RB.receptions')));
   }
-  for (const p of byPos.WR || []) {
-    const r = play({ WR: p }, {}, N), g = G.players[p.id];
-    put('WR catch rate', g.catch, r('WR.receptions') / Math.max(1, r('WR.targets')));
-    put('WR yds/catch', g.ypr, r('WR.receivingYards') / Math.max(1, r('WR.receptions')));
+  for (const pos of ['WR', 'TE']) {
+    for (const p of byPos[pos] || []) {
+      const r = play({ [pos]: p }, {}, N), g = G.players[p.id];
+      put(`${pos} catch rate`, g.catch, r(`${pos}.receptions`) / Math.max(1, r(`${pos}.targets`)));
+      put(`${pos} yds/catch`, g.ypr, r(`${pos}.receivingYards`) / Math.max(1, r(`${pos}.receptions`)));
+    }
   }
   for (const p of byPos.QB || []) {
     const r = play({ QB: p }, {}, N), g = G.players[p.id];
@@ -107,17 +111,18 @@ if (!ONLY_WINS) {
 if (!NO_WINS) {
   // 3. winning
   const W = Math.max(2000, N * 10);
-  const key = { QB: 'pass_yds_g', RB: 'rush_yds_g', WR: 'rec_yds_g', DEF: 'pts_allowed_g' };
+  const key = { QB: 'pass_yds_g', RB: 'rush_yds_g', WR: 'rec_yds_g', TE: 'rec_yds_g', DEF: 'pts_allowed_g' };
   const sorted = pos => byPos[pos].slice().sort((a, b) => (pos === 'DEF' ? a.stats[key[pos]] - b.stats[key[pos]] : b.stats[key[pos]] - a.stats[key[pos]]));
   const line = (label, r) => console.log(`  ${label.padEnd(58)} wins ${(100 * r('win') / W).toFixed(1)}%  margin ${(r('margin') / W >= 0 ? '+' : '') + (r('margin') / W).toFixed(1)}`);
   console.log(`\nWINNING (${W} games each; everything else league average; balance ${JSON.stringify(SIMKIT.K.balance)})`);
-  for (const pos of ['QB', 'RB', 'WR', 'DEF']) {
+  for (const pos of ['QB', 'RB', 'WR', 'TE', 'DEF']) {
     const s = sorted(pos), best = s[0], worst = s[s.length - 1];
     line(`${pos}: ${best.name} vs ${worst.name}`, play({ [pos]: best }, { [pos]: worst }, W));
   }
   const find = n => data.players.find(p => p.name === n);
-  const core = { QB: find('Jared Goff'), RB: find('Bijan Robinson'), WR: find('Garrett Wilson'), DEF: find('Seahawks Defense') };
-  line('FLEX: Puka Nacua vs empty (same QB, RB, WR, DEF)', play(Object.assign({ FLEX: find('Puka Nacua') }, core), Object.assign({ FLEX: null }, core), W, 'empty'));
-  line('FLEX: Jahmyr Gibbs vs empty (same QB, RB, WR, DEF)', play(Object.assign({ FLEX: find('Jahmyr Gibbs') }, core), Object.assign({ FLEX: null }, core), W, 'empty'));
+  const core = { QB: find('Jared Goff'), RB: find('Bijan Robinson'), WR: find('Garrett Wilson'), TE: find('Travis Kelce'), DEF: find('Seahawks Defense') };
+  for (const n of ['Puka Nacua', 'Jahmyr Gibbs', 'Trey McBride']) {
+    line(`FLEX: ${n} vs empty (same QB, RB, WR, TE, DEF)`, play(Object.assign({ FLEX: find(n) }, core), Object.assign({ FLEX: null }, core), W, 'empty'));
+  }
 }
 console.log(`(${((Date.now() - t0) / 1000).toFixed(1)} s)`);

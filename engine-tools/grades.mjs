@@ -6,8 +6,10 @@
 // Madden part has production's spread and units, and a player's grade leans to his own 2025 line.
 // A defense is ranked by its 21 defenders' mean overall.
 //
+// A tight end rated from production (ratings-production.mts, while Madden's tight ends are out of
+// reach) has an overall that is his production rank, so his grade is all production.
 // Stats are rates, not volume (volume is the usage hooks'): a back's yards per carry and per catch,
-// a receiver's catch rate and yards per catch, a quarterback's completion rate, yards, and
+// a receiver's or tight end's catch rate and yards per catch, a quarterback's completion rate, yards, and
 // interceptions a game (the file has no pass attempts), a defense's yards and points allowed and
 // takeaways a game. SIMKIT turns them into each play's edges (simkit.src.js, K.grade).
 //   build.mjs writes them into simkit.js; `node grades.mjs` prints them.
@@ -57,11 +59,11 @@ export function computeGrades(playerFile, ratings) {
   for (const p of rbs) {
     out.players[p.id] = { ypc: r3(blend(rbs, p, overall, (q) => q.stats.ypc)), ypr: r3(blend(rbs, p, overall, rbYpr)) }
   }
-  const wrs = byPos.WR ?? []
   const catchRate = (p) => p.stats.totals.rec / Math.max(1, p.stats.totals.tgt)
-  const wrYpr = (p) => p.stats.totals.rec_yds / Math.max(1, p.stats.totals.rec)
-  for (const p of wrs) {
-    out.players[p.id] = { catch: r3(blend(wrs, p, overall, catchRate)), ypr: r3(blend(wrs, p, overall, wrYpr)) }
+  const recYpr = (p) => p.stats.totals.rec_yds / Math.max(1, p.stats.totals.rec)
+  for (const pos of ['WR', 'TE']) {
+    const pool = byPos[pos] ?? []
+    for (const p of pool) out.players[p.id] = { catch: r3(blend(pool, p, overall, catchRate)), ypr: r3(blend(pool, p, overall, recYpr)) }
   }
   const qbs = byPos.QB ?? []
   for (const p of qbs) {

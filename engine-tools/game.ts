@@ -5,11 +5,12 @@
    Every play is Cornerstone's own engine. The players are rated: SIMKIT
    gives the real players their Madden ratings on the engine's scale. Without
    options this reproduces Cornerstone's simulateGame draw for draw
-   (engine-tools/equiv.ts checks it). This game adds:
+   (engine-tools/equiv.mts checks it). This game adds:
    - opts.usage: who gets the ball follows each player's real 2025 volume
      (targets, backs' carries); ratings still decide which routes and runs;
      and each real player's grade (mostly his 2025 production) moves the
-     plays he is in: yards a carry, completions, interceptions, yards a catch;
+     plays he is in: yards a carry and breakaway runs, completions,
+     interceptions, yards a catch;
    - opts.neutral: a neutral field (no crowd, fixed mild weather, no pace draw);
    - quarter-by-quarter play, and up to three overtime periods under the
      engine's own overtime rules (both teams get the ball, then sudden death);
@@ -17,6 +18,7 @@
    ===================================================================== */
 import { HOOKS } from 'game:hooks'
 import { buildDepthChart } from './cornerstone/depthChart'
+import { quantileAt } from './cornerstone/distributions'
 import { kickoff, runCurrentPeriod, simulateGame as cornerstoneSimulateGame, transitionPeriod } from './cornerstone/gameEngine'
 import { mulberry32 } from './cornerstone/rng'
 import { createGameStatBook, playerStatLines } from './cornerstone/stats'
@@ -37,6 +39,10 @@ type Any = any
 // Grades (SIMKIT's `edge` on a real player, `unit` on a real defense's players): edges add to a
 // run's yards and a throw's completion chance, and multiply a catch's yards and the interception
 // chance. Filler and a replacement defense have none, so an all-filler game is the engine's own.
+// A back's `breakaway` edge (yards a carry) comes through the engine's own breakaway, a draw from
+// the top `breakawayTail` of the run table (the 20-yard-plus runs): above zero, an extra chance of
+// one on each carry; below, a chance that a breakaway he would have had is drawn from the rest of
+// the table instead (past all of them, the remainder comes off every carry).
 // CONFIG: the league's mixes, measured in an all-average game (engine-tools/check.js prints them).
 const ROUTES = ['screen', 'short', 'medium', 'deep'] as const
 const RUNS = ['inside', 'outside', 'draw', 'power'] as const
@@ -92,7 +98,15 @@ const USAGE = {
     backs.forEach((c, i) => { c.weight = total > 0 ? backShare * weights[i]! / total : 0 })
   },
   runShift(rusher: Any, defense: Any): number {
-    return edgeOf(rusher).run + unitOf(defense).run
+    const breakaway = edgeOf(rusher).breakaway || 0
+    const past = breakaway < -BREAKAWAY.removed ? breakaway + BREAKAWAY.removed : 0
+    return edgeOf(rusher).run + past + unitOf(defense).run
+  },
+  runDraw(u: number, rusher: Any, rng: Any): number {
+    const breakaway = edgeOf(rusher).breakaway || 0, tail = TUNING.rushing.breakawayTail
+    if (breakaway > 0 && rng.chance(Math.min(1, breakaway / BREAKAWAY.added))) return 1 - tail * rng.next()
+    if (breakaway < 0 && u > 1 - tail && rng.chance(Math.min(1, -breakaway / BREAKAWAY.removed))) return (1 - tail) * rng.next()
+    return u
   },
   passCatch(qb: Any, receiver: Any, defense: Any): number {
     return edgeOf(qb).catch + edgeOf(receiver).catch + unitOf(defense).catch
@@ -104,7 +118,22 @@ const USAGE = {
     return drawn > 0 ? drawn * edgeOf(qb).yards * edgeOf(receiver).yards * unitOf(defense).yards : drawn
   },
 }
-const NO_EDGE = { run: 0, catch: 0, yards: 1, int: 1 }
+// Yards a carry per unit of breakaway chance: added (a draw from the tail instead of the average
+// run) and taken away (the rest of the table instead of the tail), from the run table's own means.
+const BREAKAWAY = (() => {
+  const table = TUNING.rushing.runYards, tail = TUNING.rushing.breakawayTail, steps = 20000
+  let all = 0, top = 0
+  for (let i = 0; i < steps; i += 1) {
+    const u = (i + 0.5) / steps, y = quantileAt(table, u)
+    all += y
+    if (u > 1 - tail) top += y
+  }
+  all /= steps
+  top /= steps * tail
+  const rest = (all - tail * top) / (1 - tail)
+  return { added: top - all, removed: tail * (top - rest) }
+})()
+const NO_EDGE = { run: 0, breakaway: 0, catch: 0, yards: 1, int: 1 }
 const edgeOf = (player: Any) => player.edge || NO_EDGE
 // A real defense's edges ride on each of its players; any of its backs will do.
 const unitOf = (defense: Any) => defense.getGroup('DB').unit || NO_EDGE

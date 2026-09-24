@@ -3,12 +3,17 @@
 //  B. this game's driver (createGame + playQuarter + playOvertimePeriod) against the same.
 // Compares scores, both teams' stats, every player's line, and every play-recorder event.
 // Run from the Cornerstone repo so its imports resolve:
-//   cd "D:/NFL game test" && npx tsx "<this folder>/equiv.ts" "<this folder>/engine.js" 2000
+//   cd "D:/NFL game test" && npx tsx "<this folder>/equiv.mts" "<this folder>/engine.js" 2000
+// (Cornerstone elsewhere: set CORNERSTONE to its folder.)
 import { createRequire } from 'node:module'
-import { mulberry32 } from 'file:///D:/NFL%20game%20test/src/core/rng.ts'
-import { generateLeague } from 'file:///D:/NFL%20game%20test/src/core/generate.ts'
-import { simulateGame } from 'file:///D:/NFL%20game%20test/src/core/gameEngine.ts'
-import { TEAMS } from 'file:///D:/NFL%20game%20test/src/data/teams.ts'
+import path from 'node:path'
+import { pathToFileURL } from 'node:url'
+// The Cornerstone repo: $CORNERSTONE, else D:/NFL game test.
+const core = (file: string) => import(pathToFileURL(path.join(process.env.CORNERSTONE ?? 'D:/NFL game test', 'src', file)).href)
+const { mulberry32 } = await core('core/rng.ts')
+const { generateLeague } = await core('core/generate.ts')
+const { simulateGame } = await core('core/gameEngine.ts')
+const { TEAMS } = await core('data/teams.ts')
 
 const require = createRequire(import.meta.url)
 const ENGINE = require(process.argv[2]!)

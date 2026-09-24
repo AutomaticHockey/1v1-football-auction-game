@@ -12,8 +12,8 @@ import { applyPatches } from './patches.mjs'
 import { computeGrades } from './grades.mjs'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
-// ESBUILD_FROM: another package.json to take esbuild from (the Cornerstone repo's by default).
-const esbuild = createRequire(process.env.ESBUILD_FROM || 'D:/NFL game test/package.json')('esbuild')
+// esbuild from the Cornerstone repo ($CORNERSTONE, else D:/NFL game test), or from ESBUILD_FROM's package.json.
+const esbuild = createRequire(process.env.ESBUILD_FROM || path.join(process.env.CORNERSTONE || 'D:/NFL game test', 'package.json'))('esbuild')
 const core = path.join(here, 'cornerstone')
 
 // 1. The full TUNING object, evaluated from the snapshot.
@@ -96,6 +96,7 @@ console.log(`engine.js ${Math.round(engine.length / 1024)} KB; TUNING sections: 
 const R = JSON.parse(readFileSync(path.join(here, 'ratings.json'), 'utf8'))
 const grades = computeGrades(JSON.parse(readFileSync(path.join(here, '..', 'nfl_auction_players.json'), 'utf8')), R)
 if (R.unmatched.length) console.warn(`players with no Madden match (they play as a league-average starter): ${R.unmatched.join('; ')}`)
+if (R.production && R.production.length) console.log(`rated from 2025 production, not Madden (ratings-production.mts): ${R.production.length} (${[...new Set(R.production.map((s) => s.split(' ')[0]))].join(', ')})`)
 const one = (x) => Math.round(x * 10) / 10
 const data = {
   source: R.source,

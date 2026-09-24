@@ -1,6 +1,6 @@
 // The game's edits to Cornerstone's engine, applied by build.mjs at build time; the snapshot in
 // cornerstone/ stays verbatim. Every `find` must occur exactly once in its file, or the build
-// stops, so an engine update can never silently skip one. equiv.ts proves the result is still
+// stops, so an engine update can never silently skip one. equiv.mts proves the result is still
 // Cornerstone's engine, game by game, against its own simulateGame.
 //
 // Three kinds of edit:
@@ -9,8 +9,9 @@
 //   backs' share of designed runs), HOOKS.game may weigh players by their real 2025 volume. Every
 //   rating-driven part of the pick stays: route and run fitness from the ratings, the per-game
 //   form, and the quarterback's and receivers' own share of runs;
-// - grades: a run's yards, a throw's completion and interception chances and a catch's yards also
-//   take the graded players' edges (their 2025 production, grades.mjs), through HOOKS.game.
+// - grades: a run's yards and breakaway chance, a throw's completion and interception chances and a
+//   catch's yards also take the graded players' edges (their 2025 production, grades.mjs), through
+//   HOOKS.game.
 // With HOOKS.game null the original code runs unchanged.
 
 const HOOKS_IMPORT = "import { HOOKS } from 'game:hooks'\n"
@@ -90,6 +91,11 @@ function chooseReceiver(offense: DepthChart, kind: RouteKind, rng: RNG): Receivi
       why: "grades: the carrier's and the defense's yards per carry",
       find: '    + TUNING.usage.carrierYardsOffset[carrier.group]\n',
       replace: '    + TUNING.usage.carrierYardsOffset[carrier.group]\n    + (HOOKS.game ? HOOKS.game.runShift(rusher, defense) : 0)\n',
+    },
+    {
+      why: "grades: a graded back's breakaway runs (more of them for a better back, fewer for a worse one)",
+      find: '  if (rng.chance(Math.max(0, rusher.ratings.speed - TUNING.roster.starterMean) / TUNING.rushing.carryingEffectDivisor)) u = 1 - tail * rng.next()\n',
+      replace: '  if (rng.chance(Math.max(0, rusher.ratings.speed - TUNING.roster.starterMean) / TUNING.rushing.carryingEffectDivisor)) u = 1 - tail * rng.next()\n  if (HOOKS.game) u = HOOKS.game.runDraw(u, rusher, rng)\n',
     },
     {
       why: "grades: the passer's, the receiver's and the defense's completion rate",

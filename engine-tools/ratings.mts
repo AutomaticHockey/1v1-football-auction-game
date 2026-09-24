@@ -12,15 +12,17 @@
 // Writes ratings.json: every auctioned player's ratings (keyed by the player file's id), every
 // team's 21 defenders, and the filler (the league-average player at each depth slot).
 // Run from the Cornerstone repo so its imports resolve:
-//   cd "D:/NFL game test" && npx tsx "<this folder>/ratings.ts"
+//   cd "D:/NFL game test" && npx tsx "<this folder>/ratings.mts"   (Cornerstone elsewhere: set CORNERSTONE)
 import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { mulberry32 } from 'file:///D:/NFL%20game%20test/src/core/rng.ts'
-import { generateLeague, deriveOverall } from 'file:///D:/NFL%20game%20test/src/core/generate.ts'
-import { buildDepthChart } from 'file:///D:/NFL%20game%20test/src/core/depthChart.ts'
-import { TUNING } from 'file:///D:/NFL%20game%20test/src/core/tuning.ts'
-import { TEAMS } from 'file:///D:/NFL%20game%20test/src/data/teams.ts'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+// The Cornerstone repo: $CORNERSTONE, else D:/NFL game test.
+const core = (file: string) => import(pathToFileURL(path.join(process.env.CORNERSTONE ?? 'D:/NFL game test', 'src', file)).href)
+const { mulberry32 } = await core('core/rng.ts')
+const { generateLeague, deriveOverall } = await core('core/generate.ts')
+const { buildDepthChart } = await core('core/depthChart.ts')
+const { TUNING } = await core('core/tuning.ts')
+const { TEAMS } = await core('data/teams.ts')
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const MADDEN_FILE = process.argv[2] ?? path.join(here, 'madden26-week-18.json')

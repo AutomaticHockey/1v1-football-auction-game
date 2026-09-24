@@ -521,6 +521,7 @@ var ENGINE = (() => {
     const tail = TUNING.rushing.breakawayTail;
     let u = rng.next();
     if (rng.chance(Math.max(0, rusher.ratings.speed - TUNING.roster.starterMean) / TUNING.rushing.carryingEffectDivisor)) u = 1 - tail * rng.next();
+    if (HOOKS.game) u = HOOKS.game.runDraw(u, rusher, rng);
     const shortYardage = context.down >= TUNING.football.downs - 1 && context.toGo <= TUNING.rushing.shortYardageToGo;
     const table = shortYardage ? TUNING.rushing.shortYardageRunYards : TUNING.rushing.runYards;
     const yards = Math.min(Math.round(quantileAt(table, u) + matchup + TUNING.rushing.runShift), TUNING.football.fieldLength - context.yardLine);
@@ -1687,7 +1688,15 @@ var ENGINE = (() => {
       });
     },
     runShift(rusher, defense) {
-      return edgeOf(rusher).run + unitOf(defense).run;
+      const breakaway = edgeOf(rusher).breakaway || 0;
+      const past = breakaway < -BREAKAWAY.removed ? breakaway + BREAKAWAY.removed : 0;
+      return edgeOf(rusher).run + past + unitOf(defense).run;
+    },
+    runDraw(u, rusher, rng) {
+      const breakaway = edgeOf(rusher).breakaway || 0, tail = TUNING.rushing.breakawayTail;
+      if (breakaway > 0 && rng.chance(Math.min(1, breakaway / BREAKAWAY.added))) return 1 - tail * rng.next();
+      if (breakaway < 0 && u > 1 - tail && rng.chance(Math.min(1, -breakaway / BREAKAWAY.removed))) return (1 - tail) * rng.next();
+      return u;
     },
     passCatch(qb, receiver, defense) {
       return edgeOf(qb).catch + edgeOf(receiver).catch + unitOf(defense).catch;
@@ -1699,7 +1708,20 @@ var ENGINE = (() => {
       return drawn > 0 ? drawn * edgeOf(qb).yards * edgeOf(receiver).yards * unitOf(defense).yards : drawn;
     }
   };
-  var NO_EDGE = { run: 0, catch: 0, yards: 1, int: 1 };
+  var BREAKAWAY = (() => {
+    const table = TUNING.rushing.runYards, tail = TUNING.rushing.breakawayTail, steps = 2e4;
+    let all = 0, top = 0;
+    for (let i = 0; i < steps; i += 1) {
+      const u = (i + 0.5) / steps, y = quantileAt(table, u);
+      all += y;
+      if (u > 1 - tail) top += y;
+    }
+    all /= steps;
+    top /= steps * tail;
+    const rest = (all - tail * top) / (1 - tail);
+    return { added: top - all, removed: tail * (top - rest) };
+  })();
+  var NO_EDGE = { run: 0, breakaway: 0, catch: 0, yards: 1, int: 1 };
   var edgeOf = (player) => player.edge || NO_EDGE;
   var unitOf = (defense) => defense.getGroup("DB").unit || NO_EDGE;
   function withUsage(on, fn) {

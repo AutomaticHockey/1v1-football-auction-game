@@ -8,7 +8,7 @@ const by = {}; for (const p of data.players) { p.short = p.name.split(' ').pop()
 const PAIRS = Number(process.argv[2] || 200), SIMS = Number(process.argv[3] || 300);
 let s0 = 12345; const rnd = () => { s0 = (s0 * 1103515245 + 12345) & 0x7fffffff; return s0 / 0x7fffffff; };
 const pick = a => a[Math.floor(rnd() * a.length)];
-const draft = () => { const wr = pick(by.WR); let fx; do { fx = pick(by.RB.concat(by.WR)); } while (fx === wr); let rb; do { rb = pick(by.RB); } while (rb === fx); return { QB: pick(by.QB), RB: rb, WR: wr, FLEX: fx, DEF: pick(by.DEF) }; };
+const draft = () => { const wr = pick(by.WR), te = pick(by.TE); let fx; do { fx = pick(by.RB.concat(by.WR, by.TE)); } while (fx === wr || fx === te); let rb; do { rb = pick(by.RB); } while (rb === fx); return { QB: pick(by.QB), RB: rb, WR: wr, TE: te, FLEX: fx, DEF: pick(by.DEF) }; };
 let fav = 0, over70 = 0, over80 = 0, seed = 1, pts = [];
 for (let n = 0; n < PAIRS; n++) {
   const A = SIMKIT.buildSide(0, draft()), B = SIMKIT.buildSide(1, draft()), pl = A.players.concat(B.players);
