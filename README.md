@@ -7,6 +7,10 @@ A 1v1 NFL auction game in a single HTML file. Two GMs bid on real 2025 players f
 
 - **On one device:** open `index.html` in a browser. It works straight from disk, offline, and the
   player list is built in.
+- **Against the CPU:** pick *Vs CPU* and a level (Easy, Normal, Hard). Classic rules, offline. The
+  CPU bids by what each player is worth in this game's sim, measured ahead of time
+  (`engine-tools/cpu-values.js`), against what it can expect from the players still undrawn at that
+  position; like you, it never knows which lot comes next.
 - **Online with a friend:** both open the page, one picks *Host online* and shares the code, the
   other picks *Join online*. Online play needs internet access to cdn.jsdelivr.net and 0.peerjs.com.
   Served from a website (e.g. Netlify), the host also gets an invite link.

@@ -142,9 +142,11 @@ const SIMKIT = (() => {
    * slotOf maps an engine id to our slot key ('QB', 'FLEX', ...); the whole defense maps to 'DEF'.
    * opts.emptyAs 'average': an empty slot gets the league-average starter instead (for engine-tools checks).
    * opts.fillers 'engine': fill-ins play exactly as the engine rates them (the baseline check).
+   * opts.emptySlots: slots that get the empty-slot fill-in even with emptyAs 'average' (cpu-values.js).
    */
   function buildSide(side, lineup, opts) {
     const average = opts && opts.emptyAs === 'average', graded = !(opts && opts.fillers === 'engine');
+    const emptySlots = (opts && opts.emptySlots) || [];
     const floors = {};
     const floor = pos => (pos in floors ? floors[pos] : (floors[pos] = floorFor(pos)));
     const teamId = side === 0 ? 1 : 2, base = teamId * 1000;
@@ -161,8 +163,9 @@ const SIMKIT = (() => {
       const p = L[slot], r = p && rated(p.id);
       if (r) groups[r.pos].push({ r: balanced(r, filler(r.pos + '0'), r.pos), name: p.short || p.name, slot, team: p.team, usage: realUsage(p, r.pos), edge: edgeFor(r.pos, DATA.grades.players[p.id]) });
       else {
-        const [pos, fill] = average ? AVERAGE[slot] : EMPTY[slot], starter = !average && graded && DATA.volume[pos];
-        groups[pos].push({ r: filler(fill), name: slot, slot, role: Number(fill.slice(pos.length)), fillIn: !average, usage: starter ? { targets: starter.targets, carries: starter.carries } : undefined });
+        const empty = !average || emptySlots.includes(slot);
+        const [pos, fill] = empty ? EMPTY[slot] : AVERAGE[slot], starter = empty && graded && DATA.volume[pos];
+        groups[pos].push({ r: filler(fill), name: slot, slot, role: Number(fill.slice(pos.length)), fillIn: empty, usage: starter ? { targets: starter.targets, carries: starter.carries } : undefined });
       }
     }
     for (const pos of Object.keys(DEPTH)) {
@@ -194,7 +197,8 @@ const SIMKIT = (() => {
         add(d[0], balanced({ overall: d[3], ratings: toRatings(d.slice(4)) }, base, 'DEF'), d[1], 'DEF', L.DEF.team, null, null, edge);
       }
     } else {
-      for (const [pos, count] of DEFENSE) for (let i = 0; i < count; i += 1) add(pos, filler(pos + (average ? Math.min(i, 3) : BACKUP_DEFENSE[pos][i])), 'DEF', 'DEF', 'DEF');
+      const backup = !average || emptySlots.includes('DEF');
+      for (const [pos, count] of DEFENSE) for (let i = 0; i < count; i += 1) add(pos, filler(pos + (backup ? BACKUP_DEFENSE[pos][i] : Math.min(i, 3))), 'DEF', 'DEF', 'DEF');
     }
     return { team: { id: teamId, roster: players.map(p => p.id), scheme: Object.assign({}, DATA.coach) }, players, slotOf };
   }
@@ -230,10 +234,21 @@ const SIMKIT = (() => {
   const configure = () => engine().configure({ routeMix: K.routeMix, runMix: K.runMix });
   configure();
 
+  /**
+   * A player's worth to a CPU bidder (cpu-values.js): points of margin a game over leaving `slot`
+   * empty, with everything else league average. slot: his position's slot, or 'FLEX'. null if unmeasured.
+   */
+  function value(entry, slot) {
+    const V = DATA.values;
+    if (!V || !entry) return null;
+    if (entry.pos === 'DEF') return V.defenses[entry.team] == null ? null : V.defenses[entry.team];
+    const v = V.players[entry.id];
+    return v ? (slot === 'FLEX' ? v[1] : v[0]) : null;
+  }
   /** A player's ratings summary for display: { madden, overall } (Madden's overall, and the engine's). */
   function info(id) { const r = rated(id); return r ? { madden: r.madden, overall: r.overall } : null; }
   /** A team defense's starters: [{ pos, name, madden, overall }]. */
   function defense(team) { return (DATA.defenses[team] || []).map(d => ({ pos: d[0], name: d[1], madden: d[2], overall: d[3] })); }
-  return { K, configure, buildSide, info, defense, grades: DATA.grades, source: DATA.source };
+  return { K, configure, buildSide, info, defense, value, grades: DATA.grades, source: DATA.source };
 })();
 if (typeof module !== 'undefined') module.exports = SIMKIT;
