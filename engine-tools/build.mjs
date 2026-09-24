@@ -5,7 +5,7 @@
 // Uses the esbuild in the Cornerstone repo's node_modules; writes only here.
 //   node build.mjs          (then node embed-engine.js to put both into ../index.html)
 import { createRequire } from 'node:module'
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { applyPatches } from './patches.mjs'
@@ -122,6 +122,8 @@ const data = {
   defenses: Object.fromEntries(Object.entries(R.defenses).map(([team, unit]) => [team, unit.map((d) => [d.pos, d.name, d.madden, d.overall, ...d.ratings])])),
   grades: { players: grades.players, defenses: grades.defenses },
   volume,
+  // What each player is worth to the CPU bidder (cpu-values.js), if it has been measured.
+  values: existsSync(path.join(here, 'cpu-values.json')) ? (({ players, defenses }) => ({ players, defenses }))(JSON.parse(readFileSync(path.join(here, 'cpu-values.json'), 'utf8'))) : null,
 }
 const simkitSrc = readFileSync(path.join(here, 'simkit.src.js'), 'utf8')
 if (!simkitSrc.includes('/*@@RATINGS@@*/null')) throw new Error('simkit.src.js has no ratings placeholder')

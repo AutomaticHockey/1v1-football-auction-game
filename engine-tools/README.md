@@ -87,6 +87,7 @@ the page.
 | `equiv.mts` | Gate: the compiled engine equals Cornerstone's `simulateGame`. |
 | `check.js`, `favorite.js` | Sim against real 2025 lines; how often the better roster wins. |
 | `calibrate.js` | Fits `SIMKIT.K.grade` (each player at his grade) and reports the win rates `K.balance` is set by. |
+| `cpu-values.js` | Each player's worth to the CPU opponent (`cpu-values.json`, `SIMKIT.value`): points of margin over an empty slot. |
 
 ## Commands
 
@@ -112,13 +113,35 @@ New ratings, or a new player file:
     node madden-fetch.js [iteration, default 19-week-18]
     cd "D:/NFL game test" && npx tsx "<this folder>/ratings.mts"
     cd "D:/NFL game test" && npx tsx "<this folder>/ratings-production.mts" <stats csv>   (only while Madden lacks the TEs)
-    node build.mjs && node calibrate.js 200 && node embed-engine.js   (the grades come from both files)
+    node build.mjs && node calibrate.js 200 && node cpu-values.js && node build.mjs && node embed-engine.js
+      (the grades come from both files; the CPU's values from how players play, so remeasure them after
+      anything that changes that: ratings, grades, balance, fill-ins)
     node embed-players.js   (after changing the player file)
 
 The tight ends (the stats CSV is nflverse's, `stats_player/stats_player_reg_2025.csv` in its
 `nflverse-data` releases; the script first checks it rebuilds every WR in the file exactly):
 
     node players-te.js stats_player_reg_2025.csv && node embed-players.js
+
+## The CPU opponent
+
+*Vs CPU* puts the CPU in Player 2's seat (Classic rules). The page's `CPU OPPONENT` section has the
+logic; `cpu-values.js` measures what it knows: each player in his slot (and each back, receiver and
+tight end at FLEX) against the same league-average team with that slot empty, 3,000 games each on
+every core (about 4 minutes). QBs are worth 6.4 to 16.7 points a game over an empty slot, defenses 2.3
+to 11.7, backs 0.5 to 7.4, receivers 1.3 to 4.7, tight ends 1.5 to 4.8; each is good to about ±0.25.
+
+It never sees what comes next (lots are drawn when they come up); it judges each player against the
+undrawn players who could still fill the slot. Its price: $1 plus dollars-per-point times his value
+over the slot's floor, the budget shared only over the slots the other side can still fight for.
+Solo offers: Hard works out when to sign by optimal stopping over the offers left (each decline
+redraws and adds $1, the fourth is forced). Easy and Normal misjudge values (by a random factor per
+player per game), and Easy overpays.
+
+Measured by playing whole auctions in the page and simming the two rosters (150 auctions each): Hard
+beats a card reader (a human stand-in that ranks players by their card's lead stat and spends a fair
+share on the good ones) 61.8%, Normal 51.0%, Easy 40.0%; Hard beats Normal 58.6%, Normal beats Easy
+59.6%.
 
 ## Where it stands (2026-09-24, engine 4ffc55b)
 
