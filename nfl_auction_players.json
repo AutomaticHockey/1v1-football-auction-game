@@ -1,0 +1,3928 @@
+{
+ "season": 2025,
+ "season_type": "regular",
+ "source": "nflverse (github.com/nflverse/nflverse-data)",
+ "min_games": 8,
+ "categories": {
+  "QB": [
+   {
+    "key": "pass_yds_g",
+    "label": "Pass Yds/G",
+    "high_wins": true
+   },
+   {
+    "key": "pass_td_g",
+    "label": "Pass TD/G",
+    "high_wins": true
+   },
+   {
+    "key": "int_g",
+    "label": "INT/G",
+    "high_wins": false
+   }
+  ],
+  "RB": [
+   {
+    "key": "rush_yds_g",
+    "label": "Rush Yds/G",
+    "high_wins": true
+   },
+   {
+    "key": "td_g",
+    "label": "TD/G",
+    "high_wins": true
+   },
+   {
+    "key": "ypc",
+    "label": "Yards/Carry",
+    "high_wins": true
+   }
+  ],
+  "WR": [
+   {
+    "key": "rec_yds_g",
+    "label": "Rec Yds/G",
+    "high_wins": true
+   },
+   {
+    "key": "rec_g",
+    "label": "Rec/G",
+    "high_wins": true
+   },
+   {
+    "key": "rec_td_g",
+    "label": "Rec TD/G",
+    "high_wins": true
+   }
+  ],
+  "DEF": [
+   {
+    "key": "pts_allowed_g",
+    "label": "Pts Allowed/G",
+    "high_wins": false
+   },
+   {
+    "key": "yds_allowed_g",
+    "label": "Yds Allowed/G",
+    "high_wins": false
+   },
+   {
+    "key": "takeaways_g",
+    "label": "Takeaways/G",
+    "high_wins": true
+   }
+  ]
+ },
+ "players": [
+  {
+   "id": "00-0026498",
+   "name": "Matthew Stafford",
+   "pos": "QB",
+   "team": "LA",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/jwpkjfrkzufdyh8u1mg7",
+   "stats": {
+    "pass_yds_g": 276.9,
+    "pass_td_g": 2.71,
+    "int_g": 0.47,
+    "cmp_pct": 65.0,
+    "rush_yds_g": 0.1,
+    "totals": {
+     "pass_yds": 4707,
+     "pass_td": 46,
+     "int": 8,
+     "rush_yds": 1,
+     "rush_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0033106",
+   "name": "Jared Goff",
+   "pos": "QB",
+   "team": "DET",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/kaicbot8qhzrvddilbtp",
+   "stats": {
+    "pass_yds_g": 268.5,
+    "pass_td_g": 2.0,
+    "int_g": 0.47,
+    "cmp_pct": 68.0,
+    "rush_yds_g": 2.6,
+    "totals": {
+     "pass_yds": 4564,
+     "pass_td": 34,
+     "int": 8,
+     "rush_yds": 45,
+     "rush_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0033077",
+   "name": "Dak Prescott",
+   "pos": "QB",
+   "team": "DAL",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yvscmqq1qki8zfsemmcd",
+   "stats": {
+    "pass_yds_g": 267.8,
+    "pass_td_g": 1.76,
+    "int_g": 0.59,
+    "cmp_pct": 67.3,
+    "rush_yds_g": 10.4,
+    "totals": {
+     "pass_yds": 4552,
+     "pass_td": 30,
+     "int": 10,
+     "rush_yds": 177,
+     "rush_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0039851",
+   "name": "Drake Maye",
+   "pos": "QB",
+   "team": "NE",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/s1nmoon2xnrc3bnyulv4",
+   "stats": {
+    "pass_yds_g": 258.5,
+    "pass_td_g": 1.82,
+    "int_g": 0.47,
+    "cmp_pct": 72.0,
+    "rush_yds_g": 26.5,
+    "totals": {
+     "pass_yds": 4394,
+     "pass_td": 31,
+     "int": 8,
+     "rush_yds": 450,
+     "rush_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0034869",
+   "name": "Sam Darnold",
+   "pos": "QB",
+   "team": "SEA",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/fyay8vruj0cqmhopufzk",
+   "stats": {
+    "pass_yds_g": 238.1,
+    "pass_td_g": 1.47,
+    "int_g": 0.82,
+    "cmp_pct": 67.7,
+    "rush_yds_g": 5.6,
+    "totals": {
+     "pass_yds": 4048,
+     "pass_td": 25,
+     "int": 14,
+     "rush_yds": 95,
+     "rush_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0036971",
+   "name": "Trevor Lawrence",
+   "pos": "QB",
+   "team": "JAX",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/k9uzdernqkx7oquy7dkg",
+   "stats": {
+    "pass_yds_g": 235.7,
+    "pass_td_g": 1.71,
+    "int_g": 0.71,
+    "cmp_pct": 60.9,
+    "rush_yds_g": 21.1,
+    "totals": {
+     "pass_yds": 4007,
+     "pass_td": 29,
+     "int": 12,
+     "rush_yds": 359,
+     "rush_td": 9
+    }
+   }
+  },
+  {
+   "id": "00-0039918",
+   "name": "Caleb Williams",
+   "pos": "QB",
+   "team": "CHI",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/h4qs11kutwiw7whekmyt",
+   "stats": {
+    "pass_yds_g": 231.9,
+    "pass_td_g": 1.59,
+    "int_g": 0.41,
+    "cmp_pct": 58.1,
+    "rush_yds_g": 22.8,
+    "totals": {
+     "pass_yds": 3942,
+     "pass_td": 27,
+     "int": 7,
+     "rush_yds": 388,
+     "rush_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0039732",
+   "name": "Bo Nix",
+   "pos": "QB",
+   "team": "DEN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/zvo9xatffmqn9lnukpgk",
+   "stats": {
+    "pass_yds_g": 231.2,
+    "pass_td_g": 1.47,
+    "int_g": 0.65,
+    "cmp_pct": 63.4,
+    "rush_yds_g": 20.9,
+    "totals": {
+     "pass_yds": 3931,
+     "pass_td": 25,
+     "int": 11,
+     "rush_yds": 356,
+     "rush_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0036355",
+   "name": "Justin Herbert",
+   "pos": "QB",
+   "team": "LAC",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/jnkspnntgebegzp4ghve",
+   "stats": {
+    "pass_yds_g": 232.9,
+    "pass_td_g": 1.62,
+    "int_g": 0.81,
+    "cmp_pct": 66.4,
+    "rush_yds_g": 31.1,
+    "totals": {
+     "pass_yds": 3727,
+     "pass_td": 26,
+     "int": 13,
+     "rush_yds": 498,
+     "rush_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0034855",
+   "name": "Baker Mayfield",
+   "pos": "QB",
+   "team": "TB",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/gjb8e69jtt1ffqf1afue",
+   "stats": {
+    "pass_yds_g": 217.2,
+    "pass_td_g": 1.53,
+    "int_g": 0.65,
+    "cmp_pct": 63.2,
+    "rush_yds_g": 22.5,
+    "totals": {
+     "pass_yds": 3693,
+     "pass_td": 26,
+     "int": 11,
+     "rush_yds": 382,
+     "rush_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0034857",
+   "name": "Josh Allen",
+   "pos": "QB",
+   "team": "BUF",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mjwbioajzldkq1vzoz2d",
+   "stats": {
+    "pass_yds_g": 229.2,
+    "pass_td_g": 1.56,
+    "int_g": 0.62,
+    "cmp_pct": 69.3,
+    "rush_yds_g": 36.2,
+    "totals": {
+     "pass_yds": 3668,
+     "pass_td": 25,
+     "int": 10,
+     "rush_yds": 579,
+     "rush_td": 14
+    }
+   }
+  },
+  {
+   "id": "00-0033873",
+   "name": "Patrick Mahomes",
+   "pos": "QB",
+   "team": "KC",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/wdckwtob1lybvkmxnf7p",
+   "stats": {
+    "pass_yds_g": 256.2,
+    "pass_td_g": 1.57,
+    "int_g": 0.79,
+    "cmp_pct": 62.7,
+    "rush_yds_g": 30.1,
+    "totals": {
+     "pass_yds": 3587,
+     "pass_td": 22,
+     "int": 11,
+     "rush_yds": 422,
+     "rush_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0036264",
+   "name": "Jordan Love",
+   "pos": "QB",
+   "team": "GB",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/thz8stjkbjwddxqnozi5",
+   "stats": {
+    "pass_yds_g": 225.4,
+    "pass_td_g": 1.53,
+    "int_g": 0.4,
+    "cmp_pct": 66.3,
+    "rush_yds_g": 13.3,
+    "totals": {
+     "pass_yds": 3381,
+     "pass_td": 23,
+     "int": 6,
+     "rush_yds": 199,
+     "rush_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0033119",
+   "name": "Jacoby Brissett",
+   "pos": "QB",
+   "team": "ARI",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qjswiunczrn5xmdiqhlz",
+   "stats": {
+    "pass_yds_g": 240.4,
+    "pass_td_g": 1.64,
+    "int_g": 0.57,
+    "cmp_pct": 64.9,
+    "rush_yds_g": 12.0,
+    "totals": {
+     "pass_yds": 3366,
+     "pass_td": 23,
+     "int": 8,
+     "rush_yds": 168,
+     "rush_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0023459",
+   "name": "Aaron Rodgers",
+   "pos": "QB",
+   "team": "PIT",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/dypvakakxhccxs67tb0y",
+   "stats": {
+    "pass_yds_g": 207.6,
+    "pass_td_g": 1.5,
+    "int_g": 0.44,
+    "cmp_pct": 65.7,
+    "rush_yds_g": 3.8,
+    "totals": {
+     "pass_yds": 3322,
+     "pass_td": 24,
+     "int": 7,
+     "rush_yds": 61,
+     "rush_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0036389",
+   "name": "Jalen Hurts",
+   "pos": "QB",
+   "team": "PHI",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xow5yvxjeqa6witmofmp",
+   "stats": {
+    "pass_yds_g": 201.5,
+    "pass_td_g": 1.56,
+    "int_g": 0.38,
+    "cmp_pct": 64.8,
+    "rush_yds_g": 26.3,
+    "totals": {
+     "pass_yds": 3224,
+     "pass_td": 25,
+     "int": 6,
+     "rush_yds": 421,
+     "rush_td": 8
+    }
+   }
+  },
+  {
+   "id": "00-0040676",
+   "name": "Cam Ward",
+   "pos": "QB",
+   "team": "TEN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/l7switu6stlwd2irm8yo",
+   "stats": {
+    "pass_yds_g": 186.4,
+    "pass_td_g": 0.88,
+    "int_g": 0.41,
+    "cmp_pct": 59.8,
+    "rush_yds_g": 9.4,
+    "totals": {
+     "pass_yds": 3169,
+     "pass_td": 15,
+     "int": 7,
+     "rush_yds": 159,
+     "rush_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0035710",
+   "name": "Daniel Jones",
+   "pos": "QB",
+   "team": "IND",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ohvvctuykzwrpqer7xgl",
+   "stats": {
+    "pass_yds_g": 238.5,
+    "pass_td_g": 1.46,
+    "int_g": 0.62,
+    "cmp_pct": 68.0,
+    "rush_yds_g": 12.6,
+    "totals": {
+     "pass_yds": 3101,
+     "pass_td": 19,
+     "int": 8,
+     "rush_yds": 164,
+     "rush_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0039163",
+   "name": "C.J. Stroud",
+   "pos": "QB",
+   "team": "HOU",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tt4zrtxlhifaljhj0rn7",
+   "stats": {
+    "pass_yds_g": 217.2,
+    "pass_td_g": 1.36,
+    "int_g": 0.57,
+    "cmp_pct": 64.5,
+    "rush_yds_g": 14.9,
+    "totals": {
+     "pass_yds": 3041,
+     "pass_td": 19,
+     "int": 8,
+     "rush_yds": 209,
+     "rush_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0030565",
+   "name": "Geno Smith",
+   "pos": "QB",
+   "team": "LV",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/zppfqqcyjfma14jjif3a",
+   "stats": {
+    "pass_yds_g": 201.7,
+    "pass_td_g": 1.27,
+    "int_g": 1.13,
+    "cmp_pct": 67.4,
+    "rush_yds_g": 7.3,
+    "totals": {
+     "pass_yds": 3025,
+     "pass_td": 19,
+     "int": 17,
+     "rush_yds": 109,
+     "rush_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0039150",
+   "name": "Bryce Young",
+   "pos": "QB",
+   "team": "CAR",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/vcvhmxvxw2a3armle0af",
+   "stats": {
+    "pass_yds_g": 188.2,
+    "pass_td_g": 1.44,
+    "int_g": 0.69,
+    "cmp_pct": 63.6,
+    "rush_yds_g": 13.5,
+    "totals": {
+     "pass_yds": 3011,
+     "pass_td": 23,
+     "int": 11,
+     "rush_yds": 216,
+     "rush_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0036212",
+   "name": "Tua Tagovailoa",
+   "pos": "QB",
+   "team": "MIA",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tmm4ohds7qci0vqoobhm",
+   "stats": {
+    "pass_yds_g": 190.0,
+    "pass_td_g": 1.43,
+    "int_g": 1.07,
+    "cmp_pct": 67.7,
+    "rush_yds_g": 3.1,
+    "totals": {
+     "pass_yds": 2660,
+     "pass_td": 20,
+     "int": 15,
+     "rush_yds": 43,
+     "rush_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0034796",
+   "name": "Lamar Jackson",
+   "pos": "QB",
+   "team": "BAL",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/eno6s5qzl9grbfbfwhoa",
+   "stats": {
+    "pass_yds_g": 196.1,
+    "pass_td_g": 1.62,
+    "int_g": 0.54,
+    "cmp_pct": 63.6,
+    "rush_yds_g": 26.8,
+    "totals": {
+     "pass_yds": 2549,
+     "pass_td": 21,
+     "int": 7,
+     "rush_yds": 349,
+     "rush_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0026158",
+   "name": "Joe Flacco",
+   "pos": "QB",
+   "team": "CIN",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/dre1d2f2d6dxqohzn5l2",
+   "stats": {
+    "pass_yds_g": 190.7,
+    "pass_td_g": 1.15,
+    "int_g": 0.77,
+    "cmp_pct": 60.3,
+    "rush_yds_g": 2.7,
+    "totals": {
+     "pass_yds": 2479,
+     "pass_td": 15,
+     "int": 10,
+     "rush_yds": 35,
+     "rush_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0040743",
+   "name": "Tyler Shough",
+   "pos": "QB",
+   "team": "NO",
+   "games": 11,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/toiafc7qighw86geo7jf",
+   "stats": {
+    "pass_yds_g": 216.7,
+    "pass_td_g": 0.91,
+    "int_g": 0.55,
+    "cmp_pct": 67.6,
+    "rush_yds_g": 16.9,
+    "totals": {
+     "pass_yds": 2384,
+     "pass_td": 10,
+     "int": 6,
+     "rush_yds": 186,
+     "rush_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0040691",
+   "name": "Jaxson Dart",
+   "pos": "QB",
+   "team": "NYG",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/n6uymxssgiicjmxkzxoc",
+   "stats": {
+    "pass_yds_g": 162.3,
+    "pass_td_g": 1.07,
+    "int_g": 0.36,
+    "cmp_pct": 63.7,
+    "rush_yds_g": 34.8,
+    "totals": {
+     "pass_yds": 2272,
+     "pass_td": 15,
+     "int": 5,
+     "rush_yds": 487,
+     "rush_td": 9
+    }
+   }
+  },
+  {
+   "id": "00-0037834",
+   "name": "Brock Purdy",
+   "pos": "QB",
+   "team": "SF",
+   "games": 9,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xs2fyj1sqdgwvt9ihbri",
+   "stats": {
+    "pass_yds_g": 240.8,
+    "pass_td_g": 2.22,
+    "int_g": 1.11,
+    "cmp_pct": 69.4,
+    "rush_yds_g": 16.3,
+    "totals": {
+     "pass_yds": 2167,
+     "pass_td": 20,
+     "int": 10,
+     "rush_yds": 147,
+     "rush_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0036972",
+   "name": "Mac Jones",
+   "pos": "QB",
+   "team": "SF",
+   "games": 11,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mbdwfwiuhl0ib5ajtmzq",
+   "stats": {
+    "pass_yds_g": 195.5,
+    "pass_td_g": 1.18,
+    "int_g": 0.55,
+    "cmp_pct": 69.6,
+    "rush_yds_g": 5.5,
+    "totals": {
+     "pass_yds": 2151,
+     "pass_td": 13,
+     "int": 6,
+     "rush_yds": 60,
+     "rush_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0039917",
+   "name": "Michael Penix Jr.",
+   "pos": "QB",
+   "team": "ATL",
+   "games": 9,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mip4kogkqxwkkya6mvmh",
+   "stats": {
+    "pass_yds_g": 220.2,
+    "pass_td_g": 1.0,
+    "int_g": 0.33,
+    "cmp_pct": 60.1,
+    "rush_yds_g": 7.8,
+    "totals": {
+     "pass_yds": 1982,
+     "pass_td": 9,
+     "int": 3,
+     "rush_yds": 70,
+     "rush_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0036442",
+   "name": "Joe Burrow",
+   "pos": "QB",
+   "team": "CIN",
+   "games": 8,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/gnnvcgui1cijybukk2w7",
+   "stats": {
+    "pass_yds_g": 226.1,
+    "pass_td_g": 2.12,
+    "int_g": 0.62,
+    "cmp_pct": 66.8,
+    "rush_yds_g": 5.1,
+    "totals": {
+     "pass_yds": 1809,
+     "pass_td": 17,
+     "int": 5,
+     "rush_yds": 41,
+     "rush_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0029604",
+   "name": "Kirk Cousins",
+   "pos": "QB",
+   "team": "ATL",
+   "games": 10,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/za7cynvpwlsro1tsaijk",
+   "stats": {
+    "pass_yds_g": 172.1,
+    "pass_td_g": 1.0,
+    "int_g": 0.5,
+    "cmp_pct": 61.7,
+    "rush_yds_g": 0.7,
+    "totals": {
+     "pass_yds": 1721,
+     "pass_td": 10,
+     "int": 5,
+     "rush_yds": 7,
+     "rush_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0032268",
+   "name": "Marcus Mariota",
+   "pos": "QB",
+   "team": "WAS",
+   "games": 10,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/grx6m1fmu1odltjo3y31",
+   "stats": {
+    "pass_yds_g": 169.5,
+    "pass_td_g": 1.0,
+    "int_g": 0.7,
+    "cmp_pct": 61.2,
+    "rush_yds_g": 29.7,
+    "totals": {
+     "pass_yds": 1695,
+     "pass_td": 10,
+     "int": 7,
+     "rush_yds": 297,
+     "rush_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0038542",
+   "name": "Bijan Robinson",
+   "pos": "RB",
+   "team": "ATL",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/esii5yb8yn9edboi4mlq",
+   "stats": {
+    "rush_yds_g": 86.9,
+    "ypc": 5.15,
+    "td_g": 0.65,
+    "scrim_yds_g": 135.2,
+    "rec_g": 4.6,
+    "totals": {
+     "carries": 287,
+     "rush_yds": 1478,
+     "rush_td": 7,
+     "rec": 79,
+     "rec_yds": 820,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0033280",
+   "name": "Christian McCaffrey",
+   "pos": "RB",
+   "team": "SF",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/st82s2ytyzanatcmkqck",
+   "stats": {
+    "rush_yds_g": 70.7,
+    "ypc": 3.86,
+    "td_g": 1.0,
+    "scrim_yds_g": 125.1,
+    "rec_g": 6.0,
+    "totals": {
+     "carries": 311,
+     "rush_yds": 1202,
+     "rush_td": 10,
+     "rec": 102,
+     "rec_yds": 924,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0036223",
+   "name": "Jonathan Taylor",
+   "pos": "RB",
+   "team": "IND",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yw46ky6akdm7h7siofu8",
+   "stats": {
+    "rush_yds_g": 93.2,
+    "ypc": 4.91,
+    "td_g": 1.18,
+    "scrim_yds_g": 115.5,
+    "rec_g": 2.7,
+    "totals": {
+     "carries": 323,
+     "rush_yds": 1585,
+     "rush_td": 18,
+     "rec": 46,
+     "rec_yds": 378,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0037248",
+   "name": "James Cook",
+   "pos": "RB",
+   "team": "BUF",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/anjbznqb9i21wzcgrtbs",
+   "stats": {
+    "rush_yds_g": 95.4,
+    "ypc": 5.25,
+    "td_g": 0.82,
+    "scrim_yds_g": 112.5,
+    "rec_g": 1.9,
+    "totals": {
+     "carries": 309,
+     "rush_yds": 1621,
+     "rush_td": 12,
+     "rec": 33,
+     "rec_yds": 291,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0039139",
+   "name": "Jahmyr Gibbs",
+   "pos": "RB",
+   "team": "DET",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cursejnmmp1i9hnxihkj",
+   "stats": {
+    "rush_yds_g": 71.9,
+    "ypc": 5.03,
+    "td_g": 1.06,
+    "scrim_yds_g": 108.2,
+    "rec_g": 4.5,
+    "totals": {
+     "carries": 243,
+     "rush_yds": 1223,
+     "rush_td": 13,
+     "rec": 77,
+     "rec_yds": 616,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0039040",
+   "name": "De'Von Achane",
+   "pos": "RB",
+   "team": "MIA",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xk1xwio0bryfxo1ylweu",
+   "stats": {
+    "rush_yds_g": 84.4,
+    "ypc": 5.67,
+    "td_g": 0.75,
+    "scrim_yds_g": 114.9,
+    "rec_g": 4.2,
+    "totals": {
+     "carries": 238,
+     "rush_yds": 1350,
+     "rush_td": 8,
+     "rec": 67,
+     "rec_yds": 488,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0032764",
+   "name": "Derrick Henry",
+   "pos": "RB",
+   "team": "BAL",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tm79x0iknqg6hms3ypyt",
+   "stats": {
+    "rush_yds_g": 93.8,
+    "ypc": 5.2,
+    "td_g": 0.94,
+    "scrim_yds_g": 102.6,
+    "rec_g": 0.9,
+    "totals": {
+     "carries": 307,
+     "rush_yds": 1595,
+     "rush_td": 16,
+     "rec": 15,
+     "rec_yds": 150,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0037840",
+   "name": "Kyren Williams",
+   "pos": "RB",
+   "team": "LA",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xti3pek6rmojqchakxpy",
+   "stats": {
+    "rush_yds_g": 73.6,
+    "ypc": 4.83,
+    "td_g": 0.76,
+    "scrim_yds_g": 90.2,
+    "rec_g": 2.1,
+    "totals": {
+     "carries": 259,
+     "rush_yds": 1252,
+     "rush_td": 10,
+     "rec": 36,
+     "rec_yds": 281,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0038597",
+   "name": "Chase Brown",
+   "pos": "RB",
+   "team": "CIN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tch3y6jlj7khvyi9jg0c",
+   "stats": {
+    "rush_yds_g": 59.9,
+    "ypc": 4.39,
+    "td_g": 0.65,
+    "scrim_yds_g": 85.6,
+    "rec_g": 4.1,
+    "totals": {
+     "carries": 232,
+     "rush_yds": 1019,
+     "rush_td": 6,
+     "rec": 69,
+     "rec_yds": 437,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0038120",
+   "name": "Breece Hall",
+   "pos": "RB",
+   "team": "NYJ",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/i01xtqbfajfq68lb6orh",
+   "stats": {
+    "rush_yds_g": 66.6,
+    "ypc": 4.38,
+    "td_g": 0.31,
+    "scrim_yds_g": 88.4,
+    "rec_g": 2.2,
+    "totals": {
+     "carries": 243,
+     "rush_yds": 1065,
+     "rush_td": 4,
+     "rec": 36,
+     "rec_yds": 350,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0034844",
+   "name": "Saquon Barkley",
+   "pos": "RB",
+   "team": "PHI",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qcayrzjpura2zydszonh",
+   "stats": {
+    "rush_yds_g": 71.2,
+    "ypc": 4.07,
+    "td_g": 0.56,
+    "scrim_yds_g": 88.3,
+    "rec_g": 2.3,
+    "totals": {
+     "carries": 280,
+     "rush_yds": 1140,
+     "rush_td": 7,
+     "rec": 37,
+     "rec_yds": 273,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0036973",
+   "name": "Travis Etienne",
+   "pos": "RB",
+   "team": "JAX",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/pwko5dybmjie8qqo4qz2",
+   "stats": {
+    "rush_yds_g": 65.1,
+    "ypc": 4.26,
+    "td_g": 0.76,
+    "scrim_yds_g": 82.3,
+    "rec_g": 2.1,
+    "totals": {
+     "carries": 260,
+     "rush_yds": 1107,
+     "rush_td": 7,
+     "rec": 36,
+     "rec_yds": 292,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0036275",
+   "name": "D'Andre Swift",
+   "pos": "RB",
+   "team": "CHI",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/owpmwzoilitcodc6cmxo",
+   "stats": {
+    "rush_yds_g": 67.9,
+    "ypc": 4.87,
+    "td_g": 0.62,
+    "scrim_yds_g": 86.6,
+    "rec_g": 2.1,
+    "totals": {
+     "carries": 223,
+     "rush_yds": 1087,
+     "rush_td": 9,
+     "rec": 34,
+     "rec_yds": 299,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0036139",
+   "name": "Rico Dowdle",
+   "pos": "RB",
+   "team": "CAR",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mx2bxccuzmdvzbksypws",
+   "stats": {
+    "rush_yds_g": 63.3,
+    "ypc": 4.56,
+    "td_g": 0.41,
+    "scrim_yds_g": 80.8,
+    "rec_g": 2.3,
+    "totals": {
+     "carries": 236,
+     "rush_yds": 1076,
+     "rush_td": 6,
+     "rec": 39,
+     "rec_yds": 297,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0036997",
+   "name": "Javonte Williams",
+   "pos": "RB",
+   "team": "DAL",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xvwroirev2kie6oiphtz",
+   "stats": {
+    "rush_yds_g": 75.1,
+    "ypc": 4.77,
+    "td_g": 0.81,
+    "scrim_yds_g": 83.6,
+    "rec_g": 2.2,
+    "totals": {
+     "carries": 252,
+     "rush_yds": 1201,
+     "rush_td": 11,
+     "rec": 35,
+     "rec_yds": 137,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0040122",
+   "name": "Ashton Jeanty",
+   "pos": "RB",
+   "team": "LV",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/syspis1mntov9kgspb7r",
+   "stats": {
+    "rush_yds_g": 57.4,
+    "ypc": 3.67,
+    "td_g": 0.59,
+    "scrim_yds_g": 77.7,
+    "rec_g": 3.2,
+    "totals": {
+     "carries": 266,
+     "rush_yds": 975,
+     "rush_td": 5,
+     "rec": 55,
+     "rec_yds": 346,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0038134",
+   "name": "Kenneth Walker III",
+   "pos": "RB",
+   "team": "SEA",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/vk6nruaqdewdglofcwwg",
+   "stats": {
+    "rush_yds_g": 60.4,
+    "ypc": 4.65,
+    "td_g": 0.29,
+    "scrim_yds_g": 77.0,
+    "rec_g": 1.8,
+    "totals": {
+     "carries": 221,
+     "rush_yds": 1027,
+     "rush_td": 5,
+     "rec": 31,
+     "rec_yds": 282,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0037228",
+   "name": "Jaylen Warren",
+   "pos": "RB",
+   "team": "PIT",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/dkiteytgnxar1mpaxcxv",
+   "stats": {
+    "rush_yds_g": 59.9,
+    "ypc": 4.54,
+    "td_g": 0.5,
+    "scrim_yds_g": 80.7,
+    "rec_g": 2.5,
+    "totals": {
+     "carries": 211,
+     "rush_yds": 958,
+     "rush_td": 6,
+     "rec": 40,
+     "rec_yds": 333,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0035261",
+   "name": "Tony Pollard",
+   "pos": "RB",
+   "team": "TEN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mb2xdrqiys6ktlcuah2n",
+   "stats": {
+    "rush_yds_g": 63.6,
+    "ypc": 4.47,
+    "td_g": 0.29,
+    "scrim_yds_g": 75.8,
+    "rec_g": 1.9,
+    "totals": {
+     "carries": 242,
+     "rush_yds": 1082,
+     "rush_td": 5,
+     "rec": 33,
+     "rec_yds": 206,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0035700",
+   "name": "Josh Jacobs",
+   "pos": "RB",
+   "team": "GB",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/uceokxeo0uqrqms3e3vl",
+   "stats": {
+    "rush_yds_g": 61.9,
+    "ypc": 3.97,
+    "td_g": 0.93,
+    "scrim_yds_g": 80.7,
+    "rec_g": 2.4,
+    "totals": {
+     "carries": 234,
+     "rush_yds": 929,
+     "rush_td": 13,
+     "rec": 36,
+     "rec_yds": 282,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0040734",
+   "name": "TreVeyon Henderson",
+   "pos": "RB",
+   "team": "NE",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ebcjvwytgu2y4kqm8ihv",
+   "stats": {
+    "rush_yds_g": 53.6,
+    "ypc": 5.06,
+    "td_g": 0.59,
+    "scrim_yds_g": 66.6,
+    "rec_g": 2.1,
+    "totals": {
+     "carries": 180,
+     "rush_yds": 911,
+     "rush_td": 9,
+     "rec": 35,
+     "rec_yds": 221,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0039384",
+   "name": "Tyrone Tracy Jr.",
+   "pos": "RB",
+   "team": "NYG",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/b9nje50lohbprf06xoom",
+   "stats": {
+    "rush_yds_g": 49.3,
+    "ypc": 4.2,
+    "td_g": 0.27,
+    "scrim_yds_g": 68.5,
+    "rec_g": 2.4,
+    "totals": {
+     "carries": 176,
+     "rush_yds": 740,
+     "rush_td": 2,
+     "rec": 36,
+     "rec_yds": 288,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0036919",
+   "name": "Kenny Gainwell",
+   "pos": "RB",
+   "team": "PIT",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/eo62l8ec8e3lzt86ihth",
+   "stats": {
+    "rush_yds_g": 31.6,
+    "ypc": 4.71,
+    "td_g": 0.47,
+    "scrim_yds_g": 60.2,
+    "rec_g": 4.3,
+    "totals": {
+     "carries": 114,
+     "rush_yds": 537,
+     "rush_td": 5,
+     "rec": 73,
+     "rec_yds": 486,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0040784",
+   "name": "Quinshon Judkins",
+   "pos": "RB",
+   "team": "CLE",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ojtce2im0wp2ltyel0vc",
+   "stats": {
+    "rush_yds_g": 59.1,
+    "ypc": 3.6,
+    "td_g": 0.5,
+    "scrim_yds_g": 71.3,
+    "rec_g": 1.9,
+    "totals": {
+     "carries": 230,
+     "rush_yds": 827,
+     "rush_td": 7,
+     "rec": 26,
+     "rec_yds": 171,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0036875",
+   "name": "Rhamondre Stevenson",
+   "pos": "RB",
+   "team": "NE",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/zmpuirvuw4r04inxth5i",
+   "stats": {
+    "rush_yds_g": 43.1,
+    "ypc": 4.64,
+    "td_g": 0.64,
+    "scrim_yds_g": 67.7,
+    "rec_g": 2.3,
+    "totals": {
+     "carries": 130,
+     "rush_yds": 603,
+     "rush_td": 7,
+     "rec": 32,
+     "rec_yds": 345,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0040236",
+   "name": "Kyle Monangai",
+   "pos": "RB",
+   "team": "CHI",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/bkkk3uuouhcobydqawro",
+   "stats": {
+    "rush_yds_g": 46.1,
+    "ypc": 4.63,
+    "td_g": 0.29,
+    "scrim_yds_g": 55.7,
+    "rec_g": 1.1,
+    "totals": {
+     "carries": 169,
+     "rush_yds": 783,
+     "rush_td": 5,
+     "rec": 18,
+     "rec_yds": 164,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0040583",
+   "name": "Woody Marks",
+   "pos": "RB",
+   "team": "HOU",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/y5ntpcenhhhv98uz2fys",
+   "stats": {
+    "rush_yds_g": 43.9,
+    "ypc": 3.59,
+    "td_g": 0.31,
+    "scrim_yds_g": 56.9,
+    "rec_g": 1.5,
+    "totals": {
+     "carries": 196,
+     "rush_yds": 703,
+     "rush_td": 2,
+     "rec": 24,
+     "rec_yds": 208,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0035685",
+   "name": "David Montgomery",
+   "pos": "RB",
+   "team": "DET",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/csz0c9roa4pqsccothxg",
+   "stats": {
+    "rush_yds_g": 42.1,
+    "ypc": 4.53,
+    "td_g": 0.47,
+    "scrim_yds_g": 53.4,
+    "rec_g": 1.4,
+    "totals": {
+     "carries": 158,
+     "rush_yds": 716,
+     "rush_td": 8,
+     "rec": 24,
+     "rec_yds": 192,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0040730",
+   "name": "RJ Harvey",
+   "pos": "RB",
+   "team": "DEN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/szxmro5enrxlscvv67xg",
+   "stats": {
+    "rush_yds_g": 31.8,
+    "ypc": 3.7,
+    "td_g": 0.71,
+    "scrim_yds_g": 52.7,
+    "rec_g": 2.8,
+    "totals": {
+     "carries": 146,
+     "rush_yds": 540,
+     "rush_td": 7,
+     "rec": 47,
+     "rec_yds": 356,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0039165",
+   "name": "Zach Charbonnet",
+   "pos": "RB",
+   "team": "SEA",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cuuyog0lpxfaj0y0huvp",
+   "stats": {
+    "rush_yds_g": 45.6,
+    "ypc": 3.97,
+    "td_g": 0.75,
+    "scrim_yds_g": 54.6,
+    "rec_g": 1.2,
+    "totals": {
+     "carries": 184,
+     "rush_yds": 730,
+     "rush_td": 12,
+     "rec": 20,
+     "rec_yds": 144,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0040242",
+   "name": "Jacory Croskey-Merritt",
+   "pos": "RB",
+   "team": "WAS",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qew4qhlj4yuf50voko61",
+   "stats": {
+    "rush_yds_g": 47.4,
+    "ypc": 4.6,
+    "td_g": 0.47,
+    "scrim_yds_g": 51.4,
+    "rec_g": 0.5,
+    "totals": {
+     "carries": 175,
+     "rush_yds": 805,
+     "rush_td": 8,
+     "rec": 9,
+     "rec_yds": 68,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0039361",
+   "name": "Bucky Irving",
+   "pos": "RB",
+   "team": "TB",
+   "games": 10,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/vkc00rvnix3f2b96vkwo",
+   "stats": {
+    "rush_yds_g": 58.8,
+    "ypc": 3.4,
+    "td_g": 0.4,
+    "scrim_yds_g": 86.5,
+    "rec_g": 3.0,
+    "totals": {
+     "carries": 173,
+     "rush_yds": 588,
+     "rush_td": 1,
+     "rec": 30,
+     "rec_yds": 277,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0036158",
+   "name": "J.K. Dobbins",
+   "pos": "RB",
+   "team": "DEN",
+   "games": 10,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cevotvl3ho5h1mioruyg",
+   "stats": {
+    "rush_yds_g": 77.2,
+    "ypc": 5.05,
+    "td_g": 0.4,
+    "scrim_yds_g": 80.9,
+    "rec_g": 1.1,
+    "totals": {
+     "carries": 153,
+     "rush_yds": 772,
+     "rush_td": 4,
+     "rec": 11,
+     "rec_yds": 37,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0037525",
+   "name": "Jordan Mason",
+   "pos": "RB",
+   "team": "MIN",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qeeucinnxl8mpzaw23hc",
+   "stats": {
+    "rush_yds_g": 47.4,
+    "ypc": 4.77,
+    "td_g": 0.38,
+    "scrim_yds_g": 50.6,
+    "rec_g": 0.9,
+    "totals": {
+     "carries": 159,
+     "rush_yds": 758,
+     "rush_td": 6,
+     "rec": 14,
+     "rec_yds": 51,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0037256",
+   "name": "Rachaad White",
+   "pos": "RB",
+   "team": "TB",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/wtdhs50gcl2p6vngsnre",
+   "stats": {
+    "rush_yds_g": 33.6,
+    "ypc": 4.33,
+    "td_g": 0.24,
+    "scrim_yds_g": 46.5,
+    "rec_g": 2.4,
+    "totals": {
+     "carries": 132,
+     "rush_yds": 572,
+     "rush_td": 4,
+     "rec": 40,
+     "rec_yds": 218,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0039738",
+   "name": "Blake Corum",
+   "pos": "RB",
+   "team": "LA",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/axzqbqjkrbwfzodwwakq",
+   "stats": {
+    "rush_yds_g": 43.9,
+    "ypc": 5.14,
+    "td_g": 0.35,
+    "scrim_yds_g": 46.0,
+    "rec_g": 0.5,
+    "totals": {
+     "carries": 145,
+     "rush_yds": 746,
+     "rush_td": 6,
+     "rec": 8,
+     "rec_yds": 36,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0039391",
+   "name": "Kimani Vidal",
+   "pos": "RB",
+   "team": "LAC",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tqdctdun0bv60d5ziwtl",
+   "stats": {
+    "rush_yds_g": 49.5,
+    "ypc": 4.15,
+    "td_g": 0.31,
+    "scrim_yds_g": 59.9,
+    "rec_g": 1.2,
+    "totals": {
+     "carries": 155,
+     "rush_yds": 643,
+     "rush_td": 3,
+     "rec": 16,
+     "rec_yds": 136,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0033923",
+   "name": "Kareem Hunt",
+   "pos": "RB",
+   "team": "KC",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/hktvzf8hiupoycyg1kmc",
+   "stats": {
+    "rush_yds_g": 35.9,
+    "ypc": 3.75,
+    "td_g": 0.53,
+    "scrim_yds_g": 44.4,
+    "rec_g": 1.1,
+    "totals": {
+     "carries": 163,
+     "rush_yds": 611,
+     "rush_td": 8,
+     "rec": 18,
+     "rec_yds": 143,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0033293",
+   "name": "Aaron Jones",
+   "pos": "RB",
+   "team": "MIN",
+   "games": 12,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/bktkfvgfwujkdbzkcfim",
+   "stats": {
+    "rush_yds_g": 45.7,
+    "ypc": 4.15,
+    "td_g": 0.25,
+    "scrim_yds_g": 62.2,
+    "rec_g": 2.3,
+    "totals": {
+     "carries": 132,
+     "rush_yds": 548,
+     "rush_td": 2,
+     "rec": 28,
+     "rec_yds": 199,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0040666",
+   "name": "Omarion Hampton",
+   "pos": "RB",
+   "team": "LAC",
+   "games": 9,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/lf2jxvxnbexlinoydbej",
+   "stats": {
+    "rush_yds_g": 60.6,
+    "ypc": 4.4,
+    "td_g": 0.56,
+    "scrim_yds_g": 81.9,
+    "rec_g": 3.6,
+    "totals": {
+     "carries": 124,
+     "rush_yds": 545,
+     "rush_td": 4,
+     "rec": 32,
+     "rec_yds": 192,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0036555",
+   "name": "Chuba Hubbard",
+   "pos": "RB",
+   "team": "CAR",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/rzsvnt0pxsaize2ndhxm",
+   "stats": {
+    "rush_yds_g": 34.1,
+    "ypc": 3.81,
+    "td_g": 0.27,
+    "scrim_yds_g": 48.9,
+    "rec_g": 2.0,
+    "totals": {
+     "carries": 134,
+     "rush_yds": 511,
+     "rush_td": 1,
+     "rec": 30,
+     "rec_yds": 223,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0033906",
+   "name": "Alvin Kamara",
+   "pos": "RB",
+   "team": "NO",
+   "games": 11,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yxebpuskandivlh2iil4",
+   "stats": {
+    "rush_yds_g": 42.8,
+    "ypc": 3.6,
+    "td_g": 0.09,
+    "scrim_yds_g": 59.7,
+    "rec_g": 3.0,
+    "totals": {
+     "carries": 131,
+     "rush_yds": 471,
+     "rush_td": 1,
+     "rec": 33,
+     "rec_yds": 186,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0040715",
+   "name": "Cam Skattebo",
+   "pos": "RB",
+   "team": "NYG",
+   "games": 8,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/hlggiqdfvj1f4kntkafr",
+   "stats": {
+    "rush_yds_g": 51.2,
+    "ypc": 4.06,
+    "td_g": 0.88,
+    "scrim_yds_g": 77.1,
+    "rec_g": 3.0,
+    "totals": {
+     "carries": 101,
+     "rush_yds": 410,
+     "rush_td": 5,
+     "rec": 24,
+     "rec_yds": 207,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0037263",
+   "name": "Tyler Allgeier",
+   "pos": "RB",
+   "team": "ATL",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/sp9lhhmpv4qy3xy2msxd",
+   "stats": {
+    "rush_yds_g": 30.2,
+    "ypc": 3.59,
+    "td_g": 0.47,
+    "scrim_yds_g": 35.9,
+    "rec_g": 0.8,
+    "totals": {
+     "carries": 143,
+     "rush_yds": 514,
+     "rush_td": 8,
+     "rec": 14,
+     "rec_yds": 96,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0036924",
+   "name": "Michael Carter",
+   "pos": "RB",
+   "team": "ARI",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cwqrxzouk4gkhfziyqre",
+   "stats": {
+    "rush_yds_g": 25.6,
+    "ypc": 3.62,
+    "td_g": 0.08,
+    "scrim_yds_g": 46.2,
+    "rec_g": 2.5,
+    "totals": {
+     "carries": 92,
+     "rush_yds": 333,
+     "rush_td": 1,
+     "rec": 33,
+     "rec_yds": 267,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0038797",
+   "name": "Emanuel Wilson",
+   "pos": "RB",
+   "team": "GB",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/uorruvczsxzvffpbxu8z",
+   "stats": {
+    "rush_yds_g": 29.2,
+    "ypc": 3.97,
+    "td_g": 0.18,
+    "scrim_yds_g": 35.0,
+    "rec_g": 0.9,
+    "totals": {
+     "carries": 125,
+     "rush_yds": 496,
+     "rush_td": 3,
+     "rec": 15,
+     "rec_yds": 99,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0035250",
+   "name": "Devin Singletary",
+   "pos": "RB",
+   "team": "NYG",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xy2r2msxjqneml2c1cdc",
+   "stats": {
+    "rush_yds_g": 25.7,
+    "ypc": 3.67,
+    "td_g": 0.29,
+    "scrim_yds_g": 34.6,
+    "rec_g": 1.1,
+    "totals": {
+     "carries": 119,
+     "rush_yds": 437,
+     "rush_td": 5,
+     "rec": 18,
+     "rec_yds": 151,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0034791",
+   "name": "Nick Chubb",
+   "pos": "RB",
+   "team": "HOU",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/h5y74trx6l8ivpkbmrkt",
+   "stats": {
+    "rush_yds_g": 33.7,
+    "ypc": 4.15,
+    "td_g": 0.2,
+    "scrim_yds_g": 38.2,
+    "rec_g": 0.9,
+    "totals": {
+     "carries": 122,
+     "rush_yds": 506,
+     "rush_td": 3,
+     "rec": 13,
+     "rec_yds": 67,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0037197",
+   "name": "Isiah Pacheco",
+   "pos": "RB",
+   "team": "KC",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/hkqb4imkum3vxxkwuetl",
+   "stats": {
+    "rush_yds_g": 35.5,
+    "ypc": 3.92,
+    "td_g": 0.15,
+    "scrim_yds_g": 43.3,
+    "rec_g": 1.5,
+    "totals": {
+     "carries": 118,
+     "rush_yds": 462,
+     "rush_td": 1,
+     "rec": 19,
+     "rec_yds": 101,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0039032",
+   "name": "Tyjae Spears",
+   "pos": "RB",
+   "team": "TEN",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/pkly3nkohty1tuijtwty",
+   "stats": {
+    "rush_yds_g": 21.8,
+    "ypc": 3.93,
+    "td_g": 0.15,
+    "scrim_yds_g": 42.1,
+    "rec_g": 3.5,
+    "totals": {
+     "carries": 72,
+     "rush_yds": 283,
+     "rush_td": 2,
+     "rec": 45,
+     "rec_yds": 264,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0038543",
+   "name": "Jaxon Smith-Njigba",
+   "pos": "WR",
+   "team": "SEA",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yx1xjrupbqdknnjaq4a6",
+   "stats": {
+    "rec_yds_g": 105.5,
+    "rec_g": 7.0,
+    "rec_td_g": 0.59,
+    "ypr": 15.07,
+    "tgt_g": 9.6,
+    "totals": {
+     "tgt": 163,
+     "rec": 119,
+     "rec_yds": 1793,
+     "rec_td": 10
+    }
+   }
+  },
+  {
+   "id": "00-0039075",
+   "name": "Puka Nacua",
+   "pos": "WR",
+   "team": "LA",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ipy6qw7hdygdfc8k86ba",
+   "stats": {
+    "rec_yds_g": 107.2,
+    "rec_g": 8.1,
+    "rec_td_g": 0.62,
+    "ypr": 13.29,
+    "tgt_g": 10.4,
+    "totals": {
+     "tgt": 166,
+     "rec": 129,
+     "rec_yds": 1715,
+     "rec_td": 10
+    }
+   }
+  },
+  {
+   "id": "00-0037247",
+   "name": "George Pickens",
+   "pos": "WR",
+   "team": "DAL",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cbpyykoguf7rsxezqzvk",
+   "stats": {
+    "rec_yds_g": 84.1,
+    "rec_g": 5.5,
+    "rec_td_g": 0.53,
+    "ypr": 15.37,
+    "tgt_g": 8.1,
+    "totals": {
+     "tgt": 137,
+     "rec": 93,
+     "rec_yds": 1429,
+     "rec_td": 9
+    }
+   }
+  },
+  {
+   "id": "00-0036900",
+   "name": "Ja'Marr Chase",
+   "pos": "WR",
+   "team": "CIN",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qya3dtjb5kgofcuj2tuw",
+   "stats": {
+    "rec_yds_g": 88.2,
+    "rec_g": 7.8,
+    "rec_td_g": 0.5,
+    "ypr": 11.3,
+    "tgt_g": 11.6,
+    "totals": {
+     "tgt": 185,
+     "rec": 125,
+     "rec_yds": 1412,
+     "rec_td": 8
+    }
+   }
+  },
+  {
+   "id": "00-0036963",
+   "name": "Amon-Ra St. Brown",
+   "pos": "WR",
+   "team": "DET",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/fd8nwhm6pvxfyzphzl6i",
+   "stats": {
+    "rec_yds_g": 82.4,
+    "rec_g": 6.9,
+    "rec_td_g": 0.65,
+    "ypr": 11.97,
+    "tgt_g": 10.1,
+    "totals": {
+     "tgt": 172,
+     "rec": 117,
+     "rec_yds": 1401,
+     "rec_td": 11
+    }
+   }
+  },
+  {
+   "id": "00-0039064",
+   "name": "Zay Flowers",
+   "pos": "WR",
+   "team": "BAL",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xzhto2dejy2pflkfx40c",
+   "stats": {
+    "rec_yds_g": 71.2,
+    "rec_g": 5.1,
+    "rec_td_g": 0.29,
+    "ypr": 14.08,
+    "tgt_g": 6.9,
+    "totals": {
+     "tgt": 118,
+     "rec": 86,
+     "rec_yds": 1211,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0037239",
+   "name": "Chris Olave",
+   "pos": "WR",
+   "team": "NO",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/onmxufsprtvglhejg94o",
+   "stats": {
+    "rec_yds_g": 72.7,
+    "rec_g": 6.2,
+    "rec_td_g": 0.56,
+    "ypr": 11.63,
+    "tgt_g": 9.8,
+    "totals": {
+     "tgt": 156,
+     "rec": 100,
+     "rec_yds": 1163,
+     "rec_td": 9
+    }
+   }
+  },
+  {
+   "id": "00-0036554",
+   "name": "Nico Collins",
+   "pos": "WR",
+   "team": "HOU",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/fguybjrn1kwflxm5szwq",
+   "stats": {
+    "rec_yds_g": 74.5,
+    "rec_g": 4.7,
+    "rec_td_g": 0.4,
+    "ypr": 15.73,
+    "tgt_g": 8.0,
+    "totals": {
+     "tgt": 120,
+     "rec": 71,
+     "rec_yds": 1117,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0037240",
+   "name": "Jameson Williams",
+   "pos": "WR",
+   "team": "DET",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/byiptqggtglvy5qrw5wp",
+   "stats": {
+    "rec_yds_g": 65.7,
+    "rec_g": 3.8,
+    "rec_td_g": 0.41,
+    "ypr": 17.18,
+    "tgt_g": 6.0,
+    "totals": {
+     "tgt": 102,
+     "rec": 65,
+     "rec_yds": 1117,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0036358",
+   "name": "CeeDee Lamb",
+   "pos": "WR",
+   "team": "DAL",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mbblzwtynxr15ovzkevi",
+   "stats": {
+    "rec_yds_g": 82.8,
+    "rec_g": 5.8,
+    "rec_td_g": 0.23,
+    "ypr": 14.36,
+    "tgt_g": 9.0,
+    "totals": {
+     "tgt": 117,
+     "rec": 75,
+     "rec_yds": 1077,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0036322",
+   "name": "Justin Jefferson",
+   "pos": "WR",
+   "team": "MIN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/htjevkugzk6ietrjysny",
+   "stats": {
+    "rec_yds_g": 61.6,
+    "rec_g": 4.9,
+    "rec_td_g": 0.12,
+    "ypr": 12.48,
+    "tgt_g": 8.3,
+    "totals": {
+     "tgt": 141,
+     "rec": 84,
+     "rec_yds": 1048,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0034348",
+   "name": "Courtland Sutton",
+   "pos": "WR",
+   "team": "DEN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/kqwmqcrlrwmqcvfuguhs",
+   "stats": {
+    "rec_yds_g": 59.8,
+    "rec_g": 4.4,
+    "rec_td_g": 0.41,
+    "ypr": 13.74,
+    "tgt_g": 7.3,
+    "totals": {
+     "tgt": 124,
+     "rec": 74,
+     "rec_yds": 1017,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0038117",
+   "name": "Wan'Dale Robinson",
+   "pos": "WR",
+   "team": "NYG",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yzcvyhmilvxedfjfjglc",
+   "stats": {
+    "rec_yds_g": 63.4,
+    "rec_g": 5.8,
+    "rec_td_g": 0.25,
+    "ypr": 11.02,
+    "tgt_g": 8.8,
+    "totals": {
+     "tgt": 140,
+     "rec": 92,
+     "rec_yds": 1014,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0040124",
+   "name": "Tetairoa McMillan",
+   "pos": "WR",
+   "team": "CAR",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/gilgvjemumd6kpc9eiku",
+   "stats": {
+    "rec_yds_g": 59.6,
+    "rec_g": 4.1,
+    "rec_td_g": 0.41,
+    "ypr": 14.49,
+    "tgt_g": 7.2,
+    "totals": {
+     "tgt": 122,
+     "rec": 70,
+     "rec_yds": 1014,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0031588",
+   "name": "Stefon Diggs",
+   "pos": "WR",
+   "team": "NE",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cemcexmscsarpvwhafln",
+   "stats": {
+    "rec_yds_g": 59.6,
+    "rec_g": 5.0,
+    "rec_td_g": 0.24,
+    "ypr": 11.92,
+    "tgt_g": 6.0,
+    "totals": {
+     "tgt": 102,
+     "rec": 85,
+     "rec_yds": 1013,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0036912",
+   "name": "DeVonta Smith",
+   "pos": "WR",
+   "team": "PHI",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/k724kq3hyv7jc0y9s03x",
+   "stats": {
+    "rec_yds_g": 59.3,
+    "rec_g": 4.5,
+    "rec_td_g": 0.24,
+    "ypr": 13.09,
+    "tgt_g": 6.6,
+    "totals": {
+     "tgt": 113,
+     "rec": 77,
+     "rec_yds": 1008,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0038559",
+   "name": "Michael Wilson",
+   "pos": "WR",
+   "team": "ARI",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/hm2b9z4zujjmbiyldh8n",
+   "stats": {
+    "rec_yds_g": 59.2,
+    "rec_g": 4.6,
+    "rec_td_g": 0.41,
+    "ypr": 12.9,
+    "tgt_g": 7.4,
+    "totals": {
+     "tgt": 126,
+     "rec": 78,
+     "rec_yds": 1006,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0035676",
+   "name": "A.J. Brown",
+   "pos": "WR",
+   "team": "PHI",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qfhvjyssf0lwsh0kienp",
+   "stats": {
+    "rec_yds_g": 66.9,
+    "rec_g": 5.2,
+    "rec_td_g": 0.47,
+    "ypr": 12.86,
+    "tgt_g": 8.1,
+    "totals": {
+     "tgt": 121,
+     "rec": 78,
+     "rec_yds": 1003,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0037664",
+   "name": "Alec Pierce",
+   "pos": "WR",
+   "team": "IND",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qcg9t51wgp3hicavmkmy",
+   "stats": {
+    "rec_yds_g": 66.9,
+    "rec_g": 3.1,
+    "rec_td_g": 0.4,
+    "ypr": 21.34,
+    "tgt_g": 5.6,
+    "totals": {
+     "tgt": 84,
+     "rec": 47,
+     "rec_yds": 1003,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0040129",
+   "name": "Emeka Egbuka",
+   "pos": "WR",
+   "team": "TB",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/z224kbzs62rjuykc0vha",
+   "stats": {
+    "rec_yds_g": 55.2,
+    "rec_g": 3.7,
+    "rec_td_g": 0.35,
+    "ypr": 14.89,
+    "tgt_g": 7.5,
+    "totals": {
+     "tgt": 127,
+     "rec": 63,
+     "rec_yds": 938,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0037238",
+   "name": "Drake London",
+   "pos": "WR",
+   "team": "ATL",
+   "games": 12,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mcllowcfrmmdeo4zy3g1",
+   "stats": {
+    "rec_yds_g": 76.6,
+    "rec_g": 5.7,
+    "rec_td_g": 0.58,
+    "ypr": 13.51,
+    "tgt_g": 9.3,
+    "totals": {
+     "tgt": 112,
+     "rec": 68,
+     "rec_yds": 919,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0036613",
+   "name": "Jaylen Waddle",
+   "pos": "WR",
+   "team": "MIA",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/gkh7m1jedon9mwn5jlf1",
+   "stats": {
+    "rec_yds_g": 56.9,
+    "rec_g": 4.0,
+    "rec_td_g": 0.38,
+    "ypr": 14.22,
+    "tgt_g": 6.2,
+    "totals": {
+     "tgt": 100,
+     "rec": 64,
+     "rec_yds": 910,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0035640",
+   "name": "DK Metcalf",
+   "pos": "WR",
+   "team": "PIT",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/kxql4sjfelubhxawu2zh",
+   "stats": {
+    "rec_yds_g": 56.7,
+    "rec_g": 3.9,
+    "rec_td_g": 0.4,
+    "ypr": 14.41,
+    "tgt_g": 6.6,
+    "totals": {
+     "tgt": 99,
+     "rec": 59,
+     "rec_yds": 850,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0038606",
+   "name": "Parker Washington",
+   "pos": "WR",
+   "team": "JAX",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yn0hc5xrz5nqeccg8two",
+   "stats": {
+    "rec_yds_g": 52.9,
+    "rec_g": 3.6,
+    "rec_td_g": 0.31,
+    "ypr": 14.6,
+    "tgt_g": 5.9,
+    "totals": {
+     "tgt": 95,
+     "rec": 58,
+     "rec_yds": 847,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0036410",
+   "name": "Tee Higgins",
+   "pos": "WR",
+   "team": "CIN",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/gpwtyv3viwy9q4ewderl",
+   "stats": {
+    "rec_yds_g": 56.4,
+    "rec_g": 3.9,
+    "rec_td_g": 0.73,
+    "ypr": 14.34,
+    "tgt_g": 6.5,
+    "totals": {
+     "tgt": 98,
+     "rec": 59,
+     "rec_yds": 846,
+     "rec_td": 11
+    }
+   }
+  },
+  {
+   "id": "00-0034960",
+   "name": "Jakobi Meyers",
+   "pos": "WR",
+   "team": "JAX",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/zrs4ij8mvw7wr1uujwew",
+   "stats": {
+    "rec_yds_g": 52.2,
+    "rec_g": 4.7,
+    "rec_td_g": 0.19,
+    "ypr": 11.13,
+    "tgt_g": 6.9,
+    "totals": {
+     "tgt": 110,
+     "rec": 75,
+     "rec_yds": 835,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0031381",
+   "name": "Davante Adams",
+   "pos": "WR",
+   "team": "LA",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tdzluk4xau3arxqk9zsl",
+   "stats": {
+    "rec_yds_g": 56.4,
+    "rec_g": 4.3,
+    "rec_td_g": 1.0,
+    "ypr": 13.15,
+    "tgt_g": 8.1,
+    "totals": {
+     "tgt": 114,
+     "rec": 60,
+     "rec_yds": 789,
+     "rec_td": 14
+    }
+   }
+  },
+  {
+   "id": "00-0039915",
+   "name": "Ladd McConkey",
+   "pos": "WR",
+   "team": "LAC",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/q2sk7yforrkiusvruo1o",
+   "stats": {
+    "rec_yds_g": 49.3,
+    "rec_g": 4.1,
+    "rec_td_g": 0.38,
+    "ypr": 11.95,
+    "tgt_g": 6.6,
+    "totals": {
+     "tgt": 106,
+     "rec": 66,
+     "rec_yds": 789,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0036252",
+   "name": "Michael Pittman",
+   "pos": "WR",
+   "team": "IND",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/q1ythn05kwcmdr4mwzll",
+   "stats": {
+    "rec_yds_g": 46.1,
+    "rec_g": 4.7,
+    "rec_td_g": 0.41,
+    "ypr": 9.8,
+    "tgt_g": 6.5,
+    "totals": {
+     "tgt": 111,
+     "rec": 80,
+     "rec_yds": 784,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0030279",
+   "name": "Keenan Allen",
+   "pos": "WR",
+   "team": "LAC",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ri267r6lzfwarh89hsn6",
+   "stats": {
+    "rec_yds_g": 45.7,
+    "rec_g": 4.8,
+    "rec_td_g": 0.24,
+    "ypr": 9.59,
+    "tgt_g": 7.2,
+    "totals": {
+     "tgt": 122,
+     "rec": 81,
+     "rec_yds": 777,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0038544",
+   "name": "Quentin Johnston",
+   "pos": "WR",
+   "team": "LAC",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/lyvsrjh4mjb4dqwp6shm",
+   "stats": {
+    "rec_yds_g": 56.5,
+    "rec_g": 3.9,
+    "rec_td_g": 0.62,
+    "ypr": 14.41,
+    "tgt_g": 6.5,
+    "totals": {
+     "tgt": 84,
+     "rec": 51,
+     "rec_yds": 735,
+     "rec_td": 8
+    }
+   }
+  },
+  {
+   "id": "00-0035719",
+   "name": "Deebo Samuel Sr.",
+   "pos": "WR",
+   "team": "WAS",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ntgyhqg6hq7fanhhsqiw",
+   "stats": {
+    "rec_yds_g": 45.4,
+    "rec_g": 4.5,
+    "rec_td_g": 0.31,
+    "ypr": 10.1,
+    "tgt_g": 6.2,
+    "totals": {
+     "tgt": 99,
+     "rec": 72,
+     "rec_yds": 727,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0037816",
+   "name": "Romeo Doubs",
+   "pos": "WR",
+   "team": "GB",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yxvzijmgwyyigljxfmyb",
+   "stats": {
+    "rec_yds_g": 45.2,
+    "rec_g": 3.4,
+    "rec_td_g": 0.38,
+    "ypr": 13.16,
+    "tgt_g": 5.3,
+    "totals": {
+     "tgt": 85,
+     "rec": 55,
+     "rec_yds": 724,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0037261",
+   "name": "Khalil Shakir",
+   "pos": "WR",
+   "team": "BUF",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/syvp3hficobwcsim3i9v",
+   "stats": {
+    "rec_yds_g": 44.9,
+    "rec_g": 4.5,
+    "rec_td_g": 0.25,
+    "ypr": 9.99,
+    "tgt_g": 5.9,
+    "totals": {
+     "tgt": 95,
+     "rec": 72,
+     "rec_yds": 719,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0039868",
+   "name": "Troy Franklin",
+   "pos": "WR",
+   "team": "DEN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/wgfbgxjntyqzojpizgaj",
+   "stats": {
+    "rec_yds_g": 41.7,
+    "rec_g": 3.8,
+    "rec_td_g": 0.35,
+    "ypr": 10.91,
+    "tgt_g": 6.1,
+    "totals": {
+     "tgt": 104,
+     "rec": 65,
+     "rec_yds": 709,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0039893",
+   "name": "Brian Thomas Jr.",
+   "pos": "WR",
+   "team": "JAX",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/plnekkriys4cm11rnxwl",
+   "stats": {
+    "rec_yds_g": 50.5,
+    "rec_g": 3.4,
+    "rec_td_g": 0.14,
+    "ypr": 14.73,
+    "tgt_g": 6.5,
+    "totals": {
+     "tgt": 91,
+     "rec": 48,
+     "rec_yds": 707,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0038563",
+   "name": "Tre Tucker",
+   "pos": "WR",
+   "team": "LV",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/hazzk3hrcequzosdgzgv",
+   "stats": {
+    "rec_yds_g": 40.9,
+    "rec_g": 3.4,
+    "rec_td_g": 0.29,
+    "ypr": 12.21,
+    "tgt_g": 5.4,
+    "totals": {
+     "tgt": 92,
+     "rec": 57,
+     "rec_yds": 696,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0037545",
+   "name": "Rashid Shaheed",
+   "pos": "WR",
+   "team": "SEA",
+   "games": 18,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ku2naisfbxmzgagxojnm",
+   "stats": {
+    "rec_yds_g": 38.2,
+    "rec_g": 3.3,
+    "rec_td_g": 0.11,
+    "ypr": 11.64,
+    "tgt_g": 5.1,
+    "totals": {
+     "tgt": 92,
+     "rec": 59,
+     "rec_yds": 687,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0034827",
+   "name": "DJ Moore",
+   "pos": "WR",
+   "team": "CHI",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/lsavpxtqoqu25emwcnvy",
+   "stats": {
+    "rec_yds_g": 40.1,
+    "rec_g": 2.9,
+    "rec_td_g": 0.35,
+    "ypr": 13.64,
+    "tgt_g": 5.0,
+    "totals": {
+     "tgt": 85,
+     "rec": 50,
+     "rec_yds": 682,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0039919",
+   "name": "Rome Odunze",
+   "pos": "WR",
+   "team": "CHI",
+   "games": 12,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/niewdl2p2325kpohbw9v",
+   "stats": {
+    "rec_yds_g": 55.1,
+    "rec_g": 3.7,
+    "rec_td_g": 0.5,
+    "ypr": 15.02,
+    "tgt_g": 7.5,
+    "totals": {
+     "tgt": 90,
+     "rec": 44,
+     "rec_yds": 661,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0040735",
+   "name": "Luther Burden III",
+   "pos": "WR",
+   "team": "CHI",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/iyuwdz7pbowdkwzq2tg5",
+   "stats": {
+    "rec_yds_g": 43.5,
+    "rec_g": 3.1,
+    "rec_td_g": 0.13,
+    "ypr": 13.87,
+    "tgt_g": 4.0,
+    "totals": {
+     "tgt": 60,
+     "rec": 47,
+     "rec_yds": 652,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0036259",
+   "name": "Jauan Jennings",
+   "pos": "WR",
+   "team": "SF",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ben8kbygzzlid6ltmdum",
+   "stats": {
+    "rec_yds_g": 42.9,
+    "rec_g": 3.7,
+    "rec_td_g": 0.6,
+    "ypr": 11.69,
+    "tgt_g": 6.0,
+    "totals": {
+     "tgt": 90,
+     "rec": 55,
+     "rec_yds": 643,
+     "rec_td": 9
+    }
+   }
+  },
+  {
+   "id": "00-0038124",
+   "name": "Christian Watson",
+   "pos": "WR",
+   "team": "GB",
+   "games": 10,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tumeg4d32sirkab2xzu5",
+   "stats": {
+    "rec_yds_g": 61.1,
+    "rec_g": 3.5,
+    "rec_td_g": 0.6,
+    "ypr": 17.46,
+    "tgt_g": 5.5,
+    "totals": {
+     "tgt": 55,
+     "rec": 35,
+     "rec_yds": 611,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0038994",
+   "name": "Jordan Addison",
+   "pos": "WR",
+   "team": "MIN",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mi4lzk9gvjrvo6rwdf1e",
+   "stats": {
+    "rec_yds_g": 43.6,
+    "rec_g": 3.0,
+    "rec_td_g": 0.21,
+    "ypr": 14.52,
+    "tgt_g": 5.6,
+    "totals": {
+     "tgt": 79,
+     "rec": 42,
+     "rec_yds": 610,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0039849",
+   "name": "Marvin Harrison Jr.",
+   "pos": "WR",
+   "team": "ARI",
+   "games": 12,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/hwpoo1icpnh8emjvqaii",
+   "stats": {
+    "rec_yds_g": 50.7,
+    "rec_g": 3.4,
+    "rec_td_g": 0.33,
+    "ypr": 14.83,
+    "tgt_g": 6.1,
+    "totals": {
+     "tgt": 73,
+     "rec": 41,
+     "rec_yds": 608,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0036407",
+   "name": "Jerry Jeudy",
+   "pos": "WR",
+   "team": "CLE",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/szca1v9butuqkjs7ekpm",
+   "stats": {
+    "rec_yds_g": 35.4,
+    "rec_g": 2.9,
+    "rec_td_g": 0.12,
+    "ypr": 12.04,
+    "tgt_g": 6.2,
+    "totals": {
+     "tgt": 106,
+     "rec": 50,
+     "rec_yds": 602,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0033908",
+   "name": "Cooper Kupp",
+   "pos": "WR",
+   "team": "SEA",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/kjixprihktsfog6wx9sq",
+   "stats": {
+    "rec_yds_g": 37.1,
+    "rec_g": 2.9,
+    "rec_td_g": 0.12,
+    "ypr": 12.62,
+    "tgt_g": 4.4,
+    "totals": {
+     "tgt": 70,
+     "rec": 47,
+     "rec_yds": 593,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0035662",
+   "name": "Marquise Brown",
+   "pos": "WR",
+   "team": "KC",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/shkjxggufymydgp6wk3p",
+   "stats": {
+    "rec_yds_g": 36.7,
+    "rec_g": 3.1,
+    "rec_td_g": 0.31,
+    "ypr": 11.98,
+    "tgt_g": 4.6,
+    "totals": {
+     "tgt": 74,
+     "rec": 49,
+     "rec_yds": 587,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0035659",
+   "name": "Terry McLaurin",
+   "pos": "WR",
+   "team": "WAS",
+   "games": 10,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tmfl2zruajmkrtcg4zxp",
+   "stats": {
+    "rec_yds_g": 58.2,
+    "rec_g": 3.8,
+    "rec_td_g": 0.3,
+    "ypr": 15.32,
+    "tgt_g": 6.0,
+    "totals": {
+     "tgt": 60,
+     "rec": 38,
+     "rec_yds": 582,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0039067",
+   "name": "Rashee Rice",
+   "pos": "WR",
+   "team": "KC",
+   "games": 8,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qhkbqrydjeur8zvrrmfl",
+   "stats": {
+    "rec_yds_g": 71.4,
+    "rec_g": 6.6,
+    "rec_td_g": 0.62,
+    "ypr": 10.77,
+    "tgt_g": 9.8,
+    "totals": {
+     "tgt": 78,
+     "rec": 53,
+     "rec_yds": 571,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0038997",
+   "name": "Josh Downs",
+   "pos": "WR",
+   "team": "IND",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/z3wahaxpmc6d5lcxgh60",
+   "stats": {
+    "rec_yds_g": 35.4,
+    "rec_g": 3.6,
+    "rec_td_g": 0.25,
+    "ypr": 9.76,
+    "tgt_g": 5.5,
+    "totals": {
+     "tgt": 88,
+     "rec": 58,
+     "rec_yds": 566,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0033307",
+   "name": "Kendrick Bourne",
+   "pos": "WR",
+   "team": "SF",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yzfa94cmhpcqamrwzdzk",
+   "stats": {
+    "rec_yds_g": 39.4,
+    "rec_g": 2.6,
+    "rec_td_g": 0.0,
+    "ypr": 14.89,
+    "tgt_g": 3.8,
+    "totals": {
+     "tgt": 53,
+     "rec": 37,
+     "rec_yds": 551,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0038608",
+   "name": "Kayshon Boutte",
+   "pos": "WR",
+   "team": "NE",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mg4icjqhwhnc5uobmau5",
+   "stats": {
+    "rec_yds_g": 39.4,
+    "rec_g": 2.4,
+    "rec_td_g": 0.43,
+    "ypr": 16.7,
+    "tgt_g": 3.3,
+    "totals": {
+     "tgt": 46,
+     "rec": 33,
+     "rec_yds": 551,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0033555",
+   "name": "Mack Hollins",
+   "pos": "WR",
+   "team": "NE",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qbz7whjzsittudcecezw",
+   "stats": {
+    "rec_yds_g": 39.3,
+    "rec_g": 3.3,
+    "rec_td_g": 0.14,
+    "ypr": 11.96,
+    "tgt_g": 4.6,
+    "totals": {
+     "tgt": 65,
+     "rec": 46,
+     "rec_yds": 550,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0035535",
+   "name": "Darius Slayton",
+   "pos": "WR",
+   "team": "NYG",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/otksyfjll5waf0vsczeu",
+   "stats": {
+    "rec_yds_g": 38.4,
+    "rec_g": 2.6,
+    "rec_td_g": 0.07,
+    "ypr": 14.54,
+    "tgt_g": 4.5,
+    "totals": {
+     "tgt": 63,
+     "rec": 37,
+     "rec_yds": 538,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0039894",
+   "name": "Xavier Worthy",
+   "pos": "WR",
+   "team": "KC",
+   "games": 14,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/u6fmnffwteccoxn3uguq",
+   "stats": {
+    "rec_yds_g": 38.0,
+    "rec_g": 3.0,
+    "rec_td_g": 0.07,
+    "ypr": 12.67,
+    "tgt_g": 5.2,
+    "totals": {
+     "tgt": 73,
+     "rec": 42,
+     "rec_yds": 532,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0039916",
+   "name": "Ricky Pearsall",
+   "pos": "WR",
+   "team": "SF",
+   "games": 9,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/rrv2qhkjqagb8ibzwakv",
+   "stats": {
+    "rec_yds_g": 58.7,
+    "rec_g": 4.0,
+    "rec_td_g": 0.0,
+    "ypr": 14.67,
+    "tgt_g": 5.9,
+    "totals": {
+     "tgt": 53,
+     "rec": 36,
+     "rec_yds": 528,
+     "rec_td": 0
+    }
+   }
+  },
+  {
+   "id": "00-0040130",
+   "name": "Jayden Higgins",
+   "pos": "WR",
+   "team": "HOU",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/s3zuo0ysm9ncxr9o4420",
+   "stats": {
+    "rec_yds_g": 30.9,
+    "rec_g": 2.4,
+    "rec_td_g": 0.35,
+    "ypr": 12.8,
+    "tgt_g": 4.0,
+    "totals": {
+     "tgt": 68,
+     "rec": 41,
+     "rec_yds": 525,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0040170",
+   "name": "Elic Ayomanor",
+   "pos": "WR",
+   "team": "TEN",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/jjmscqt6v4ecasveugoh",
+   "stats": {
+    "rec_yds_g": 32.2,
+    "rec_g": 2.6,
+    "rec_td_g": 0.25,
+    "ypr": 12.56,
+    "tgt_g": 5.6,
+    "totals": {
+     "tgt": 89,
+     "rec": 41,
+     "rec_yds": 515,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0039410",
+   "name": "Ryan Flournoy",
+   "pos": "WR",
+   "team": "DAL",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tqwq3cgpqu7j9hzoyicx",
+   "stats": {
+    "rec_yds_g": 31.7,
+    "rec_g": 2.7,
+    "rec_td_g": 0.27,
+    "ypr": 11.88,
+    "tgt_g": 3.7,
+    "totals": {
+     "tgt": 56,
+     "rec": 40,
+     "rec_yds": 475,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "DEF-ARI",
+   "name": "Cardinals Defense",
+   "pos": "DEF",
+   "team": "ARI",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 28.7,
+    "yds_allowed_g": 369.8,
+    "sacks_g": 1.76,
+    "takeaways_g": 1.12,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 488,
+     "yds_allowed": 6286,
+     "sacks": 30,
+     "int": 10,
+     "fum_rec": 9,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-ATL",
+   "name": "Falcons Defense",
+   "pos": "DEF",
+   "team": "ATL",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 23.6,
+    "yds_allowed_g": 348.2,
+    "sacks_g": 3.35,
+    "takeaways_g": 1.35,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 401,
+     "yds_allowed": 5919,
+     "sacks": 57,
+     "int": 16,
+     "fum_rec": 7,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-BAL",
+   "name": "Ravens Defense",
+   "pos": "DEF",
+   "team": "BAL",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 23.4,
+    "yds_allowed_g": 365.6,
+    "sacks_g": 1.76,
+    "takeaways_g": 1.18,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 398,
+     "yds_allowed": 6216,
+     "sacks": 30,
+     "int": 11,
+     "fum_rec": 9,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-BUF",
+   "name": "Bills Defense",
+   "pos": "DEF",
+   "team": "BUF",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 21.5,
+    "yds_allowed_g": 306.4,
+    "sacks_g": 2.12,
+    "takeaways_g": 1.18,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 365,
+     "yds_allowed": 5209,
+     "sacks": 36,
+     "int": 13,
+     "fum_rec": 7,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-CAR",
+   "name": "Panthers Defense",
+   "pos": "DEF",
+   "team": "CAR",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 22.4,
+    "yds_allowed_g": 338.4,
+    "sacks_g": 1.76,
+    "takeaways_g": 1.24,
+    "def_td": 2,
+    "totals": {
+     "pts_allowed": 380,
+     "yds_allowed": 5753,
+     "sacks": 30,
+     "int": 15,
+     "fum_rec": 6,
+     "def_td": 2
+    }
+   }
+  },
+  {
+   "id": "DEF-CHI",
+   "name": "Bears Defense",
+   "pos": "DEF",
+   "team": "CHI",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 24.4,
+    "yds_allowed_g": 373.8,
+    "sacks_g": 2.06,
+    "takeaways_g": 1.94,
+    "def_td": 2,
+    "totals": {
+     "pts_allowed": 415,
+     "yds_allowed": 6354,
+     "sacks": 35,
+     "int": 23,
+     "fum_rec": 10,
+     "def_td": 2
+    }
+   }
+  },
+  {
+   "id": "DEF-CIN",
+   "name": "Bengals Defense",
+   "pos": "DEF",
+   "team": "CIN",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 28.9,
+    "yds_allowed_g": 392.6,
+    "sacks_g": 2.0,
+    "takeaways_g": 1.18,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 492,
+     "yds_allowed": 6675,
+     "sacks": 34,
+     "int": 13,
+     "fum_rec": 7,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-CLE",
+   "name": "Browns Defense",
+   "pos": "DEF",
+   "team": "CLE",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 22.3,
+    "yds_allowed_g": 305.8,
+    "sacks_g": 3.12,
+    "takeaways_g": 1.06,
+    "def_td": 3,
+    "totals": {
+     "pts_allowed": 379,
+     "yds_allowed": 5199,
+     "sacks": 53,
+     "int": 11,
+     "fum_rec": 7,
+     "def_td": 3
+    }
+   }
+  },
+  {
+   "id": "DEF-DAL",
+   "name": "Cowboys Defense",
+   "pos": "DEF",
+   "team": "DAL",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 30.1,
+    "yds_allowed_g": 391.4,
+    "sacks_g": 2.0,
+    "takeaways_g": 0.71,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 511,
+     "yds_allowed": 6654,
+     "sacks": 34,
+     "int": 6,
+     "fum_rec": 6,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-DEN",
+   "name": "Broncos Defense",
+   "pos": "DEF",
+   "team": "DEN",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 18.3,
+    "yds_allowed_g": 303.2,
+    "sacks_g": 4.0,
+    "takeaways_g": 0.82,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 311,
+     "yds_allowed": 5154,
+     "sacks": 68,
+     "int": 10,
+     "fum_rec": 4,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-DET",
+   "name": "Lions Defense",
+   "pos": "DEF",
+   "team": "DET",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 24.3,
+    "yds_allowed_g": 351.4,
+    "sacks_g": 2.82,
+    "takeaways_g": 1.12,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 413,
+     "yds_allowed": 5974,
+     "sacks": 48,
+     "int": 13,
+     "fum_rec": 6,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-GB",
+   "name": "Packers Defense",
+   "pos": "DEF",
+   "team": "GB",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 21.2,
+    "yds_allowed_g": 324.5,
+    "sacks_g": 2.12,
+    "takeaways_g": 0.82,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 360,
+     "yds_allowed": 5517,
+     "sacks": 36,
+     "int": 7,
+     "fum_rec": 7,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-HOU",
+   "name": "Texans Defense",
+   "pos": "DEF",
+   "team": "HOU",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 17.4,
+    "yds_allowed_g": 298.8,
+    "sacks_g": 2.76,
+    "takeaways_g": 1.71,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 295,
+     "yds_allowed": 5079,
+     "sacks": 47,
+     "int": 19,
+     "fum_rec": 10,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-IND",
+   "name": "Colts Defense",
+   "pos": "DEF",
+   "team": "IND",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 24.2,
+    "yds_allowed_g": 364.4,
+    "sacks_g": 2.29,
+    "takeaways_g": 1.24,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 412,
+     "yds_allowed": 6194,
+     "sacks": 39,
+     "int": 14,
+     "fum_rec": 7,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-JAX",
+   "name": "Jaguars Defense",
+   "pos": "DEF",
+   "team": "JAX",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 19.8,
+    "yds_allowed_g": 316.9,
+    "sacks_g": 1.88,
+    "takeaways_g": 1.82,
+    "def_td": 2,
+    "totals": {
+     "pts_allowed": 336,
+     "yds_allowed": 5388,
+     "sacks": 32,
+     "int": 22,
+     "fum_rec": 9,
+     "def_td": 2
+    }
+   }
+  },
+  {
+   "id": "DEF-KC",
+   "name": "Chiefs Defense",
+   "pos": "DEF",
+   "team": "KC",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 19.3,
+    "yds_allowed_g": 310.8,
+    "sacks_g": 1.94,
+    "takeaways_g": 0.82,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 328,
+     "yds_allowed": 5284,
+     "sacks": 33,
+     "int": 10,
+     "fum_rec": 4,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-LA",
+   "name": "Rams Defense",
+   "pos": "DEF",
+   "team": "LA",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 20.4,
+    "yds_allowed_g": 345.4,
+    "sacks_g": 2.76,
+    "takeaways_g": 1.47,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 346,
+     "yds_allowed": 5872,
+     "sacks": 47,
+     "int": 16,
+     "fum_rec": 9,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-LAC",
+   "name": "Chargers Defense",
+   "pos": "DEF",
+   "team": "LAC",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 20.0,
+    "yds_allowed_g": 300.3,
+    "sacks_g": 2.65,
+    "takeaways_g": 1.35,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 340,
+     "yds_allowed": 5105,
+     "sacks": 45,
+     "int": 19,
+     "fum_rec": 4,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-LV",
+   "name": "Raiders Defense",
+   "pos": "DEF",
+   "team": "LV",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 25.4,
+    "yds_allowed_g": 331.2,
+    "sacks_g": 2.12,
+    "takeaways_g": 0.94,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 432,
+     "yds_allowed": 5630,
+     "sacks": 36,
+     "int": 8,
+     "fum_rec": 8,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-MIA",
+   "name": "Dolphins Defense",
+   "pos": "DEF",
+   "team": "MIA",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 24.9,
+    "yds_allowed_g": 363.0,
+    "sacks_g": 2.29,
+    "takeaways_g": 1.18,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 424,
+     "yds_allowed": 6171,
+     "sacks": 39,
+     "int": 9,
+     "fum_rec": 11,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-MIN",
+   "name": "Vikings Defense",
+   "pos": "DEF",
+   "team": "MIN",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 19.6,
+    "yds_allowed_g": 301.8,
+    "sacks_g": 2.88,
+    "takeaways_g": 1.24,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 333,
+     "yds_allowed": 5131,
+     "sacks": 49,
+     "int": 8,
+     "fum_rec": 13,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-NE",
+   "name": "Patriots Defense",
+   "pos": "DEF",
+   "team": "NE",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 18.8,
+    "yds_allowed_g": 308.3,
+    "sacks_g": 2.0,
+    "takeaways_g": 1.12,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 320,
+     "yds_allowed": 5241,
+     "sacks": 34,
+     "int": 10,
+     "fum_rec": 9,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-NO",
+   "name": "Saints Defense",
+   "pos": "DEF",
+   "team": "NO",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 22.5,
+    "yds_allowed_g": 316.8,
+    "sacks_g": 2.59,
+    "takeaways_g": 1.18,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 383,
+     "yds_allowed": 5386,
+     "sacks": 44,
+     "int": 10,
+     "fum_rec": 10,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-NYG",
+   "name": "Giants Defense",
+   "pos": "DEF",
+   "team": "NYG",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 25.8,
+    "yds_allowed_g": 375.2,
+    "sacks_g": 2.24,
+    "takeaways_g": 0.88,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 439,
+     "yds_allowed": 6378,
+     "sacks": 38,
+     "int": 9,
+     "fum_rec": 6,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-NYJ",
+   "name": "Jets Defense",
+   "pos": "DEF",
+   "team": "NYJ",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 29.6,
+    "yds_allowed_g": 365.9,
+    "sacks_g": 1.53,
+    "takeaways_g": 0.24,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 503,
+     "yds_allowed": 6220,
+     "sacks": 26,
+     "int": 0,
+     "fum_rec": 4,
+     "def_td": 0
+    }
+   }
+  },
+  {
+   "id": "DEF-PHI",
+   "name": "Eagles Defense",
+   "pos": "DEF",
+   "team": "PHI",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 19.1,
+    "yds_allowed_g": 328.9,
+    "sacks_g": 2.47,
+    "takeaways_g": 1.24,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 325,
+     "yds_allowed": 5591,
+     "sacks": 42,
+     "int": 12,
+     "fum_rec": 9,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-PIT",
+   "name": "Steelers Defense",
+   "pos": "DEF",
+   "team": "PIT",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 22.8,
+    "yds_allowed_g": 374.1,
+    "sacks_g": 2.82,
+    "takeaways_g": 1.59,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 387,
+     "yds_allowed": 6359,
+     "sacks": 48,
+     "int": 15,
+     "fum_rec": 12,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-SEA",
+   "name": "Seahawks Defense",
+   "pos": "DEF",
+   "team": "SEA",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 17.2,
+    "yds_allowed_g": 304.8,
+    "sacks_g": 2.76,
+    "takeaways_g": 1.47,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 292,
+     "yds_allowed": 5182,
+     "sacks": 47,
+     "int": 18,
+     "fum_rec": 7,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-SF",
+   "name": "49ers Defense",
+   "pos": "DEF",
+   "team": "SF",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 21.8,
+    "yds_allowed_g": 349.6,
+    "sacks_g": 1.18,
+    "takeaways_g": 0.94,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 371,
+     "yds_allowed": 5943,
+     "sacks": 20,
+     "int": 6,
+     "fum_rec": 10,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-TB",
+   "name": "Buccaneers Defense",
+   "pos": "DEF",
+   "team": "TB",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 24.2,
+    "yds_allowed_g": 353.9,
+    "sacks_g": 2.18,
+    "takeaways_g": 1.35,
+    "def_td": 2,
+    "totals": {
+     "pts_allowed": 411,
+     "yds_allowed": 6016,
+     "sacks": 37,
+     "int": 13,
+     "fum_rec": 10,
+     "def_td": 2
+    }
+   }
+  },
+  {
+   "id": "DEF-TEN",
+   "name": "Titans Defense",
+   "pos": "DEF",
+   "team": "TEN",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 28.1,
+    "yds_allowed_g": 362.9,
+    "sacks_g": 2.47,
+    "takeaways_g": 0.76,
+    "def_td": 1,
+    "totals": {
+     "pts_allowed": 478,
+     "yds_allowed": 6169,
+     "sacks": 42,
+     "int": 6,
+     "fum_rec": 7,
+     "def_td": 1
+    }
+   }
+  },
+  {
+   "id": "DEF-WAS",
+   "name": "Commanders Defense",
+   "pos": "DEF",
+   "team": "WAS",
+   "games": 17,
+   "headshot": "",
+   "stats": {
+    "pts_allowed_g": 26.5,
+    "yds_allowed_g": 398.9,
+    "sacks_g": 2.47,
+    "takeaways_g": 0.59,
+    "def_td": 0,
+    "totals": {
+     "pts_allowed": 451,
+     "yds_allowed": 6782,
+     "sacks": 42,
+     "int": 8,
+     "fum_rec": 2,
+     "def_td": 0
+    }
+   }
+  }
+ ]
+}

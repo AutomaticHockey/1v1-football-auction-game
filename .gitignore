@@ -1,0 +1,5 @@
+# Raw Madden ratings download (re-fetch with: node engine-tools/madden-fetch.js)
+engine-tools/madden26-*.json
+# Local editor / agent settings
+.claude/
+node_modules/
