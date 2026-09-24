@@ -18,8 +18,9 @@ for (const p of data.players) { p.short = p.name.split(' ').slice(-1)[0]; (byPos
 const LINE = ['passAttempts', 'completions', 'passingYards', 'passingTouchdowns', 'interceptions', 'rushAttempts', 'rushingYards', 'rushingTouchdowns', 'targets', 'receptions', 'receivingYards', 'receivingTouchdowns'];
 const TEAM = ['points', 'totalPlays', 'passAttempts', 'completions', 'netPassingYards', 'rushAttempts', 'rushingYards', 'passingTouchdowns', 'rushingTouchdowns', 'sacksAllowed', 'interceptions', 'turnovers', 'firstDowns', 'thirdDownAttempts', 'thirdDownConversions', 'redZoneTrips', 'redZoneTouchdowns', 'penalties', 'punts', 'fieldGoalsAttempted', 'fieldGoalsMade', 'defensiveTouchdowns', 'totalYards'];
 let seed = 1;
-function play(lineA, lineB, games, recorder) {
-  const A = SIMKIT.buildSide(0, lineA, { emptyAs: 'average' }), B = SIMKIT.buildSide(1, lineB, { emptyAs: 'average' });
+// fillers 'engine': the baseline's fill-ins play as the engine rates them (no floor), so it reads the engine.
+function play(lineA, lineB, games, recorder, fillers) {
+  const A = SIMKIT.buildSide(0, lineA, { emptyAs: 'average', fillers }), B = SIMKIT.buildSide(1, lineB, { emptyAs: 'average', fillers });
   const players = A.players.concat(B.players), sum = {};
   const add = (k, v) => { sum[k] = (sum[k] || 0) + v; };
   for (let g = 0; g < games; g++) {
@@ -53,7 +54,7 @@ const rec = { record(e) {
     runs[power ? 'power' : e.playType === 'draw' ? 'draw' : e.playType === 'outsideRun' ? 'outside' : 'inside']++;
   }
 } };
-const B = play({}, {}, Math.max(1000, N * 5), rec);
+const B = play({}, {}, Math.max(1000, N * 5), rec, 'engine');
 const share = o => { const t = Object.values(o).reduce((a, b) => a + b, 0); return JSON.stringify(Object.fromEntries(Object.entries(o).map(([k, v]) => [k, +(v / t).toFixed(3)]))); };
 const tm = k => (B('a.' + k) + B('b.' + k)) / 2;
 const dropbacks = tm('passAttempts') + tm('sacksAllowed');

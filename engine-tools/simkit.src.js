@@ -18,6 +18,9 @@
    - Balance (K.balance): how much of the gap between real players counts at
      each slot. It scales a player's edges and his ratings' distance from the
      league-average starter alike, so the grade's mix holds.
+   - Fill-ins (K.fill): every backup beside the real players, and whoever an
+     empty slot gets, plays below the worst real player at his position and
+     ranks behind every real player (opts.fillers 'engine' turns this off).
    ===================================================================== */
 const SIMKIT = (() => {
   const DATA = /*@@RATINGS@@*/null;
@@ -53,9 +56,12 @@ const SIMKIT = (() => {
     },
     // CHOSEN (by win rates, calibrate.js): 1 plays every real player at his grade. Below 1 narrows
     // the gap between players at that slot, above 1 widens it. FLEX takes its player's position's.
-    // Set so the best against the worst at a slot, all else equal, wins about: QB 78%, DEF 72%,
-    // RB, WR and TE 60% (a star FLEX against an empty one, 60-63%).
-    balance: { QB: 0.63, RB: 1.35, WR: 0.65, TE: 0.85, DEF: 0.55 }
+    // Set so the best against the worst at a slot, all else equal (the game's fill-ins), wins about:
+    // QB 78%, DEF 72%, RB, WR and TE 60%. A star FLEX against an empty one wins 61-69%.
+    balance: { QB: 0.67, RB: 1.0, WR: 0.43, TE: 0.69, DEF: 0.56 },
+    // CHOSEN: a fill-in's edges are, part by part, the worst real player's at his position (as
+    // played), less this share of the real players' spread in that part.
+    fill: { margin: 0.25 }
   };
   const num = (v, fb) => { const n = Number(v); return Number.isFinite(n) ? n : fb; };
   const toRatings = list => { const r = {}; DATA.keys.forEach((k, i) => { r[k] = list[i]; }); return r; };
@@ -75,6 +81,23 @@ const SIMKIT = (() => {
     const ratings = {};
     for (const k of Object.keys(r.ratings)) ratings[k] = Math.max(0, Math.min(100, base.ratings[k] + b * (r.ratings[k] - base.ratings[k])));
     return Object.assign({}, r, { overall: base.overall + b * (r.overall - base.overall), ratings });
+  }
+  // The fill-ins' floor at a position: each edge part at the worst real player's, less K.fill.margin
+  // of the spread (a factor's in log terms), and an overall below every real player's as played.
+  function floorFor(pos) {
+    const real = Object.keys(DATA.players).filter(id => DATA.players[id][0] === pos && DATA.grades.players[id]);
+    if (!real.length) return null;
+    const m = K.fill.margin, edges = real.map(id => edgeFor(pos, DATA.grades.players[id]));
+    const worst = (part, dir, log) => {
+      const v = edges.map(e => (log ? Math.log(e[part]) : e[part])), lo = Math.min(...v), hi = Math.max(...v);
+      const x = dir < 0 ? lo - m * (hi - lo) : hi + m * (hi - lo);
+      return log ? Math.exp(x) : x;
+    };
+    const base = filler(pos + '0');
+    return {
+      edge: { run: worst('run', -1), breakaway: worst('breakaway', -1), catch: worst('catch', -1), yards: worst('yards', -1, true), int: worst('int', 1, true) },
+      overall: Math.min(...real.map(id => balanced(rated(id), base, pos).overall)),
+    };
   }
   function rawEdge(pos, g) {
     const G = K.grade, R = G.ref, e = { run: 0, breakaway: 0, catch: 0, yards: 1, int: 1 };
@@ -112,9 +135,12 @@ const SIMKIT = (() => {
    * offensive entry carries `short`, the name the play-by-play uses. Returns { team, players, slotOf }:
    * slotOf maps an engine id to our slot key ('QB', 'FLEX', ...); the whole defense maps to 'DEF'.
    * opts.emptyAs 'average': an empty slot gets the league-average starter instead (for engine-tools checks).
+   * opts.fillers 'engine': fill-ins play exactly as the engine rates them (the baseline check).
    */
   function buildSide(side, lineup, opts) {
-    const average = opts && opts.emptyAs === 'average';
+    const average = opts && opts.emptyAs === 'average', graded = !(opts && opts.fillers === 'engine');
+    const floors = {};
+    const floor = pos => (pos in floors ? floors[pos] : (floors[pos] = floorFor(pos)));
     const teamId = side === 0 ? 1 : 2, base = teamId * 1000;
     let n = 0;
     const players = [], slotOf = new Map();
@@ -128,10 +154,18 @@ const SIMKIT = (() => {
     for (const slot of ['QB', 'RB', 'WR', 'TE', 'FLEX']) {
       const p = L[slot], r = p && rated(p.id);
       if (r) groups[r.pos].push({ r: balanced(r, filler(r.pos + '0'), r.pos), name: p.short || p.name, slot, team: p.team, usage: realUsage(p, r.pos), edge: edgeFor(r.pos, DATA.grades.players[p.id]) });
-      else { const [pos, fill] = average ? AVERAGE[slot] : EMPTY[slot]; groups[pos].push({ r: filler(fill), name: slot, slot, role: Number(fill.slice(pos.length)) }); }
+      else { const [pos, fill] = average ? AVERAGE[slot] : EMPTY[slot]; groups[pos].push({ r: filler(fill), name: slot, slot, role: Number(fill.slice(pos.length)), fillIn: !average }); }
     }
     for (const pos of Object.keys(DEPTH)) {
-      while (groups[pos].length < DEPTH[pos]) { const role = groups[pos].length; groups[pos].push({ r: filler(pos + role), name: fillName(pos, role), slot: null, role }); }
+      while (groups[pos].length < DEPTH[pos]) { const role = groups[pos].length; groups[pos].push({ r: filler(pos + role), name: fillName(pos, role), slot: null, role, fillIn: true }); }
+    }
+    // Fill-ins below the worst real player: his floor's edges, and behind every real player on the
+    // depth chart (equal overalls keep the fill-ins' own order, by id).
+    for (const pos of Object.keys(DEPTH)) {
+      for (const e of groups[pos]) {
+        const f = e.fillIn && graded && floor(pos);
+        if (f) { e.edge = f.edge; e.r = Object.assign({}, e.r, { overall: Math.min(e.r.overall, f.overall - 1) }); }
+      }
     }
     fillUsage(groups);
     for (const pos of Object.keys(DEPTH)) for (const e of groups[pos]) add(pos, e.r, e.name, e.slot, e.team, e.usage, e.edge);
