@@ -28,8 +28,9 @@ the page.
   handles TEs already); rerun it, and skip `ratings-production.mts`.
 - **Usage: who gets the ball.** Your engine picks targets and back carries by depth slot and ratings,
   and can't know a player's team role. With `opts.usage`, those two picks weigh each player by his
-  real 2025 volume (targets a game, carries a game). His route and run fitness, from his ratings,
-  still decide which routes and which runs. Quarterback runs and receiver carries stay the engine's.
+  real 2025 volume (targets a game, carries a game), and the backups beside him give up most of
+  theirs to the real players (see fill-ins). His route and run fitness, from his ratings, still
+  decide which routes and which runs. Quarterback runs and receiver carries stay the engine's.
   An RB in FLEX next to the RB: the two re-split the carries they have together, half by real
   carries and half by overall.
 - **Grades: how well.** The engine's ratings barely separate skill players (a back 15 points better
@@ -48,16 +49,19 @@ the page.
   past all of them, the rest comes off every carry). The other 20% moves every carry. As played,
   Cook, Gibbs, Achane and Robinson break 20+ on 5.1-5.7% of carries (2.6-3.1% before), Spears and
   Singletary on 0.6-1.3% (2.4-2.6%), around the league's 2.9%.
-- **Fill-ins play below every real player.** Everyone but the auctioned players is a fill-in: the
-  backups beside them (they get about 40% of a team's targets and 30% of its backs' carries, what the
-  real players' 2025 volume leaves) and whoever an empty slot gets. Their ratings are the engine's
+- **Fill-ins play below every real player, and less.** Everyone but the auctioned players is a
+  fill-in: the backups beside them and whoever an empty slot gets. Their ratings are the engine's
   league-average player at that depth, but graded players' production made the weakest real players
   worse than that: a fill-in WR out-gained 33 of the 60 real WRs a target, and an empty QB, RB, WR or
   TE slot did as well as the weakest real pick. Now each fill-in at QB, RB, WR and TE takes, part by
   part, the worst real player's edges at his position (as played), less `K.fill.margin` (25%) of the
-  real spread, and ranks behind every real player on the depth chart. An empty DEF slot already was
-  worse than any real defense (31 points allowed against 19 to 26). `opts.fillers: 'engine'` turns it
-  off (the baseline check, the grade fit and `ref` use it).
+  real spread, and ranks behind every real player on the depth chart. The backups also keep only
+  `K.fill.touches` (30%) of the touches their depth role would get (17% of a team's targets and backs'
+  carries, from 40% and 30%); the real players take the rest by their real volume, so a real player
+  runs about 30% above his 2025 volume on an otherwise average team. An empty slot's fill-in gets the
+  average real player's volume at his position instead (`DATA.volume`), so any real pick beats him.
+  An empty DEF slot already was worse than any real defense (31 points allowed against 19 to 26).
+  `opts.fillers: 'engine'` turns all of it off (the baseline check and `ref` use it).
 - **Balance: how much the gap counts.** `SIMKIT.K.balance` scales, per slot, both a player's grade
   edges and his ratings' distance from the league-average starter, so his mix of production and
   Madden holds. It is chosen by win rates, with the game's fill-ins: the best player at a slot against
@@ -121,50 +125,50 @@ The tight ends (the stats CSV is nflverse's, `stats_player/stats_player_reg_2025
 `equiv.mts`, with every hook in the build: 2,000 games, 3.79M stat fields and 788,818 play-recorder
 events, 0 mismatches for both Cornerstone's `simulateGame` and the game's driver.
 
-`calibrate.js`, at full strength (balance 1, an average supporting cast): every graded rate lands on
-its grade, bias within ±3% and slope 0.82 to 1.17 (points allowed, which follows from the graded
-yards, 1.22).
+`calibrate.js`, at full strength (balance 1) as the game uses a player (the game's fill-ins beside
+him): every graded rate lands on its grade, bias within ±2% and slope 0.83 to 1.15 (points allowed,
+which follows from the graded yards, 1.26). The QB and DEF refs carry the fill-ins.
 
 `calibrate.js`, as played: the best player at each slot against the worst (by the card's lead
 stat), everything else league average, the game's fill-ins, 10,000 games each.
 
 | Slot | Matchup | Wins (before grades) |
 |---|---|---|
-| QB | Stafford vs Dart | 78.0% (72.1%) |
-| DEF | Seahawks vs Cowboys | 71.2% (69.4%) |
-| RB | Cook vs Spears | 60.5% (52.1%) |
-| WR | Nacua vs Higgins | 59.0% (53.5%) |
-| TE | McBride vs Barner | 60.0% (no TEs) |
-| FLEX | Nacua / Gibbs / McBride vs an empty FLEX | 64.7% / 61.8% / 68.9% (51.8% / 52.5% / –) |
+| QB | Stafford vs Dart | 77.5% (72.1%) |
+| DEF | Seahawks vs Cowboys | 71.9% (69.4%) |
+| RB | Cook vs Spears | 61.4% (52.1%) |
+| WR | Nacua vs Higgins | 59.7% (53.5%) |
+| TE | McBride vs Barner | 58.3% to 59.8% (no TEs) |
+| FLEX | Nacua / Gibbs / McBride vs an empty FLEX | 62.4% / 63.2% / 67.9% (51.8% / 52.5% / –) |
 
 Fill-ins against the worst real players (300 games per real player, beside him): fill-in WRs gain
-5.4 to 6.0 yards a target (the worst real WR, Ayomanor, 6.3), fill-in backs 3.1 to 3.25 a carry
-(Carter 3.4), fill-in TEs 4.5 to 4.6 (Barner 6.6). The weakest real pick beats an empty slot (6,000
-games, the rest of the team the same): Ayomanor 53.4%, Higgins 52.9%, Carter 52.0%, Theo Johnson
-52.3%, Mariota 71.8%, the Cowboys defense 60.7%.
+5.4 to 6.0 yards a target (the worst real WR, Ayomanor, 6.25), fill-in backs 3.1 to 3.25 a carry
+(Carter 3.4), fill-in TEs 4.5 to 4.9 (Okonkwo 6.7). The weakest real pick beats an empty slot (6,000
+games, the rest of the team the same): Ayomanor 56.4%, Higgins 57.5%, Carter 52.5%, Spears 53.5%,
+Theo Johnson 55.8%, Ferguson 56.2%, Mariota 71.3%, the Cowboys defense 56.1%.
 
 `check.js` puts each real player on an otherwise league-average team and compares 200 games with his
 real 2025 per-game line. Bias is the average miss. Slope is how much of the gap between players
 comes through (1 = all of it); by the balance, QB, DEF and receivers' yards a catch sit near half.
-The rest of the team is the game's fill-ins, so a quarterback throws for less than his line (40% of
-his targets go to fill-ins) and a defense allows less (the average offense has fill-ins too).
+Real players run about 30% above their 2025 volume (the backups' touches), so their per-game lines
+do too; their rates stay on their lines.
 
 | Stat | Bias | Slope (before grades) | Driven by |
 |---|---|---|---|
-| WR targets / RB carries / TE targets | +1% / −2% / 0% | 0.95 / 1.06 / 0.97 (0.96 / 1.01 / –) | real usage |
-| WR receptions / yards | −3% / −5% | 0.87 / 0.87 (0.80 / 0.68) | usage plus grade |
-| TE receptions / yards | −2% / 0% | 0.98 / 1.27 | usage plus grade |
-| RB rushing yards / receiving yards | +1% / +1% | 1.12 / 1.03 (0.85 / –) | usage plus grade |
-| RB yards per carry, WR / TE yards per catch | +1% / −3% / 0% | 0.73 / 0.33 / 0.43 (0.13 / 0.05 / –) | grade |
-| QB passing yards / TDs / completion % | −5% / −41% / −4% | 0.55 / 0.48 / 0.49 (0.33 / 0.45 / 0.27) | grade, and the fill-ins he throws to |
-| QB INTs | +3% | 0.56 (0.00) | grade |
-| QB rushing yards | +4% | 0.60 (0.66) | ratings (speed: scrambles and designed runs) |
-| DEF points / yards allowed | −16% / −9% | 0.46 / 0.48 (0.46 / 0.28) | grade, against an offense with fill-ins |
-| DEF defensive TDs | +99% | 0.24 | the engine's return rates (9% of turnovers) against the file's 4.5% |
+| WR targets / RB carries / TE targets | +34% / +31% / +30% | 1.14 / 0.91 / 1.09 (0.96 / 1.01 / –) | real usage plus the backups' |
+| WR receptions / yards | +29% / +24% | 1.06 / 1.04 (0.80 / 0.68) | usage plus grade |
+| TE receptions / yards | +27% / +28% | 1.12 / 1.34 | usage plus grade |
+| RB rushing yards / receiving yards | +33% / +37% | 1.07 / 1.24 (0.85 / –) | usage plus grade |
+| RB yards per carry, WR / TE yards per catch | +1% / −5% / −1% | 0.74 / 0.32 / 0.31 (0.13 / 0.05 / –) | grade |
+| QB passing yards / TDs / completion % | +4% / −22% / −1% | 0.60 / 0.59 / 0.51 (0.33 / 0.45 / 0.27) | grade |
+| QB INTs | +6% | 0.66 (0.00) | grade |
+| QB rushing yards | +4% | 0.58 (0.66) | ratings (speed: scrambles and designed runs) |
+| DEF points / yards allowed | −5% / −2% | 0.50 / 0.43 (0.46 / 0.28) | grade |
+| DEF defensive TDs | +99% | 0.09 | the engine's return rates (9% of turnovers) against the file's 4.5% |
 
 An all-average game (the engine's own fill-ins) lands inside Cornerstone's acceptance bands, except
-points (21.5 against 22 to 23.5). With the game's fill-ins, random six-slot drafts score 19.0 points
-a team (22.7 before the fill-in floor).
+points (21.5 against 22 to 23.5). Random six-slot drafts score 22.0 to 22.6 points a team (19.0 with
+the fill-in floor alone, 22.7 before it).
 
 `favorite.js`: the better roster (by the engine's own odds) wins 64% of random six-slot drafts, and
 31% of matchups have a 70%+ favorite. What the grades changed is who that is: over 300 random drafts,

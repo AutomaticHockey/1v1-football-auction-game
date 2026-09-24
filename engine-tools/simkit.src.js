@@ -19,8 +19,9 @@
      each slot. It scales a player's edges and his ratings' distance from the
      league-average starter alike, so the grade's mix holds.
    - Fill-ins (K.fill): every backup beside the real players, and whoever an
-     empty slot gets, plays below the worst real player at his position and
-     ranks behind every real player (opts.fillers 'engine' turns this off).
+     empty slot gets, plays below the worst real player at his position, ranks
+     behind every real player, and gets fewer touches, the real players taking
+     them (opts.fillers 'engine' turns all of this off).
    ===================================================================== */
 const SIMKIT = (() => {
   const DATA = /*@@RATINGS@@*/null;
@@ -37,11 +38,13 @@ const SIMKIT = (() => {
     routeMix: { screen: 0.199, short: 0.454, medium: 0.215, deep: 0.131 },
     runMix: { inside: 0.354, outside: 0.441, draw: 0.121, power: 0.084 },
     // Grades to edges: edge = gain x (grade - ref), or (grade / ref)^gain for a factor. FITTED
-    // together (calibrate.js, at balance 1) so that a real player on an otherwise average team
-    // plays at his grade: slope 1, no bias. A grade at ref gets no edge, so he plays to his ratings
-    // alone. (calibrate.js also prints what an all-average game's players do, for comparison.)
+    // together (calibrate.js, at balance 1) so that a real player on an otherwise average team, with
+    // the game's fill-ins, plays at his grade: slope 1, no bias. A grade at ref gets no edge, so he
+    // plays to his ratings alone. The QB and DEF refs carry the fill-ins: a QB throws some of his
+    // passes to them, and a defense faces them. (calibrate.js also prints what an all-average game's
+    // players do, for comparison.)
     grade: {
-      ref: { ypc: 4.3, rbYpr: 7.217, wrCatch: 0.619, wrYpr: 12.587, teCatch: 0.692, teYpr: 11.25, cmp: 0.617, qbYds: 246, int: 0.78, defYds: 326, take: 1.481 },
+      ref: { ypc: 4.3, rbYpr: 7.065, wrCatch: 0.619, wrYpr: 12.587, teCatch: 0.692, teYpr: 11.25, cmp: 0.59, qbYds: 224, int: 0.738, defYds: 311, take: 1.481 },
       run: 0.92,          // yards a carry per yard of graded yards per carry over ref
       runBreakaway: 0.8,  // CHOSEN: the share of it that comes through breakaway runs (game.ts), the rest on every carry
       catch: 0.9,         // completion chance per point of graded catch rate over ref
@@ -58,10 +61,13 @@ const SIMKIT = (() => {
     // the gap between players at that slot, above 1 widens it. FLEX takes its player's position's.
     // Set so the best against the worst at a slot, all else equal (the game's fill-ins), wins about:
     // QB 78%, DEF 72%, RB, WR and TE 60%. A star FLEX against an empty one wins 61-69%.
-    balance: { QB: 0.67, RB: 1.0, WR: 0.43, TE: 0.69, DEF: 0.56 },
+    balance: { QB: 0.65, RB: 1.0, WR: 0.43, TE: 0.57, DEF: 0.55 },
     // CHOSEN: a fill-in's edges are, part by part, the worst real player's at his position (as
-    // played), less this share of the real players' spread in that part.
-    fill: { margin: 0.25 }
+    // played), less this share of the real players' spread in that part. touches: a backup's share
+    // of targets and carries, against what his depth role would get; the real players take the
+    // rest, each by his real volume. An empty slot's fill-in gets a starter's touches instead: the
+    // average real player's volume at his position (DATA.volume), so any real pick beats him.
+    fill: { margin: 0.25, touches: 0.3 }
   };
   const num = (v, fb) => { const n = Number(v); return Number.isFinite(n) ? n : fb; };
   const toRatings = list => { const r = {}; DATA.keys.forEach((k, i) => { r[k] = list[i]; }); return r; };
@@ -154,13 +160,17 @@ const SIMKIT = (() => {
     for (const slot of ['QB', 'RB', 'WR', 'TE', 'FLEX']) {
       const p = L[slot], r = p && rated(p.id);
       if (r) groups[r.pos].push({ r: balanced(r, filler(r.pos + '0'), r.pos), name: p.short || p.name, slot, team: p.team, usage: realUsage(p, r.pos), edge: edgeFor(r.pos, DATA.grades.players[p.id]) });
-      else { const [pos, fill] = average ? AVERAGE[slot] : EMPTY[slot]; groups[pos].push({ r: filler(fill), name: slot, slot, role: Number(fill.slice(pos.length)), fillIn: !average }); }
+      else {
+        const [pos, fill] = average ? AVERAGE[slot] : EMPTY[slot], starter = !average && graded && DATA.volume[pos];
+        groups[pos].push({ r: filler(fill), name: slot, slot, role: Number(fill.slice(pos.length)), fillIn: !average, usage: starter ? { targets: starter.targets, carries: starter.carries } : undefined });
+      }
     }
     for (const pos of Object.keys(DEPTH)) {
       while (groups[pos].length < DEPTH[pos]) { const role = groups[pos].length; groups[pos].push({ r: filler(pos + role), name: fillName(pos, role), slot: null, role, fillIn: true }); }
     }
-    // Fill-ins below the worst real player: his floor's edges, and behind every real player on the
-    // depth chart (equal overalls keep the fill-ins' own order, by id).
+    // Fill-ins below the worst real player: his floor's edges, behind every real player on the depth
+    // chart (equal overalls keep the fill-ins' own order, by id), and K.fill.touches of his touches
+    // (after fillUsage below).
     for (const pos of Object.keys(DEPTH)) {
       for (const e of groups[pos]) {
         const f = e.fillIn && graded && floor(pos);
@@ -168,6 +178,7 @@ const SIMKIT = (() => {
       }
     }
     fillUsage(groups);
+    if (graded) for (const pos of Object.keys(DEPTH)) for (const e of groups[pos]) if (e.fillIn && e.usage) e.usage = e.slot ? Object.assign(e.usage, { own: false }) : { targets: e.usage.targets * K.fill.touches, carries: e.usage.carries * K.fill.touches, own: false };
     for (const pos of Object.keys(DEPTH)) for (const e of groups[pos]) add(pos, e.r, e.name, e.slot, e.team, e.usage, e.edge);
     for (const pos of ['LT', 'LG', 'C', 'RG', 'RT']) add(pos, filler(pos + '0'), pos, null);
     add('K', filler('K0'), 'K', null);

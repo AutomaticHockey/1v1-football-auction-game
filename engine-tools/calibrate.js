@@ -1,12 +1,12 @@
 // Calibrates the grade hooks (SIMKIT.K.grade) and reports what they do to winning.
 // 1) ref: an all-average game's per-player rates (fill-ins as the engine rates them), what the
 //    engine's league-average player does (K.grade.ref; a grade there gets no edge).
-// 2) Each real player (and defense) on an otherwise average team against an average team: his
-//    simulated rate beside his grade (grades.mjs). slope 1 and bias 0 mean the sim plays him at
-//    his grade. The gains in K.grade are fitted to that, with an average supporting cast (the
-//    fill-ins as the engine rates them): in a game the fill-ins are worse, so a QB throws for less.
-// 3) Winning, with the game's fill-ins: at each slot the best player against the worst (by the
-//    stat the auction cards lead with), everything else equal; and a star FLEX against an empty one.
+// 2) Each real player (and defense) on an otherwise average team against an average team, with the
+//    game's fill-ins: his simulated rate beside his grade (grades.mjs). slope 1 and bias 0 mean the
+//    sim plays him at his grade as the game uses him (first on the depth chart, the fill-ins beside
+//    him). The gains and refs in K.grade are fitted to that.
+// 3) Winning, the same way: at each slot the best player against the worst (by the stat the
+//    auction cards lead with), everything else equal; and a star FLEX against an empty one.
 // Usage: node calibrate.js [games per player, default 200] [--wins-only] [--no-wins]
 //   GRADE='{...}' and BALANCE='{...}' try other K.grade and K.balance values without a rebuild.
 const fs = require('fs');
@@ -78,31 +78,31 @@ if (!ONLY_WINS) {
   const rows = {};
   const put = (key, grade, sim) => { (rows[key] = rows[key] || []).push([grade, sim]); };
   for (const p of byPos.RB || []) {
-    const r = play({ RB: p }, {}, N, 'average', 'engine'), g = G.players[p.id];
+    const r = play({ RB: p }, {}, N), g = G.players[p.id];
     put('RB yds/carry', g.ypc, r('RB.rushingYards') / Math.max(1, r('RB.rushAttempts')));
     put('RB yds/catch', g.ypr, r('RB.receivingYards') / Math.max(1, r('RB.receptions')));
   }
   for (const pos of ['WR', 'TE']) {
     for (const p of byPos[pos] || []) {
-      const r = play({ [pos]: p }, {}, N, 'average', 'engine'), g = G.players[p.id];
+      const r = play({ [pos]: p }, {}, N), g = G.players[p.id];
       put(`${pos} catch rate`, g.catch, r(`${pos}.receptions`) / Math.max(1, r(`${pos}.targets`)));
       put(`${pos} yds/catch`, g.ypr, r(`${pos}.receivingYards`) / Math.max(1, r(`${pos}.receptions`)));
     }
   }
   for (const p of byPos.QB || []) {
-    const r = play({ QB: p }, {}, N, 'average', 'engine'), g = G.players[p.id];
+    const r = play({ QB: p }, {}, N), g = G.players[p.id];
     put('QB cmp rate', g.cmp, r('QB.completions') / Math.max(1, r('QB.passAttempts')));
     put('QB pass yds/g', g.yds, r('QB.passingYards') / N);
     put('QB INT/g', g.int, r('QB.interceptions') / N);
   }
   for (const p of byPos.DEF || []) {
-    const r = play({ DEF: p }, {}, N, 'average', 'engine'), g = G.defenses[p.team];
+    const r = play({ DEF: p }, {}, N), g = G.defenses[p.team];
     put('DEF yds allowed/g', g.yds, r('b.totalYards') / N);
     put('DEF pts allowed/g', g.pts, r('b.points') / N);
     put('DEF takeaways/g', g.take, r('b.turnovers') / N);
   }
   Object.assign(SIMKIT.K.balance, balance);
-  console.log(`\nGRADES (each real player on an otherwise average team, ${N} games, balance 1): slope 1 = the sim plays him at his grade`);
+  console.log(`\nGRADES (each real player on an otherwise average team with the game's fill-ins, ${N} games, balance 1): slope 1 = the sim plays him at his grade`);
   for (const [key, pairs] of Object.entries(rows)) {
     const f = fit(pairs);
     console.log(`  ${key.padEnd(18)} grade ${f.grade.toFixed(3).padStart(8)}  sim ${f.sim.toFixed(3).padStart(8)}  bias ${(f.bias >= 0 ? '+' : '') + f.bias.toFixed(1)}%`.padEnd(70) + `slope ${f.slope.toFixed(2)}  corr ${f.corr.toFixed(2)}`);
