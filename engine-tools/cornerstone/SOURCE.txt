@@ -1,0 +1,3 @@
+Snapshot of the Cornerstone engine (D:\NFL game test, src/core) at commit 4ffc55b1fd435e683ea8e69d7ddfa69088b68457
+(2026-09-24, "Merge the engine revamp: NFLVERSE Stage 2 and Stage 3 (#1)").
+Copied verbatim with git show. Do not edit these files: build.mjs applies the game's patches at build time.
