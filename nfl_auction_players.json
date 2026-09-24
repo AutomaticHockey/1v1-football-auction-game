@@ -55,6 +55,23 @@
     "high_wins": true
    }
   ],
+  "TE": [
+   {
+    "key": "rec_yds_g",
+    "label": "Rec Yds/G",
+    "high_wins": true
+   },
+   {
+    "key": "rec_g",
+    "label": "Rec/G",
+    "high_wins": true
+   },
+   {
+    "key": "rec_td_g",
+    "label": "Rec TD/G",
+    "high_wins": true
+   }
+  ],
   "DEF": [
    {
     "key": "pts_allowed_g",
@@ -3184,6 +3201,510 @@
      "tgt": 56,
      "rec": 40,
      "rec_yds": 475,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0037744",
+   "name": "Trey McBride",
+   "pos": "TE",
+   "team": "ARI",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/psasp10nn5pcvkli9kil",
+   "stats": {
+    "rec_yds_g": 72.9,
+    "rec_g": 7.4,
+    "rec_td_g": 0.65,
+    "ypr": 9.83,
+    "tgt_g": 9.9,
+    "totals": {
+     "tgt": 169,
+     "rec": 126,
+     "rec_yds": 1239,
+     "rec_td": 11
+    }
+   }
+  },
+  {
+   "id": "00-0036970",
+   "name": "Kyle Pitts",
+   "pos": "TE",
+   "team": "ATL",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xczipzxvytnmvgznhhb4",
+   "stats": {
+    "rec_yds_g": 54.6,
+    "rec_g": 5.2,
+    "rec_td_g": 0.29,
+    "ypr": 10.55,
+    "tgt_g": 6.9,
+    "totals": {
+     "tgt": 118,
+     "rec": 88,
+     "rec_yds": 928,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0036040",
+   "name": "Juwan Johnson",
+   "pos": "TE",
+   "team": "NO",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ahzqkvhjot6lygwr4ccb",
+   "stats": {
+    "rec_yds_g": 52.3,
+    "rec_g": 4.5,
+    "rec_td_g": 0.18,
+    "ypr": 11.55,
+    "tgt_g": 6.0,
+    "totals": {
+     "tgt": 102,
+     "rec": 77,
+     "rec_yds": 889,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0030506",
+   "name": "Travis Kelce",
+   "pos": "TE",
+   "team": "KC",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/dpxovcfku6ud2aohgf6a",
+   "stats": {
+    "rec_yds_g": 50.1,
+    "rec_g": 4.5,
+    "rec_td_g": 0.29,
+    "ypr": 11.2,
+    "tgt_g": 6.4,
+    "totals": {
+     "tgt": 108,
+     "rec": 76,
+     "rec_yds": 851,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0040128",
+   "name": "Tyler Warren",
+   "pos": "TE",
+   "team": "IND",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/f1mfwwrr3qvnxuiackgq",
+   "stats": {
+    "rec_yds_g": 48.1,
+    "rec_g": 4.5,
+    "rec_td_g": 0.24,
+    "ypr": 10.75,
+    "tgt_g": 6.6,
+    "totals": {
+     "tgt": 112,
+     "rec": 76,
+     "rec_yds": 817,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0034383",
+   "name": "Dalton Schultz",
+   "pos": "TE",
+   "team": "HOU",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ym8sbkev8l4scnrc0vd8",
+   "stats": {
+    "rec_yds_g": 45.7,
+    "rec_g": 4.8,
+    "rec_td_g": 0.18,
+    "ypr": 9.48,
+    "tgt_g": 6.2,
+    "totals": {
+     "tgt": 106,
+     "rec": 82,
+     "rec_yds": 777,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0033090",
+   "name": "Hunter Henry",
+   "pos": "TE",
+   "team": "NE",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cvlunbqgztudbhjrug7l",
+   "stats": {
+    "rec_yds_g": 45.2,
+    "rec_g": 3.5,
+    "rec_td_g": 0.41,
+    "ypr": 12.8,
+    "tgt_g": 5.1,
+    "totals": {
+     "tgt": 87,
+     "rec": 60,
+     "rec_yds": 768,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0040663",
+   "name": "Harold Fannin Jr.",
+   "pos": "TE",
+   "team": "CLE",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/fxublmpnxx9uggsddwik",
+   "stats": {
+    "rec_yds_g": 45.7,
+    "rec_g": 4.5,
+    "rec_td_g": 0.38,
+    "ypr": 10.15,
+    "tgt_g": 6.7,
+    "totals": {
+     "tgt": 107,
+     "rec": 72,
+     "rec_yds": 731,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0040126",
+   "name": "Colston Loveland",
+   "pos": "TE",
+   "team": "CHI",
+   "games": 16,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cnxiyi76jeahgx94nh6d",
+   "stats": {
+    "rec_yds_g": 44.6,
+    "rec_g": 3.6,
+    "rec_td_g": 0.38,
+    "ypr": 12.29,
+    "tgt_g": 5.1,
+    "totals": {
+     "tgt": 82,
+     "rec": 58,
+     "rec_yds": 713,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0039338",
+   "name": "Brock Bowers",
+   "pos": "TE",
+   "team": "LV",
+   "games": 12,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/waorceny0ggpaeckaol8",
+   "stats": {
+    "rec_yds_g": 56.7,
+    "rec_g": 5.3,
+    "rec_td_g": 0.58,
+    "ypr": 10.62,
+    "tgt_g": 7.2,
+    "totals": {
+     "tgt": 86,
+     "rec": 64,
+     "rec_yds": 680,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0040189",
+   "name": "Oronde Gadsden II",
+   "pos": "TE",
+   "team": "LAC",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/r8b4oghjwhw8x9nv1wbs",
+   "stats": {
+    "rec_yds_g": 44.3,
+    "rec_g": 3.3,
+    "rec_td_g": 0.2,
+    "ypr": 13.55,
+    "tgt_g": 4.6,
+    "totals": {
+     "tgt": 69,
+     "rec": 49,
+     "rec_yds": 664,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0033288",
+   "name": "George Kittle",
+   "pos": "TE",
+   "team": "SF",
+   "games": 11,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/vkicdglglkyukgyxtmpx",
+   "stats": {
+    "rec_yds_g": 57.1,
+    "rec_g": 5.2,
+    "rec_td_g": 0.64,
+    "ypr": 11.02,
+    "tgt_g": 6.3,
+    "totals": {
+     "tgt": 69,
+     "rec": 57,
+     "rec_yds": 628,
+     "rec_td": 7
+    }
+   }
+  },
+  {
+   "id": "00-0038041",
+   "name": "Jake Ferguson",
+   "pos": "TE",
+   "team": "DAL",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xpykb0tbosfwsn6dqstb",
+   "stats": {
+    "rec_yds_g": 35.3,
+    "rec_g": 4.8,
+    "rec_td_g": 0.47,
+    "ypr": 7.32,
+    "tgt_g": 6.0,
+    "totals": {
+     "tgt": 102,
+     "rec": 82,
+     "rec_yds": 600,
+     "rec_td": 8
+    }
+   }
+  },
+  {
+   "id": "00-0034351",
+   "name": "Dallas Goedert",
+   "pos": "TE",
+   "team": "PHI",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/bafepstxu7vvxb9v5vua",
+   "stats": {
+    "rec_yds_g": 39.4,
+    "rec_g": 4.0,
+    "rec_td_g": 0.73,
+    "ypr": 9.85,
+    "tgt_g": 5.5,
+    "totals": {
+     "tgt": 82,
+     "rec": 60,
+     "rec_yds": 591,
+     "rec_td": 11
+    }
+   }
+  },
+  {
+   "id": "00-0038129",
+   "name": "Cade Otton",
+   "pos": "TE",
+   "team": "TB",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yanr6h9aplae3jyzimf7",
+   "stats": {
+    "rec_yds_g": 38.1,
+    "rec_g": 3.9,
+    "rec_td_g": 0.07,
+    "ypr": 9.69,
+    "tgt_g": 5.4,
+    "totals": {
+     "tgt": 81,
+     "rec": 59,
+     "rec_yds": 572,
+     "rec_td": 1
+    }
+   }
+  },
+  {
+   "id": "00-0038933",
+   "name": "Dalton Kincaid",
+   "pos": "TE",
+   "team": "BUF",
+   "games": 12,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/z7k857flehljboaixj8m",
+   "stats": {
+    "rec_yds_g": 47.6,
+    "rec_g": 3.2,
+    "rec_td_g": 0.42,
+    "ypr": 14.64,
+    "tgt_g": 4.1,
+    "totals": {
+     "tgt": 49,
+     "rec": 39,
+     "rec_yds": 571,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0037809",
+   "name": "Chig Okonkwo",
+   "pos": "TE",
+   "team": "TEN",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/pzcez6pi9tpdqkmjjnzk",
+   "stats": {
+    "rec_yds_g": 32.9,
+    "rec_g": 3.3,
+    "rec_td_g": 0.12,
+    "ypr": 10.0,
+    "tgt_g": 4.6,
+    "totals": {
+     "tgt": 79,
+     "rec": 56,
+     "rec_yds": 560,
+     "rec_td": 2
+    }
+   }
+  },
+  {
+   "id": "00-0038935",
+   "name": "Brenton Strange",
+   "pos": "TE",
+   "team": "JAX",
+   "games": 12,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/devxzxwf1sfficgncggm",
+   "stats": {
+    "rec_yds_g": 45.0,
+    "rec_g": 3.8,
+    "rec_td_g": 0.25,
+    "ypr": 11.74,
+    "tgt_g": 5.0,
+    "totals": {
+     "tgt": 60,
+     "rec": 46,
+     "rec_yds": 540,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0039847",
+   "name": "Theo Johnson",
+   "pos": "TE",
+   "team": "NYG",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/fv2jbzlocr1o3ahkru43",
+   "stats": {
+    "rec_yds_g": 35.2,
+    "rec_g": 3.0,
+    "rec_td_g": 0.33,
+    "ypr": 11.73,
+    "tgt_g": 4.9,
+    "totals": {
+     "tgt": 74,
+     "rec": 45,
+     "rec_yds": 528,
+     "rec_td": 5
+    }
+   }
+  },
+  {
+   "id": "00-0039793",
+   "name": "AJ Barner",
+   "pos": "TE",
+   "team": "SEA",
+   "games": 17,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/i0esiguve9if4ts5mm1q",
+   "stats": {
+    "rec_yds_g": 30.5,
+    "rec_g": 3.1,
+    "rec_td_g": 0.35,
+    "ypr": 9.98,
+    "tgt_g": 4.0,
+    "totals": {
+     "tgt": 68,
+     "rec": 52,
+     "rec_yds": 519,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0030061",
+   "name": "Zach Ertz",
+   "pos": "TE",
+   "team": "WAS",
+   "games": 13,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xktmmeumuoglbuam75iz",
+   "stats": {
+    "rec_yds_g": 38.8,
+    "rec_g": 3.8,
+    "rec_td_g": 0.31,
+    "ypr": 10.08,
+    "tgt_g": 5.5,
+    "totals": {
+     "tgt": 72,
+     "rec": 50,
+     "rec_yds": 504,
+     "rec_td": 4
+    }
+   }
+  },
+  {
+   "id": "00-0038996",
+   "name": "Tucker Kraft",
+   "pos": "TE",
+   "team": "GB",
+   "games": 8,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/n6vu44jbq31rydoaadaq",
+   "stats": {
+    "rec_yds_g": 61.1,
+    "rec_g": 4.0,
+    "rec_td_g": 0.75,
+    "ypr": 15.28,
+    "tgt_g": 5.5,
+    "totals": {
+     "tgt": 44,
+     "rec": 32,
+     "rec_yds": 489,
+     "rec_td": 6
+    }
+   }
+  },
+  {
+   "id": "00-0039065",
+   "name": "Sam LaPorta",
+   "pos": "TE",
+   "team": "DET",
+   "games": 9,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/wxlk7ysg2nfq6h6ntdcu",
+   "stats": {
+    "rec_yds_g": 54.3,
+    "rec_g": 4.4,
+    "rec_td_g": 0.33,
+    "ypr": 12.22,
+    "tgt_g": 5.4,
+    "totals": {
+     "tgt": 49,
+     "rec": 40,
+     "rec_yds": 489,
+     "rec_td": 3
+    }
+   }
+  },
+  {
+   "id": "00-0036894",
+   "name": "Pat Freiermuth",
+   "pos": "TE",
+   "team": "PIT",
+   "games": 15,
+   "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/pyrdsypgggjshiaygkr7",
+   "stats": {
+    "rec_yds_g": 32.4,
+    "rec_g": 2.7,
+    "rec_td_g": 0.27,
+    "ypr": 11.85,
+    "tgt_g": 3.6,
+    "totals": {
+     "tgt": 54,
+     "rec": 41,
+     "rec_yds": 486,
      "rec_td": 4
     }
    }

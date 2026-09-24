@@ -9,9 +9,11 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { applyPatches } from './patches.mjs'
+import { computeGrades } from './grades.mjs'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
-const esbuild = createRequire('D:/NFL game test/package.json')('esbuild')
+// esbuild from the Cornerstone repo ($CORNERSTONE, else D:/NFL game test), or from ESBUILD_FROM's package.json.
+const esbuild = createRequire(process.env.ESBUILD_FROM || path.join(process.env.CORNERSTONE || 'D:/NFL game test', 'package.json'))('esbuild')
 const core = path.join(here, 'cornerstone')
 
 // 1. The full TUNING object, evaluated from the snapshot.
@@ -89,9 +91,26 @@ const engine = header + js + 'if (typeof module !== "undefined") module.exports 
 writeFileSync(path.join(here, 'engine.js'), engine)
 console.log(`engine.js ${Math.round(engine.length / 1024)} KB; TUNING sections: ${names.join(', ')}`)
 
-// 3. simkit.js: SIMKIT with the ratings packed as arrays in ratings.json's key order.
+// 3. simkit.js: SIMKIT with the ratings packed as arrays in ratings.json's key order, and every
+// player's and defense's grade (grades.mjs, from the player file and the ratings).
 const R = JSON.parse(readFileSync(path.join(here, 'ratings.json'), 'utf8'))
+const playerFile = JSON.parse(readFileSync(path.join(here, '..', 'nfl_auction_players.json'), 'utf8'))
+const grades = computeGrades(playerFile, R)
+// The average real player's volume at each position (targets and backs' carries a game, as SIMKIT's
+// realUsage reads a player): what an empty slot's fill-in gets.
+const volume = {}
+for (const pos of ['RB', 'WR', 'TE']) {
+  const list = playerFile.players.filter((p) => p.pos === pos)
+  if (!list.length) continue
+  const per = list.map((p) => {
+    const s = p.stats, games = Math.max(1, p.games)
+    return pos === 'RB' ? { targets: s.rec_g / 0.78, carries: s.totals.carries / games } : { targets: s.tgt_g, carries: 0 }
+  })
+  const avg = (k) => Math.round(10 * per.reduce((a, v) => a + v[k], 0) / per.length) / 10
+  volume[pos] = { targets: avg('targets'), carries: avg('carries') }
+}
 if (R.unmatched.length) console.warn(`players with no Madden match (they play as a league-average starter): ${R.unmatched.join('; ')}`)
+if (R.production && R.production.length) console.log(`rated from 2025 production, not Madden (ratings-production.mts): ${R.production.length} (${[...new Set(R.production.map((s) => s.split(' ')[0]))].join(', ')})`)
 const one = (x) => Math.round(x * 10) / 10
 const data = {
   source: R.source,
@@ -101,6 +120,8 @@ const data = {
   filler: Object.fromEntries(Object.entries(R.filler).map(([slot, f]) => [slot, [one(f.overall), ...f.ratings.map(one)]])),
   players: Object.fromEntries(Object.entries(R.players).map(([id, p]) => [id, [p.pos, p.madden, p.overall, ...p.ratings]])),
   defenses: Object.fromEntries(Object.entries(R.defenses).map(([team, unit]) => [team, unit.map((d) => [d.pos, d.name, d.madden, d.overall, ...d.ratings])])),
+  grades: { players: grades.players, defenses: grades.defenses },
+  volume,
 }
 const simkitSrc = readFileSync(path.join(here, 'simkit.src.js'), 'utf8')
 if (!simkitSrc.includes('/*@@RATINGS@@*/null')) throw new Error('simkit.src.js has no ratings placeholder')

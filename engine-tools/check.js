@@ -18,8 +18,9 @@ for (const p of data.players) { p.short = p.name.split(' ').slice(-1)[0]; (byPos
 const LINE = ['passAttempts', 'completions', 'passingYards', 'passingTouchdowns', 'interceptions', 'rushAttempts', 'rushingYards', 'rushingTouchdowns', 'targets', 'receptions', 'receivingYards', 'receivingTouchdowns'];
 const TEAM = ['points', 'totalPlays', 'passAttempts', 'completions', 'netPassingYards', 'rushAttempts', 'rushingYards', 'passingTouchdowns', 'rushingTouchdowns', 'sacksAllowed', 'interceptions', 'turnovers', 'firstDowns', 'thirdDownAttempts', 'thirdDownConversions', 'redZoneTrips', 'redZoneTouchdowns', 'penalties', 'punts', 'fieldGoalsAttempted', 'fieldGoalsMade', 'defensiveTouchdowns', 'totalYards'];
 let seed = 1;
-function play(lineA, lineB, games, recorder) {
-  const A = SIMKIT.buildSide(0, lineA, { emptyAs: 'average' }), B = SIMKIT.buildSide(1, lineB, { emptyAs: 'average' });
+// fillers 'engine': the baseline's fill-ins play as the engine rates them (no floor), so it reads the engine.
+function play(lineA, lineB, games, recorder, fillers) {
+  const A = SIMKIT.buildSide(0, lineA, { emptyAs: 'average', fillers }), B = SIMKIT.buildSide(1, lineB, { emptyAs: 'average', fillers });
   const players = A.players.concat(B.players), sum = {};
   const add = (k, v) => { sum[k] = (sum[k] || 0) + v; };
   for (let g = 0; g < games; g++) {
@@ -53,7 +54,7 @@ const rec = { record(e) {
     runs[power ? 'power' : e.playType === 'draw' ? 'draw' : e.playType === 'outsideRun' ? 'outside' : 'inside']++;
   }
 } };
-const B = play({}, {}, Math.max(1000, N * 5), rec);
+const B = play({}, {}, Math.max(1000, N * 5), rec, 'engine');
 const share = o => { const t = Object.values(o).reduce((a, b) => a + b, 0); return JSON.stringify(Object.fromEntries(Object.entries(o).map(([k, v]) => [k, +(v / t).toFixed(3)]))); };
 const tm = k => (B('a.' + k) + B('b.' + k)) / 2;
 const dropbacks = tm('passAttempts') + tm('sacksAllowed');
@@ -88,12 +89,15 @@ const COLS = {
   WR: [col('WR', 'targets/g', p => p.stats.tgt_g, r => r('WR.targets')), col('WR', 'rec/g', p => p.stats.rec_g, r => r('WR.receptions')),
     col('WR', 'rec yds/g', p => p.stats.rec_yds_g, r => r('WR.receivingYards')), col('WR', 'yds/catch', p => p.stats.ypr, r => r('WR.receivingYards') / Math.max(0.1, r('WR.receptions'))),
     col('WR', 'rec TD/g', p => p.stats.rec_td_g, r => r('WR.receivingTouchdowns'))],
+  TE: [col('TE', 'targets/g', p => p.stats.tgt_g, r => r('TE.targets')), col('TE', 'rec/g', p => p.stats.rec_g, r => r('TE.receptions')),
+    col('TE', 'rec yds/g', p => p.stats.rec_yds_g, r => r('TE.receivingYards')), col('TE', 'yds/catch', p => p.stats.ypr, r => r('TE.receivingYards') / Math.max(0.1, r('TE.receptions'))),
+    col('TE', 'rec TD/g', p => p.stats.rec_td_g, r => r('TE.receivingTouchdowns'))],
   DEF: [col('DEF', 'pts allowed/g', p => p.stats.pts_allowed_g, r => r('b.points')), col('DEF', 'yds allowed/g', p => p.stats.yds_allowed_g, r => r('b.totalYards')),
     col('DEF', 'sacks/g', p => p.stats.sacks_g, r => r('b.sacksAllowed')), col('DEF', 'takeaways/g', p => p.stats.takeaways_g, r => r('b.turnovers')),
     col('DEF', 'def TD/season', p => p.stats.def_td, r => r('a.defensiveTouchdowns') * 17)],
 };
-const SHOW = { QB: ['pass_yds_g', 'QB.passingYards'], RB: ['rush_yds_g', 'RB.rushingYards'], WR: ['rec_yds_g', 'WR.receivingYards'] };
-for (const pos of ['QB', 'RB', 'WR', 'DEF']) {
+const SHOW = { QB: ['pass_yds_g', 'QB.passingYards'], RB: ['rush_yds_g', 'RB.rushingYards'], WR: ['rec_yds_g', 'WR.receivingYards'], TE: ['rec_yds_g', 'TE.receivingYards'] };
+for (const pos of ['QB', 'RB', 'WR', 'TE', 'DEF']) {
   for (const p of byPos[pos] || []) {
     const r = play({ [pos === 'DEF' ? 'DEF' : pos]: p }, {}, N);
     COLS[pos].forEach(f => f(p, r));
