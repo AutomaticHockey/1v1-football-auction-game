@@ -32,7 +32,10 @@ the page.
   theirs to the real players (see fill-ins). His route and run fitness, from his ratings, still
   decide which routes and which runs. Quarterback runs and receiver carries stay the engine's.
   An RB in FLEX next to the RB: the two re-split the carries they have together, half by real
-  carries and half by overall.
+  carries and half by overall. The engine's per-game form roll on carries is off in this game
+  (`carryFormSd` 0 in `game.ts`; the engine's spread of 1 gave a lead back 4 carries one game and 25
+  the next, and a teammate out-carried a far better back in a third of games, now 15%). Carries
+  still swing with game script: the side protecting a lead runs more.
 - **Grades: how well.** The engine's ratings barely separate skill players (a back 15 points better
   gained about 0.45 yards a carry), so a star RB, WR or FLEX hardly changed who won. `grades.mjs`
   grades every real player and defense, 70% on his 2025 production and 30% on his Madden rating
@@ -135,7 +138,9 @@ It never sees what comes next (lots are drawn when they come up); it judges each
 undrawn players who could still fill the slot. Its price: $1 plus dollars-per-point times his value
 over the slot's floor, the budget shared only over the slots the other side can still fight for.
 Solo offers: Hard works out when to sign by optimal stopping over the offers left (each decline
-redraws and adds $1, the fourth is forced). Easy and Normal misjudge values (by a random factor per
+redraws and adds $1, the fourth is forced). Dump auctions: it waits at $0 on a below-average player,
+then pays in $1 steps up to a share (`CPU_DUMP_SHARE`) of the swing in sending him over: his
+shortfall against the pool in its own slot plus in yours; if you dump him on it first, it answers. Easy and Normal misjudge values (by a random factor per
 player per game), and Easy overpays.
 
 Measured by playing whole auctions in the page and simming the two rosters (150 auctions each): Hard

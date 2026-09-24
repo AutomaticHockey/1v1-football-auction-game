@@ -919,12 +919,16 @@ function nextLot() {
      for an average player leaves it as well off as filling the slot later at a fair share.
    - Bids: $1 steps up to that. Opening on a below-average player: it waits. Solo: Hard signs only
      when he beats the value of declining and redrawing (worked back from the forced fourth offer,
-     each decline adding $1); Normal signs if he is about as good as a fresh draw. Dump auctions: a free
-     player beats paying a fair share, so it takes them and never pays to dump. FLEX or his own
+     each decline adding $1); Normal signs if he is about as good as a fresh draw. Dump auctions: it
+     pays, in $1 steps, up to what sending him over is worth: his shortfall against the pool in its
+     own slot (being stuck with him) plus in the other side's (them being stuck). FLEX or his own
      slot: wherever he beats that slot's outlook by more.
    Easy misjudges values and overpays; Normal misjudges a little; Hard plays it straight.
    ===================================================================== */
 const CPU_DELAY = 650;
+// FITTED (whole auctions against the card reader): the share of the shortfall swing it pays to dump.
+// The rest is the $0 price: being stuck with him costs nothing, and that money buys others.
+const CPU_DUMP_SHARE = 0.5;
 const cpuSeat = () => (G && G.set.vs === 'cpu' ? 1 : null);
 // A seat's level: the game's setting (G.cpuLevels overrides it per seat, for engine checks).
 const cpuLevel = seat => CPU_LEVELS[(G.cpuLevels && G.cpuLevels[seat]) || G.set.cpu] || CPU_LEVELS.normal;
@@ -978,6 +982,23 @@ function cpuView(seat) {
   best.worth = 1 + rate * Math.max(0, best.v - best.o.floor) * lvl.greed;
   return best;
 }
+// How far a seat falls short with the lot's player in its best open slot for him: the pool's mean
+// there minus his value (0 if he is at least that good, or it can't take him).
+function cpuShortfall(seat, side) {
+  const L = G.lot;
+  let best = null;
+  for (const slot of slotOptions(G.pl[side], L.pos)) {
+    const miss = cpuOutlook(seat, slot, L.pid).mean - cpuValue(seat, L.pid, slot);
+    if (best === null || miss < best) best = miss;
+  }
+  return best === null ? 0 : Math.max(0, best);
+}
+// Most this seat pays in a dump auction to make the other side take the lot's player, in dollars.
+function cpuDumpWorth(seat) {
+  const L = G.lot, rate = cpuRate(seat, L.pid, slotOptions(G.pl[seat], L.pos));
+  const share = G.cpuDumpShare != null ? G.cpuDumpShare : CPU_DUMP_SHARE;
+  return rate * (cpuShortfall(seat, seat) + cpuShortfall(seat, other(seat))) * share * cpuLevel(seat).greed;
+}
 // The CPU's move on this lot, or null if it isn't its turn.
 function cpuMove(seat) {
   const L = G.lot, lvl = cpuLevel(seat);
@@ -989,8 +1010,13 @@ function cpuMove(seat) {
     for (const slot of opts) { const e = cpuValue(seat, L.pid, slot) - cpuOutlook(seat, slot, L.pid).mean; if (e > edge) { edge = e; pick = slot; } }
     return { a: 'slot', v: pick };
   }
-  // Dump auction: a free player is worth more than a fair share costs, so it never pays to dump.
-  if (L.phase === 'dump') return { a: 'pass' };
+  if (L.phase === 'dump') {
+    // Whoever wins the dump auction pays the bank and the OTHER side takes him for $0. Sending him
+    // over is worth what being stuck with him would cost this seat plus what it costs the other side:
+    // each his shortfall against what the pool promises for the slot he'd fill. $1 steps, as in a bid.
+    const next = L.bid + 1, cap = Math.min(phaseMax(seat), Math.floor(cpuDumpWorth(seat)));
+    return next <= cap ? { a: 'bid', amt: next } : { a: 'pass' };
+  }
   const view = cpuView(seat);
   if (L.phase === 'solo') {
     if (!view || L.forced) return { a: 'sign' };
@@ -1897,7 +1923,7 @@ var ENGINE = (() => {
       weight: backShare * usage.backCarrySlotWeight[rank] / backSlots * carryFitness(player, "RB", backScore)
     }));
     if (HOOKS.game) HOOKS.game.backCarries(candidates, backShare, backScore, (player, score) => carryFitness(player, "RB", score));
-    applyForm(chart, candidates, usage.formSd.carries);
+    applyForm(chart, candidates, HOOKS.game ? HOOKS.game.carryFormSd(usage.formSd.carries) : usage.formSd.carries);
     const total = candidates.reduce((sum, candidate) => sum + candidate.weight, 0);
     if (total <= 0) return { player: chart.getGroup("RB", TUNING.roster.depth.starter), group: "RB" };
     let roll = rng.next() * total;
@@ -3067,7 +3093,11 @@ var ENGINE = (() => {
     // Two real backs: the share of their carries split by overall, and its weight a point of overall
     // (0.05: 6 points apart is 57/43, 20 apart 73/27).
     backOverallShare: 0.5,
-    backOverallPerPoint: 0.05
+    backOverallPerPoint: 0.05,
+    // CHOSEN: the per-game form spread on carries (the engine's is 1: a lead back could get 4 carries
+    // one game and 25 the next, and a teammate out-carried a far better back in a third of games).
+    // 0: carries follow real volume, run fitness and game script only.
+    carryFormSd: 0
   };
   var lean = {};
   var routeWeight = {};
@@ -3114,6 +3144,9 @@ var ENGINE = (() => {
       backs.forEach((c, i) => {
         c.weight = total > 0 ? backShare * weights[i] / total : 0;
       });
+    },
+    carryFormSd(engineSd) {
+      return CONFIG.carryFormSd ?? engineSd;
     },
     runShift(rusher, defense) {
       const breakaway = edgeOf(rusher).breakaway || 0;
