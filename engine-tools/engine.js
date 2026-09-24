@@ -469,7 +469,7 @@ var ENGINE = (() => {
       weight: backShare * usage.backCarrySlotWeight[rank] / backSlots * carryFitness(player, "RB", backScore)
     }));
     if (HOOKS.game) HOOKS.game.backCarries(candidates, backShare, backScore, (player, score) => carryFitness(player, "RB", score));
-    applyForm(chart, candidates, usage.formSd.carries);
+    applyForm(chart, candidates, HOOKS.game ? HOOKS.game.carryFormSd(usage.formSd.carries) : usage.formSd.carries);
     const total = candidates.reduce((sum, candidate) => sum + candidate.weight, 0);
     if (total <= 0) return { player: chart.getGroup("RB", TUNING.roster.depth.starter), group: "RB" };
     let roll = rng.next() * total;
@@ -1639,7 +1639,11 @@ var ENGINE = (() => {
     // Two real backs: the share of their carries split by overall, and its weight a point of overall
     // (0.05: 6 points apart is 57/43, 20 apart 73/27).
     backOverallShare: 0.5,
-    backOverallPerPoint: 0.05
+    backOverallPerPoint: 0.05,
+    // CHOSEN: the per-game form spread on carries (the engine's is 1: a lead back could get 4 carries
+    // one game and 25 the next, and a teammate out-carried a far better back in a third of games).
+    // 0: carries follow real volume, run fitness and game script only.
+    carryFormSd: 0
   };
   var lean = {};
   var routeWeight = {};
@@ -1686,6 +1690,9 @@ var ENGINE = (() => {
       backs.forEach((c, i) => {
         c.weight = total > 0 ? backShare * weights[i] / total : 0;
       });
+    },
+    carryFormSd(engineSd) {
+      return CONFIG.carryFormSd ?? engineSd;
     },
     runShift(rusher, defense) {
       const breakaway = edgeOf(rusher).breakaway || 0;

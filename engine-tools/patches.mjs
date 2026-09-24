@@ -47,6 +47,11 @@ export const PATCHES = {
 `,
     },
     {
+      why: "usage: the game's per-game form spread for carries (it moves carries between teammates)",
+      find: '  applyForm(chart, candidates, usage.formSd.carries)\n',
+      replace: '  applyForm(chart, candidates, HOOKS.game ? HOOKS.game.carryFormSd(usage.formSd.carries) : usage.formSd.carries)\n',
+    },
+    {
       why: 'usage: targets by real volume (route fitness from the ratings still picks which routes)',
       find: 'function chooseReceiver(offense: DepthChart, kind: RouteKind, rng: RNG): ReceivingOption {\n  const { options, cumulative } = targetPool(offense, kind)',
       replace: `/** Game patch: a receiver's fitness for a route, exactly as targetPool computes it. */

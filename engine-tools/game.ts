@@ -53,6 +53,10 @@ const CONFIG: Any = {
   // (0.05: 6 points apart is 57/43, 20 apart 73/27).
   backOverallShare: 0.5,
   backOverallPerPoint: 0.05,
+  // CHOSEN: the per-game form spread on carries (the engine's is 1: a lead back could get 4 carries
+  // one game and 25 the next, and a teammate out-carried a far better back in a third of games).
+  // 0: carries follow real volume, run fitness and game script only.
+  carryFormSd: 0,
 }
 let lean: Record<string, Record<string, number>> = {}
 let routeWeight: Record<string, Record<string, number>> = {}
@@ -96,6 +100,9 @@ const USAGE = {
     }
     const total = weights.reduce((a, b) => a + b, 0)
     backs.forEach((c, i) => { c.weight = total > 0 ? backShare * weights[i]! / total : 0 })
+  },
+  carryFormSd(engineSd: number): number {
+    return CONFIG.carryFormSd ?? engineSd
   },
   runShift(rusher: Any, defense: Any): number {
     const breakaway = edgeOf(rusher).breakaway || 0
