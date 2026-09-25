@@ -57,17 +57,21 @@ const SIMKIT = (() => {
       defCatch: 0.24, defYards: 0.8, defRun: 3.2,   // defense: per unit of graded yards allowed over ref
       defInt: 1.6         // exponent on graded takeaways over ref (interceptions carry them all)
     },
-    // CHOSEN (by win rates, calibrate.js): 1 plays every real player at his grade. Below 1 narrows
-    // the gap between players at that slot, above 1 widens it. FLEX takes its player's position's.
-    // Set so the best against the worst at a slot, all else equal (the game's fill-ins), wins about:
-    // QB 78%, DEF 72%, RB, WR and TE 60%. A star FLEX against an empty one wins 61-69%.
-    balance: { QB: 0.65, RB: 1.0, WR: 0.43, TE: 0.57, DEF: 0.55 },
+    // CHOSEN: 1 plays every real player at his grade, his full real gap from the others. Below 1
+    // narrows the gap between players at that slot, above 1 widens it. FLEX takes its player's
+    // position's. At 1 everywhere, random drafts are as close as real 2025 games (average margin 12,
+    // 46% within one score, 28% by 17 or more; the NFL's 11.2, 53%, 28%), and the best against the
+    // worst at a slot, all else equal (the game's fill-ins), wins about QB 87%, DEF 84%, WR 73%, TE
+    // 67%, RB 62%. (Until 2026-09-25 it was set lower, to hit QB 78%, DEF 72%, the rest 60%.)
+    balance: { QB: 1, RB: 1, WR: 1, TE: 1, DEF: 1 },
     // CHOSEN: a fill-in's edges are, part by part, the worst real player's at his position (as
     // played), less this share of the real players' spread in that part. touches: a backup's share
     // of targets and carries, against what his depth role would get; the real players take the
     // rest, each by his real volume. An empty slot's fill-in gets a starter's touches instead: the
     // average real player's volume at his position (DATA.volume), so any real pick beats him.
-    fill: { margin: 0.25, touches: 0.3 }
+    // defMargin: the same for an empty DEF slot's unit, set so the worst real defense beats it by
+    // about 2 points, as the weakest real picks at the other slots beat theirs.
+    fill: { margin: 0.25, touches: 0.3, defMargin: 0.5 }
   };
   const num = (v, fb) => { const n = Number(v); return Number.isFinite(n) ? n : fb; };
   const toRatings = list => { const r = {}; DATA.keys.forEach((k, i) => { r[k] = list[i]; }); return r; };
@@ -90,20 +94,22 @@ const SIMKIT = (() => {
   }
   // The fill-ins' floor at a position: each edge part at the worst real player's, less K.fill.margin
   // of the spread (a factor's in log terms), and an overall below every real player's as played.
+  // DEF: an empty slot's defense, past the worst real defense (the most yards, the fewest takeaways).
   function floorFor(pos) {
-    const real = Object.keys(DATA.players).filter(id => DATA.players[id][0] === pos && DATA.grades.players[id]);
+    const def = pos === 'DEF';
+    const real = def ? Object.keys(DATA.grades.defenses) : Object.keys(DATA.players).filter(id => DATA.players[id][0] === pos && DATA.grades.players[id]);
     if (!real.length) return null;
-    const m = K.fill.margin, edges = real.map(id => edgeFor(pos, DATA.grades.players[id]));
+    const m = def ? K.fill.defMargin : K.fill.margin, edges = real.map(id => edgeFor(pos, def ? DATA.grades.defenses[id] : DATA.grades.players[id]));
     const worst = (part, dir, log) => {
       const v = edges.map(e => (log ? Math.log(e[part]) : e[part])), lo = Math.min(...v), hi = Math.max(...v);
       const x = dir < 0 ? lo - m * (hi - lo) : hi + m * (hi - lo);
       return log ? Math.exp(x) : x;
     };
+    const d = def ? -1 : 1;   // a defense's edges help the offense, so its worst is the other end
+    const edge = { run: worst('run', -d), breakaway: worst('breakaway', -d), catch: worst('catch', -d), yards: worst('yards', -d, true), int: worst('int', d, true) };
+    if (def) return { edge };
     const base = filler(pos + '0');
-    return {
-      edge: { run: worst('run', -1), breakaway: worst('breakaway', -1), catch: worst('catch', -1), yards: worst('yards', -1, true), int: worst('int', 1, true) },
-      overall: Math.min(...real.map(id => balanced(rated(id), base, pos).overall)),
-    };
+    return { edge, overall: Math.min(...real.map(id => balanced(rated(id), base, pos).overall)) };
   }
   function rawEdge(pos, g) {
     const G = K.grade, R = G.ref, e = { run: 0, breakaway: 0, catch: 0, yards: 1, int: 1 };
@@ -197,8 +203,11 @@ const SIMKIT = (() => {
         add(d[0], balanced({ overall: d[3], ratings: toRatings(d.slice(4)) }, base, 'DEF'), d[1], 'DEF', L.DEF.team, null, null, edge);
       }
     } else {
-      const backup = !average || emptySlots.includes('DEF');
-      for (const [pos, count] of DEFENSE) for (let i = 0; i < count; i += 1) add(pos, filler(pos + (backup ? BACKUP_DEFENSE[pos][i] : Math.min(i, 3))), 'DEF', 'DEF', 'DEF');
+      // An empty slot: with the game's fill-ins, a league-average unit playing below the worst real
+      // defense (32.6 points allowed to an average offense against the Cowboys' 30.4; backups on top
+      // of that would allow 39); with the engine's, backup-level defenders.
+      const empty = !average || emptySlots.includes('DEF'), f = empty && graded && floor('DEF'), backup = empty && !f;
+      for (const [pos, count] of DEFENSE) for (let i = 0; i < count; i += 1) add(pos, filler(pos + (backup ? BACKUP_DEFENSE[pos][i] : Math.min(i, 3))), 'DEF', 'DEF', 'DEF', null, null, f ? f.edge : null);
     }
     return { team: { id: teamId, roster: players.map(p => p.id), scheme: Object.assign({}, DATA.coach) }, players, slotOf };
   }

@@ -63,12 +63,17 @@ the page.
   carries, from 40% and 30%); the real players take the rest by their real volume, so a real player
   runs about 30% above his 2025 volume on an otherwise average team. An empty slot's fill-in gets the
   average real player's volume at his position instead (`DATA.volume`), so any real pick beats him.
-  An empty DEF slot already was worse than any real defense (31 points allowed against 19 to 26).
+  An empty DEF slot is a league-average unit playing below the worst real defense the same way, part
+  by part, past it by `K.fill.defMargin` (50%) of the spread: 32.6 points allowed to an average
+  offense, against the worst real defense's 30.4 (backup-level defenders on top of that allowed 39).
   `opts.fillers: 'engine'` turns all of it off (the baseline check and `ref` use it).
 - **Balance: how much the gap counts.** `SIMKIT.K.balance` scales, per slot, both a player's grade
   edges and his ratings' distance from the league-average starter, so his mix of production and
-  Madden holds. It is chosen by win rates, with the game's fill-ins: the best player at a slot against
-  the worst, everything else equal, wins about QB 78%, DEF 72%, RB, WR and TE 60% (`calibrate.js`).
+  Madden holds. It is 1 at every slot: each player plays his full real gap from the others. Random
+  drafts are then as lopsided as real games (below), and the best player at a slot against the worst,
+  everything else equal, wins about QB 87%, DEF 84%, WR 73%, TE 67%, RB 62% (`calibrate.js`). Until
+  2026-09-25 it was set lower (QB 0.65, WR 0.43, TE 0.57, DEF 0.55) to hit QB 78%, DEF 72% and 60%
+  elsewhere, which made games closer than real ones: a stacked roster won by 12 where it now wins by 19.
 - **This game's rules** (`game.ts`, `opts.neutral`): no crowd, a mild 5 mph day (the league's average
   weather cost), no pace draw. Also quarter-by-quarter play, up to three overtime periods under the
   engine's own rules, and a drive log read off the engine's play recorder.
@@ -89,7 +94,7 @@ the page.
 | `embed-engine.js`, `embed-players.js` | Put the engine, or the player file, into `index.html`. |
 | `equiv.mts` | Gate: the compiled engine equals Cornerstone's `simulateGame`. |
 | `check.js`, `favorite.js` | Sim against real 2025 lines; how often the better roster wins. |
-| `calibrate.js` | Fits `SIMKIT.K.grade` (each player at his grade) and reports the win rates `K.balance` is set by. |
+| `calibrate.js` | Fits `SIMKIT.K.grade` (each player at his grade) and reports the win rates at `K.balance`. |
 | `cpu-values.js` | Each player's worth to the CPU opponent (`cpu-values.json`, `SIMKIT.value`): points of margin over an empty slot. |
 
 ## Commands
@@ -105,7 +110,7 @@ Rebuild after the engine changes (from this folder unless noted):
     node build.mjs
     cd "D:/NFL game test" && npx tsx "<this folder>/equiv.mts" "<this folder>/engine.js" 2000   (must print 0 mismatches twice)
     node check.js 200
-    node calibrate.js 200      (grade slopes near 1; win rates on target, else refit K.grade / K.balance)
+    node calibrate.js 200      (grade slopes near 1, else refit K.grade; then the win rates)
     node embed-engine.js
 
 If a patch no longer matches, the build names it. Port that edit by hand, then run `equiv.mts`.
@@ -131,25 +136,34 @@ The tight ends (the stats CSV is nflverse's, `stats_player/stats_player_reg_2025
 *Vs CPU* puts the CPU in Player 2's seat (Classic rules). The page's `CPU OPPONENT` section has the
 logic; `cpu-values.js` measures what it knows: each player in his slot (and each back, receiver and
 tight end at FLEX) against the same league-average team with that slot empty, 3,000 games each on
-every core (about 4 minutes). QBs are worth 6.4 to 16.7 points a game over an empty slot, defenses 2.3
-to 11.7, backs 0.5 to 7.4, receivers 1.3 to 4.7, tight ends 1.5 to 4.8; each is good to about ±0.25.
+every core (about 3 minutes on 4). QBs are worth 7.7 to 23.0 points a game over an empty slot,
+defenses 3.1 to 18.9, backs 0.5 to 7.4, receivers 2.1 to 9.8, tight ends 1.7 to 7.0; each is good to
+about ±0.25.
 
 It never sees what comes next (lots are drawn when they come up); it judges each player against the
 undrawn players who could still fill the slot. Its price: $1 plus dollars-per-point times his value
 over the slot's floor, the budget shared only over the slots the other side can still fight for.
 Solo offers: Hard works out when to sign by optimal stopping over the offers left (each decline
 redraws and adds $1, the fourth is forced). Dump auctions: it waits at $0 on a below-average player,
-then pays in $1 steps up to a share (`CPU_DUMP_SHARE`) of the swing in sending him over: his
-shortfall against the pool in its own slot plus in yours; if you dump him on it first, it answers. Easy and Normal misjudge values (by a random factor per
-player per game), and Easy overpays.
+then pays in $1 steps up to twice (`CPU_DUMP_SHARE`) the swing in sending him over, in dollars: his
+shortfall against the pool in its own slot plus in yours; if you dump him on it first, it answers.
+Twice, because the side left with the slot open usually fills it later as the only one who can still
+use that position (choosing among draws, for a dollar or two), and a dollar buys fewer points than its
+rate says: forking 160 dump auctions from real auctions and playing both outcomes out 150 times each
+put the true worth near three times the shortfalls. Easy and Normal misjudge values (by a random
+factor per player per game), and Easy overpays (and never waits, so it rarely sees a dump auction).
 
-Measured by playing whole auctions in the page and simming the two rosters (150 auctions each): Hard
-beats a card reader (a human stand-in that ranks players by their card's lead stat and spends a fair
-share on the good ones) 63.7%, Normal 49.6%, Easy 42.3%; Hard beats Normal 62.7%, Normal beats Easy
-56.0%. The dump share barely moves this (Hard vs the card reader: 62.7% paying nothing, 62.3% a
-quarter, 63.7% half, 62.0% all of the swing; each about ±2%); half answers a dump without overpaying.
+Measured by playing whole auctions in the page and simming the two rosters (1,000 auctions of 100
+games each; about ±1.5%): Hard beats a card reader (a human stand-in that ranks players by their
+card's lead stat and spends a fair share on the good ones) 69.4%, Normal 52.0%, Easy 40.6%; Hard
+beats Normal 65.0%, Normal beats Easy 63.2%. The card reader bids on everyone, so it never reaches a
+dump auction. A stand-in that plays dumps like a person (passes on its bottom 40% by the card, then
+pays up to $5 to dump them) loses to Hard 73.3% and to Normal 57.2% (Hard 62.5% when the CPU paid
+half the shortfalls, as it used to); one that runs every dump up to $15 before letting go loses to
+Hard 57.9%. Hard at twice beats Hard at half 67.1%; twice and three times play even. (Before full
+strength, with the old values: 66.4% and 55.1% against the dumper, 60.0% and 48.8% at half.)
 
-## Where it stands (2026-09-24, engine 4ffc55b)
+## Where it stands (2026-09-25, engine 4ffc55b)
 
 `equiv.mts`, with every hook in the build: 2,000 games, 3.79M stat fields and 788,818 play-recorder
 events, 0 mismatches for both Cornerstone's `simulateGame` and the game's driver.
@@ -159,48 +173,57 @@ him): every graded rate lands on its grade, bias within ±2% and slope 0.83 to 1
 which follows from the graded yards, 1.26). The QB and DEF refs carry the fill-ins.
 
 `calibrate.js`, as played: the best player at each slot against the worst (by the card's lead
-stat), everything else league average, the game's fill-ins, 10,000 games each.
+stat), everything else league average, the game's fill-ins, 2,000 games each.
 
-| Slot | Matchup | Wins (before grades) |
+| Slot | Matchup | Wins (at the old balance) |
 |---|---|---|
-| QB | Stafford vs Dart | 77.5% (72.1%) |
-| DEF | Seahawks vs Cowboys | 71.9% (69.4%) |
-| RB | Cook vs Spears | 61.4% (52.1%) |
-| WR | Nacua vs Higgins | 59.7% (53.5%) |
-| TE | McBride vs Barner | 58.3% to 59.8% (no TEs) |
-| FLEX | Nacua / Gibbs / McBride vs an empty FLEX | 62.4% / 63.2% / 67.9% (51.8% / 52.5% / –) |
+| QB | Stafford vs Dart | 87.5% (77.5%) |
+| DEF | Seahawks vs Cowboys | 84.0% (71.9%) |
+| RB | Cook vs Spears | 61.7% (61.4%) |
+| WR | Nacua vs Jayden Higgins | 73.0% (59.7%) |
+| TE | McBride vs Barner | 67.2% (58.3% to 59.8%) |
+| FLEX | Nacua / Gibbs / McBride vs an empty FLEX | 76.2% / 63.2% / 77.5% (62.4% / 63.2% / 67.9%) |
 
 Fill-ins against the worst real players (300 games per real player, beside him): fill-in WRs gain
-5.4 to 6.0 yards a target (the worst real WR, Ayomanor, 6.25), fill-in backs 3.1 to 3.25 a carry
-(Carter 3.4), fill-in TEs 4.5 to 4.9 (Okonkwo 6.7). The weakest real pick beats an empty slot (6,000
-games, the rest of the team the same): Ayomanor 56.4%, Higgins 57.5%, Carter 52.5%, Spears 53.5%,
-Theo Johnson 55.8%, Ferguson 56.2%, Mariota 71.3%, the Cowboys defense 56.1%.
+3.4 to 3.8 yards a target (the worst real WR, Ayomanor, 5.35), fill-in backs 3.05 to 3.17 a carry
+(Carter 3.51), fill-in TEs 3.6 to 3.9 (Ferguson 6.16). The weakest real pick beats an empty slot
+(6,000 games, the rest of the team the same): Ayomanor 57.7%, Jayden Higgins 61.5%, Carter 52.7%,
+Spears 56.6%, Theo Johnson 57.9%, Ferguson 57.5%, Mariota 74.6%, the Cowboys defense 56.9%.
 
 `check.js` puts each real player on an otherwise league-average team and compares 200 games with his
 real 2025 per-game line. Bias is the average miss. Slope is how much of the gap between players
-comes through (1 = all of it); by the balance, QB, DEF and receivers' yards a catch sit near half.
-Real players run about 30% above their 2025 volume (the backups' touches), so their per-game lines
-do too; their rates stay on their lines.
+comes through (1 = all of it); at full strength most of it does (QB passing yards 0.86 and points
+allowed 0.91, from 0.62 and 0.52 at the old balance). Real players run about 30% above their 2025
+volume (backs' carries 44%: the backups' touches), so their per-game lines do too; their rates stay
+on their lines.
 
-| Stat | Bias | Slope (before grades) | Driven by |
+| Stat | Bias | Slope | Driven by |
 |---|---|---|---|
-| WR targets / RB carries / TE targets | +34% / +31% / +30% | 1.14 / 0.91 / 1.09 (0.96 / 1.01 / –) | real usage plus the backups' |
-| WR receptions / yards | +29% / +24% | 1.06 / 1.04 (0.80 / 0.68) | usage plus grade |
-| TE receptions / yards | +27% / +28% | 1.12 / 1.34 | usage plus grade |
-| RB rushing yards / receiving yards | +33% / +37% | 1.07 / 1.24 (0.85 / –) | usage plus grade |
-| RB yards per carry, WR / TE yards per catch | +1% / −5% / −1% | 0.74 / 0.32 / 0.31 (0.13 / 0.05 / –) | grade |
-| QB passing yards / TDs / completion % | +4% / −22% / −1% | 0.60 / 0.59 / 0.51 (0.33 / 0.45 / 0.27) | grade |
-| QB INTs | +6% | 0.66 (0.00) | grade |
-| QB rushing yards | +4% | 0.58 (0.66) | ratings (speed: scrambles and designed runs) |
-| DEF points / yards allowed | −5% / −2% | 0.50 / 0.43 (0.46 / 0.28) | grade |
-| DEF defensive TDs | +99% | 0.09 | the engine's return rates (9% of turnovers) against the file's 4.5% |
+| WR targets / RB carries / TE targets | +34% / +44% / +30% | 1.14 / 0.80 / 1.15 | real usage plus the backups' |
+| WR receptions / yards | +33% / +35% | 1.25 / 1.45 | usage plus grade |
+| TE receptions / yards | +32% / +34% | 1.32 / 1.82 | usage plus grade |
+| RB rushing yards / receiving yards | +45% / +38% | 1.00 / 1.23 | usage plus grade |
+| RB yards per carry, WR / TE yards per catch | +1% / 0% / 0% | 0.71 / 0.72 / 0.61 | grade |
+| QB passing yards / TDs / completion % | +1% / −26% / +1% | 0.86 / 0.80 / 0.77 | grade |
+| QB INTs | 0% | 0.83 | grade |
+| QB rushing yards | −1% | 0.68 | ratings (speed: scrambles and designed runs) |
+| DEF points / yards allowed | −1% / +1% | 0.91 / 0.87 | grade |
+| DEF defensive TDs | +97% | 0.14 | the engine's return rates (9% of turnovers) against the file's 4.5% |
 
 An all-average game (the engine's own fill-ins) lands inside Cornerstone's acceptance bands, except
-points (21.5 against 22 to 23.5). Random six-slot drafts score 22.0 to 22.6 points a team (19.0 with
-the fill-in floor alone, 22.7 before it).
+points (21.5 against 22 to 23.5). Random six-slot drafts against every 2025 regular-season game
+(nflverse's team stats), 6,000 games:
 
-`favorite.js`: the better roster (by the engine's own odds) wins 64% of random six-slot drafts, and
-31% of matchups have a 70%+ favorite. What the grades changed is who that is: over 300 random drafts,
-a team's edge on the auction cards (its players' lead stats against the file) tracks its sim win
-chance at a correlation of 0.79 (0.51 before grades, five slots). In the most lopsided tenth of drafts
-on paper the card favorite wins 79% (68%).
+| | NFL 2025 | Sim |
+|---|---|---|
+| Points a team | 23.0 (sd 9.9) | 23.6 (sd 10.8) |
+| Yards a team / turnovers | 357 / 1.16 | 349 / 1.06 |
+| Average winning margin | 11.2 | 12.0 |
+| Within one score (8) / by 17+ / by 24+ | 53% / 28% / 14% | 46% / 28% / 13% |
+| Points of margin per 100 yards of margin / per turnover | 6.0 / −4.5 | 8.1 / −3.7 |
+
+`favorite.js`: the better roster (by the engine's own odds) wins 71% of random six-slot drafts (64% at
+the old balance), and 53% of matchups have a 70%+ favorite (31%), 28% an 80%+ one. Over 300 random
+drafts, a team's edge on the auction cards (its players' lead stats against the file) tracks its sim
+win chance at a correlation of 0.77; in the most lopsided tenth of drafts on paper the card favorite
+wins 87% (79% at the old balance).
