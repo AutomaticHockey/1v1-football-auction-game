@@ -131,23 +131,30 @@ The tight ends (the stats CSV is nflverse's, `stats_player/stats_player_reg_2025
 *Vs CPU* puts the CPU in Player 2's seat (Classic rules). The page's `CPU OPPONENT` section has the
 logic; `cpu-values.js` measures what it knows: each player in his slot (and each back, receiver and
 tight end at FLEX) against the same league-average team with that slot empty, 3,000 games each on
-every core (about 4 minutes). QBs are worth 6.4 to 16.7 points a game over an empty slot, defenses 2.3
-to 11.7, backs 0.5 to 7.4, receivers 1.3 to 4.7, tight ends 1.5 to 4.8; each is good to about ±0.25.
+every core (about 4 minutes). QBs are worth 6.7 to 16.5 points a game over an empty slot, defenses 2.2
+to 11.7, backs 0.7 to 7.8, receivers 0.9 to 4.6, tight ends 1.2 to 4.4; each is good to about ±0.25.
 
 It never sees what comes next (lots are drawn when they come up); it judges each player against the
 undrawn players who could still fill the slot. Its price: $1 plus dollars-per-point times his value
 over the slot's floor, the budget shared only over the slots the other side can still fight for.
 Solo offers: Hard works out when to sign by optimal stopping over the offers left (each decline
 redraws and adds $1, the fourth is forced). Dump auctions: it waits at $0 on a below-average player,
-then pays in $1 steps up to a share (`CPU_DUMP_SHARE`) of the swing in sending him over: his
-shortfall against the pool in its own slot plus in yours; if you dump him on it first, it answers. Easy and Normal misjudge values (by a random factor per
-player per game), and Easy overpays.
+then pays in $1 steps up to twice (`CPU_DUMP_SHARE`) the swing in sending him over, in dollars: his
+shortfall against the pool in its own slot plus in yours; if you dump him on it first, it answers.
+Twice, because the side left with the slot open usually fills it later as the only one who can still
+use that position (choosing among draws, for a dollar or two), and a dollar buys fewer points than its
+rate says: forking 160 dump auctions from real auctions and playing both outcomes out 150 times each
+put the true worth near three times the shortfalls. Easy and Normal misjudge values (by a random
+factor per player per game), and Easy overpays (and never waits, so it rarely sees a dump auction).
 
-Measured by playing whole auctions in the page and simming the two rosters (150 auctions each): Hard
-beats a card reader (a human stand-in that ranks players by their card's lead stat and spends a fair
-share on the good ones) 63.7%, Normal 49.6%, Easy 42.3%; Hard beats Normal 62.7%, Normal beats Easy
-56.0%. The dump share barely moves this (Hard vs the card reader: 62.7% paying nothing, 62.3% a
-quarter, 63.7% half, 62.0% all of the swing; each about ±2%); half answers a dump without overpaying.
+Measured by playing whole auctions in the page and simming the two rosters (1,000 auctions of 100
+games each; about ±1.5%): Hard beats a card reader (a human stand-in that ranks players by their
+card's lead stat and spends a fair share on the good ones) 62.9%, Normal 49.9%, Easy 41.6%; Hard
+beats Normal 60.7%, Normal beats Easy 58.1%. The card reader bids on everyone, so it never reaches a
+dump auction. A stand-in that plays dumps like a person (passes on its bottom 40% by the card, then
+pays up to $5 to dump them) loses to Hard 66.4% and to Normal 55.1% (60.0% and 48.8% when the CPU
+paid half the shortfalls, as it used to); one that runs every dump up to $15 before letting go loses
+to Hard 54.6% (44.5% at half). Hard at twice beats Hard at half 62.4%; twice and three times play even.
 
 ## Where it stands (2026-09-24, engine 4ffc55b)
 

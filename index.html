@@ -921,14 +921,18 @@ function nextLot() {
      when he beats the value of declining and redrawing (worked back from the forced fourth offer,
      each decline adding $1); Normal signs if he is about as good as a fresh draw. Dump auctions: it
      pays, in $1 steps, up to what sending him over is worth: his shortfall against the pool in its
-     own slot (being stuck with him) plus in the other side's (them being stuck). FLEX or his own
-     slot: wherever he beats that slot's outlook by more.
+     own slot (being stuck with him) plus in the other side's (them being stuck), in dollars, times
+     CPU_DUMP_SHARE. FLEX or his own slot: wherever he beats that slot's outlook by more.
    Easy misjudges values and overpays; Normal misjudges a little; Hard plays it straight.
    ===================================================================== */
 const CPU_DELAY = 650;
-// FITTED (whole auctions against the card reader): the share of the shortfall swing it pays to dump.
-// The rest is the $0 price: being stuck with him costs nothing, and that money buys others.
-const CPU_DUMP_SHARE = 0.5;
+// FITTED: what it pays to dump, as a multiple of the two shortfalls in dollars. More than once over:
+// the side left with the slot open fills it later, often as the only one who can still use that
+// position (choosing among draws, for a dollar or two), and a dollar buys fewer points than the
+// dollars-per-point rate says. Forking real dump auctions and playing both outcomes out puts the
+// true worth near 3x. In whole auctions 2 and 3 play even; Hard at 2 beats Hard at the old 0.5 in
+// 62% of games, and a stand-in that dumps like a person 66% (60% at 0.5).
+const CPU_DUMP_SHARE = 2;
 const cpuSeat = () => (G && G.set.vs === 'cpu' ? 1 : null);
 // A seat's level: the game's setting (G.cpuLevels overrides it per seat, for engine checks).
 const cpuLevel = seat => CPU_LEVELS[(G.cpuLevels && G.cpuLevels[seat]) || G.set.cpu] || CPU_LEVELS.normal;
@@ -996,7 +1000,8 @@ function cpuShortfall(seat, side) {
 // Most this seat pays in a dump auction to make the other side take the lot's player, in dollars.
 function cpuDumpWorth(seat) {
   const L = G.lot, rate = cpuRate(seat, L.pid, slotOptions(G.pl[seat], L.pos));
-  const share = G.cpuDumpShare != null ? G.cpuDumpShare : CPU_DUMP_SHARE;
+  // Engine checks set G.cpuDumpShares = { seat: share } to try others.
+  const share = G.cpuDumpShares && G.cpuDumpShares[seat] != null ? G.cpuDumpShares[seat] : CPU_DUMP_SHARE;
   return rate * (cpuShortfall(seat, seat) + cpuShortfall(seat, other(seat))) * share * cpuLevel(seat).greed;
 }
 // The CPU's move on this lot, or null if it isn't its turn.
