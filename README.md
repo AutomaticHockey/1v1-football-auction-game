@@ -23,9 +23,11 @@ now, from their 2025 production. Each player gets the ball as often as he did in
 what the backups beside him would have had, and plays mostly to his 2025 production: his grade is 70%
 his real line, 30% his Madden rating, and a great back shows it in breakaway runs. A DEF pick is that
 team's real defense. The rest of each team (and anyone in an empty slot) are fill-ins who play below
-the worst real player at their position, so any real pick beats an empty slot. QB and DEF swing games
-the most; a star RB, WR, TE or FLEX is worth about a 60% win on his own. `engine-tools/` rebuilds and
-checks all of it; see [engine-tools/README.md](engine-tools/README.md).
+the worst real player at their position, so any real pick beats an empty slot. Every player plays his
+full real gap from the others, so a stacked roster blows out a weak one about as often as in the NFL:
+on his own, the best QB against the worst wins about 87%, the best defense 84%, a star WR 73%, TE
+67%, RB 62%. `engine-tools/` rebuilds and checks all of it; see
+[engine-tools/README.md](engine-tools/README.md).
 
 ## Files
 
